@@ -1,0 +1,756 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="mysql," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="创建mysql函数">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汉字转拼音（mysql）">
+<meta property="og:url" content="http://changyuan.github.io/2014/08/29/zh-cn-to-pinyin/index.html">
+<meta property="og:site_name" content="Chang Crazy&#39;s Blog">
+<meta property="og:description" content="创建mysql函数">
+<meta property="og:updated_time" content="2016-08-29T02:52:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="汉字转拼音（mysql）">
+<meta name="twitter:description" content="创建mysql函数">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://changyuan.github.io/2014/08/29/zh-cn-to-pinyin/"/>
+
+
+
+
+
+  <title>汉字转拼音（mysql） | Chang Crazy's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chang Crazy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">升级自己的操作系统</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2014/08/29/zh-cn-to-pinyin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">汉字转拼音（mysql）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-08-29T10:52:19+08:00">
+                2014-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="创建mysql函数"><a href="#创建mysql函数" class="headerlink" title="创建mysql函数"></a>创建mysql函数</h3><a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE FUNCTION `f_to_pinyin`(NAME VARCHAR(255) CHARSET gbk) RETURNS varchar(255) CHARSET gbk</div><div class="line">BEGIN</div><div class="line">    DECLARE mycode INT;</div><div class="line">    DECLARE tmp_lcode VARCHAR(2) CHARSET gbk;</div><div class="line">    DECLARE lcode INT;</div><div class="line">    DECLARE tmp_rcode VARCHAR(2) CHARSET gbk;</div><div class="line">    DECLARE rcode INT;</div><div class="line">    DECLARE mypy VARCHAR(255) CHARSET gbk DEFAULT &apos;&apos;;</div><div class="line">    DECLARE lp INT;</div><div class="line">    SET mycode = 0;</div><div class="line">    SET lp = 1;</div><div class="line">    SET NAME = HEX(NAME);</div><div class="line">    WHILE lp &lt; LENGTH(NAME) DO</div><div class="line">        SET tmp_lcode = SUBSTRING(NAME, lp, 2);</div><div class="line">        SET lcode = CAST(ASCII(UNHEX(tmp_lcode)) AS UNSIGNED); </div><div class="line">        SET tmp_rcode = SUBSTRING(NAME, lp + 2, 2);</div><div class="line">        SET rcode = CAST(ASCII(UNHEX(tmp_rcode)) AS UNSIGNED); </div><div class="line">        IF lcode &gt; 128 THEN</div><div class="line">            SET mycode =65536 - lcode * 256 - rcode ;</div><div class="line">            SELECT CONCAT(mypy,py) INTO mypy FROM pinyin WHERE `code` &gt;= ABS(mycode) ORDER BY `code` ASC LIMIT 1;</div><div class="line">            SET lp = lp + 4;</div><div class="line">        ELSE</div><div class="line">            SET mypy = CONCAT(mypy,CHAR(CAST(ASCII(UNHEX(SUBSTRING(NAME, lp, 2))) AS UNSIGNED)));</div><div class="line">            SET lp = lp + 2;</div><div class="line">        END IF;</div><div class="line">    END WHILE;</div><div class="line">    RETURN LOWER(mypy);</div><div class="line">END</div></pre></td></tr></table></figure>
+<h3 id="创建拼音ascii码"><a href="#创建拼音ascii码" class="headerlink" title="创建拼音ascii码"></a>创建拼音ascii码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">CREATE TABLE `pinyin` (</div><div class="line">  `code` int(11) NOT NULL,</div><div class="line">  `py` varchar(10) CHARACTER SET gbk NOT NULL,</div><div class="line">  PRIMARY KEY (`code`)</div><div class="line">) ENGINE=InnoDB DEFAULT CHARSET=utf8;</div><div class="line"></div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10254&apos;, &apos;zuo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10256&apos;, &apos;zun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10260&apos;, &apos;zui&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10262&apos;, &apos;zuan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10270&apos;, &apos;zu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10274&apos;, &apos;zou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10281&apos;, &apos;zong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10296&apos;, &apos;zi&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10307&apos;, &apos;zhuo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10309&apos;, &apos;zhun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10315&apos;, &apos;zhui&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10322&apos;, &apos;zhuang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10328&apos;, &apos;zhuan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10329&apos;, &apos;zhuai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10331&apos;, &apos;zhua&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10519&apos;, &apos;zhu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10533&apos;, &apos;zhou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10544&apos;, &apos;zhong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10587&apos;, &apos;zhi&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10764&apos;, &apos;zheng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10780&apos;, &apos;zhen&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10790&apos;, &apos;zhe&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10800&apos;, &apos;zhao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10815&apos;, &apos;zhang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10832&apos;, &apos;zhan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;10838&apos;, &apos;zhai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11014&apos;, &apos;zha&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11018&apos;, &apos;zeng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11019&apos;, &apos;zen&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11020&apos;, &apos;zei&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11024&apos;, &apos;ze&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11038&apos;, &apos;zao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11041&apos;, &apos;zang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11045&apos;, &apos;zan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11052&apos;, &apos;zai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11055&apos;, &apos;za&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11067&apos;, &apos;yun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11077&apos;, &apos;yue&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11097&apos;, &apos;yuan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11303&apos;, &apos;yu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11324&apos;, &apos;you&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11339&apos;, &apos;yong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11340&apos;, &apos;yo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11358&apos;, &apos;ying&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11536&apos;, &apos;yin&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11589&apos;, &apos;yi&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11604&apos;, &apos;ye&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11781&apos;, &apos;yao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11798&apos;, &apos;yang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11831&apos;, &apos;yan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11847&apos;, &apos;ya&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11861&apos;, &apos;xun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;11867&apos;, &apos;xue&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12039&apos;, &apos;xuan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12058&apos;, &apos;xu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12067&apos;, &apos;xiu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12074&apos;, &apos;xiong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12089&apos;, &apos;xing&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12099&apos;, &apos;xin&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12120&apos;, &apos;xie&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12300&apos;, &apos;xiao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12320&apos;, &apos;xiang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12346&apos;, &apos;xian&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12359&apos;, &apos;xia&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12556&apos;, &apos;xi&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12585&apos;, &apos;wu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12594&apos;, &apos;wo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12597&apos;, &apos;weng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12607&apos;, &apos;wen&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12802&apos;, &apos;wei&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12812&apos;, &apos;wang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12829&apos;, &apos;wan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12831&apos;, &apos;wai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12838&apos;, &apos;wa&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12849&apos;, &apos;tuo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12852&apos;, &apos;tun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12858&apos;, &apos;tui&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12860&apos;, &apos;tuan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12871&apos;, &apos;tu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12875&apos;, &apos;tou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;12888&apos;, &apos;tong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13060&apos;, &apos;ting&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13063&apos;, &apos;tie&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13068&apos;, &apos;tiao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13076&apos;, &apos;tian&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13091&apos;, &apos;ti&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13095&apos;, &apos;teng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13096&apos;, &apos;te&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13107&apos;, &apos;tao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13120&apos;, &apos;tang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13138&apos;, &apos;tan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13147&apos;, &apos;tai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13318&apos;, &apos;ta&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13326&apos;, &apos;suo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13329&apos;, &apos;sun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13340&apos;, &apos;sui&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13343&apos;, &apos;suan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13356&apos;, &apos;su&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13359&apos;, &apos;sou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13367&apos;, &apos;song&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13383&apos;, &apos;si&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13387&apos;, &apos;shuo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13391&apos;, &apos;shun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13395&apos;, &apos;shui&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13398&apos;, &apos;shuang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13400&apos;, &apos;shuan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13404&apos;, &apos;shuai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13406&apos;, &apos;shua&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13601&apos;, &apos;shu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13611&apos;, &apos;shou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13658&apos;, &apos;shi&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13831&apos;, &apos;sheng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13847&apos;, &apos;shen&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13859&apos;, &apos;she&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13870&apos;, &apos;shao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13878&apos;, &apos;shang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13894&apos;, &apos;shan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13896&apos;, &apos;shai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13905&apos;, &apos;sha&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13906&apos;, &apos;seng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13907&apos;, &apos;sen&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13910&apos;, &apos;se&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13914&apos;, &apos;sao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;13917&apos;, &apos;sang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14083&apos;, &apos;san&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14087&apos;, &apos;sai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14090&apos;, &apos;sa&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14092&apos;, &apos;ruo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14094&apos;, &apos;run&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14097&apos;, &apos;rui&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14099&apos;, &apos;ruan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14109&apos;, &apos;ru&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14112&apos;, &apos;rou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14122&apos;, &apos;rong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14123&apos;, &apos;ri&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14125&apos;, &apos;reng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14135&apos;, &apos;ren&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14137&apos;, &apos;re&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14140&apos;, &apos;rao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14145&apos;, &apos;rang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14149&apos;, &apos;ran&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14151&apos;, &apos;qun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14159&apos;, &apos;que&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14170&apos;, &apos;quan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14345&apos;, &apos;qu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14353&apos;, &apos;qiu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14355&apos;, &apos;qiong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14368&apos;, &apos;qing&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14379&apos;, &apos;qin&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14384&apos;, &apos;qie&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14399&apos;, &apos;qiao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14407&apos;, &apos;qiang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14429&apos;, &apos;qian&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14594&apos;, &apos;qia&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14630&apos;, &apos;qi&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14645&apos;, &apos;pu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14654&apos;, &apos;po&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14663&apos;, &apos;ping&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14668&apos;, &apos;pin&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14670&apos;, &apos;pie&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14674&apos;, &apos;piao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14678&apos;, &apos;pian&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14857&apos;, &apos;pi&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14871&apos;, &apos;peng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14873&apos;, &apos;pen&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14882&apos;, &apos;pei&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14889&apos;, &apos;pao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14894&apos;, &apos;pang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14902&apos;, &apos;pan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14908&apos;, &apos;pai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14914&apos;, &apos;pa&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14921&apos;, &apos;ou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14922&apos;, &apos;o&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14926&apos;, &apos;nuo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14928&apos;, &apos;nue&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14929&apos;, &apos;nuan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14930&apos;, &apos;nv&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14933&apos;, &apos;nu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14937&apos;, &apos;nong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;14941&apos;, &apos;niu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15109&apos;, &apos;ning&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15110&apos;, &apos;nin&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15117&apos;, &apos;nie&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15119&apos;, &apos;niao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15121&apos;, &apos;niang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15128&apos;, &apos;nian&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15139&apos;, &apos;ni&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15140&apos;, &apos;neng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15141&apos;, &apos;nen&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15143&apos;, &apos;nei&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15144&apos;, &apos;ne&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15149&apos;, &apos;nao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15150&apos;, &apos;nang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15153&apos;, &apos;nan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15158&apos;, &apos;nai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15165&apos;, &apos;na&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15180&apos;, &apos;mu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15183&apos;, &apos;mou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15362&apos;, &apos;mo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15363&apos;, &apos;miu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15369&apos;, &apos;ming&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15375&apos;, &apos;min&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15377&apos;, &apos;mie&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15385&apos;, &apos;miao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15394&apos;, &apos;mian&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15408&apos;, &apos;mi&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15416&apos;, &apos;meng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15419&apos;, &apos;men&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15435&apos;, &apos;mei&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15436&apos;, &apos;me&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15448&apos;, &apos;mao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15454&apos;, &apos;mang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15625&apos;, &apos;man&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15631&apos;, &apos;mai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15640&apos;, &apos;ma&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15652&apos;, &apos;luo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15659&apos;, &apos;lun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15661&apos;, &apos;lue&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15667&apos;, &apos;luan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15681&apos;, &apos;lv&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15701&apos;, &apos;lu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15707&apos;, &apos;lou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15878&apos;, &apos;long&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15889&apos;, &apos;liu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15903&apos;, &apos;ling&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15915&apos;, &apos;lin&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15920&apos;, &apos;lie&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15933&apos;, &apos;liao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15944&apos;, &apos;liang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15958&apos;, &apos;lian&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;15959&apos;, &apos;lia&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16155&apos;, &apos;li&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16158&apos;, &apos;leng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16169&apos;, &apos;lei&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16171&apos;, &apos;le&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16180&apos;, &apos;lao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16187&apos;, &apos;lang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16202&apos;, &apos;lan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16205&apos;, &apos;lai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16212&apos;, &apos;la&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16216&apos;, &apos;kuo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16220&apos;, &apos;kun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16393&apos;, &apos;kui&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16401&apos;, &apos;kuang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16403&apos;, &apos;kuan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16407&apos;, &apos;kuai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16412&apos;, &apos;kua&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16419&apos;, &apos;ku&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16423&apos;, &apos;kou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16427&apos;, &apos;kong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16429&apos;, &apos;keng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16433&apos;, &apos;ken&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16448&apos;, &apos;ke&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16452&apos;, &apos;kao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16459&apos;, &apos;kang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16465&apos;, &apos;kan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16470&apos;, &apos;kai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16474&apos;, &apos;ka&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16647&apos;, &apos;jun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16657&apos;, &apos;jue&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16664&apos;, &apos;juan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16689&apos;, &apos;ju&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16706&apos;, &apos;jiu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16708&apos;, &apos;jiong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16733&apos;, &apos;jing&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16915&apos;, &apos;jin&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16942&apos;, &apos;jie&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16970&apos;, &apos;jiao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;16983&apos;, &apos;jiang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17185&apos;, &apos;jian&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17202&apos;, &apos;jia&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17417&apos;, &apos;ji&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17427&apos;, &apos;huo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17433&apos;, &apos;hun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17454&apos;, &apos;hui&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17468&apos;, &apos;huang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17482&apos;, &apos;huan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17487&apos;, &apos;huai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17496&apos;, &apos;hua&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17676&apos;, &apos;hu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17683&apos;, &apos;hou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17692&apos;, &apos;hong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17697&apos;, &apos;heng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17701&apos;, &apos;hen&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17703&apos;, &apos;hei&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17721&apos;, &apos;he&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17730&apos;, &apos;hao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17733&apos;, &apos;hang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17752&apos;, &apos;han&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17759&apos;, &apos;hai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17922&apos;, &apos;ha&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17928&apos;, &apos;guo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17931&apos;, &apos;gun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17947&apos;, &apos;gui&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17950&apos;, &apos;guang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17961&apos;, &apos;guan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17964&apos;, &apos;guai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17970&apos;, &apos;gua&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17988&apos;, &apos;gu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;17997&apos;, &apos;gou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18012&apos;, &apos;gong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18181&apos;, &apos;geng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18183&apos;, &apos;gen&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18184&apos;, &apos;gei&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18201&apos;, &apos;ge&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18211&apos;, &apos;gao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18220&apos;, &apos;gang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18231&apos;, &apos;gan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18237&apos;, &apos;gai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18239&apos;, &apos;ga&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18446&apos;, &apos;fu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18447&apos;, &apos;fou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18448&apos;, &apos;fo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18463&apos;, &apos;feng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18478&apos;, &apos;fen&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18490&apos;, &apos;fei&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18501&apos;, &apos;fang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18518&apos;, &apos;fan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18526&apos;, &apos;fa&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18696&apos;, &apos;er&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18697&apos;, &apos;en&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18710&apos;, &apos;e&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18722&apos;, &apos;duo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18731&apos;, &apos;dun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18735&apos;, &apos;dui&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18741&apos;, &apos;duan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18756&apos;, &apos;du&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18763&apos;, &apos;dou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18773&apos;, &apos;dong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18774&apos;, &apos;diu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18783&apos;, &apos;ding&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18952&apos;, &apos;die&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18961&apos;, &apos;diao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18977&apos;, &apos;dian&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;18996&apos;, &apos;di&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19003&apos;, &apos;deng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19006&apos;, &apos;de&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19018&apos;, &apos;dao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19023&apos;, &apos;dang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19038&apos;, &apos;dan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19212&apos;, &apos;dai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19218&apos;, &apos;da&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19224&apos;, &apos;cuo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19227&apos;, &apos;cun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19235&apos;, &apos;cui&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19238&apos;, &apos;cuan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19242&apos;, &apos;cu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19243&apos;, &apos;cou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19249&apos;, &apos;cong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19261&apos;, &apos;ci&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19263&apos;, &apos;chuo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19270&apos;, &apos;chun&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19275&apos;, &apos;chui&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19281&apos;, &apos;chuang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19288&apos;, &apos;chuan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19289&apos;, &apos;chuai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19467&apos;, &apos;chu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19479&apos;, &apos;chou&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19484&apos;, &apos;chong&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19500&apos;, &apos;chi&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19515&apos;, &apos;cheng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19525&apos;, &apos;chen&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19531&apos;, &apos;che&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19540&apos;, &apos;chao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19715&apos;, &apos;chang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19725&apos;, &apos;chan&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19728&apos;, &apos;chai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19739&apos;, &apos;cha&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19741&apos;, &apos;ceng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19746&apos;, &apos;ce&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19751&apos;, &apos;cao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19756&apos;, &apos;cang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19763&apos;, &apos;can&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19774&apos;, &apos;cai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19775&apos;, &apos;ca&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19784&apos;, &apos;bu&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19805&apos;, &apos;bo&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19976&apos;, &apos;bing&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19982&apos;, &apos;bin&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19986&apos;, &apos;bie&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;19990&apos;, &apos;biao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20002&apos;, &apos;bian&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20026&apos;, &apos;bi&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20032&apos;, &apos;beng&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20036&apos;, &apos;ben&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20051&apos;, &apos;bei&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20230&apos;, &apos;bao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20242&apos;, &apos;bang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20257&apos;, &apos;ban&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20265&apos;, &apos;bai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20283&apos;, &apos;ba&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20292&apos;, &apos;ao&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20295&apos;, &apos;ang&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20304&apos;, &apos;an&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20317&apos;, &apos;ai&apos;);</div><div class="line">INSERT INTO `pinyin` VALUES (&apos;20319&apos;, &apos;a&apos;);</div></pre></td></tr></table></figure>
+<h3 id="调用"><a href="#调用" class="headerlink" title="调用"></a>调用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select f_to_pinyin(&quot;测试&quot;);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>分享即是成长</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="changyuan WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/27/atom-tutorial/" rel="next" title="atom tutorial">
+                <i class="fa fa-chevron-left"></i> atom tutorial
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/09/02/git-cheatsheet/" rel="prev" title="git-cheatsheet">
+                git-cheatsheet <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="changyuan" />
+          <p class="site-author-name" itemprop="name">changyuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">不断升级自己的操作系统</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/changyuan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/changocean1" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/changyuan2011" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/changyuanyuan" target="_blank" title="Zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建mysql函数"><span class="nav-number">1.</span> <span class="nav-text">创建mysql函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建拼音ascii码"><span class="nav-number">2.</span> <span class="nav-text">创建拼音ascii码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用"><span class="nav-number">3.</span> <span class="nav-text">调用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changyuan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
