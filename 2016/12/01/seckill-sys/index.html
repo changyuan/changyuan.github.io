@@ -93,16 +93,17 @@
 
 
 
-<meta name="description" content="秒杀业务为什么难做 im系统，例如qq或者微博，每个人都读自己的数据（好友列表、群列表、个人信息）； 微博系统，每个人读你关注的人的数据，一个人读多个人的数据； 秒杀系统，库存只有一份，所有人会在集中的时间读和写这些数据，多个人读一个数据。   小米手机每周二的秒杀，可能手机只有1万部，但瞬时进入的流量可能是几百几千万。 12306抢票，票是有限的，库存一份，瞬时流量非常多，都读相同的库存。读写冲">
+<meta name="description" content="秒杀业务为什么难做 im系统，例如qq或者微博，每个人都读自己的数据（好友列表、群列表、个人信息）； 微博系统，每个人读你关注的人的数据，一个人读多个人的数据； 秒杀系统，库存只有一份，所有人会在集中的时间读和写这些数据，多个人读一个数据。   小米手机每周二的秒杀，可能手机只有1万部，但瞬时进入的流量可能是几百几千万。   12306抢票，票是有限的，库存一份，瞬时流量非常多，都读相同的库存。读">
 <meta property="og:type" content="article">
 <meta property="og:title" content="做秒杀的几个思路">
 <meta property="og:url" content="http://changyuan.github.io/2016/12/01/seckill-sys/index.html">
 <meta property="og:site_name" content="Chang Crazy&#39;s Blog">
-<meta property="og:description" content="秒杀业务为什么难做 im系统，例如qq或者微博，每个人都读自己的数据（好友列表、群列表、个人信息）； 微博系统，每个人读你关注的人的数据，一个人读多个人的数据； 秒杀系统，库存只有一份，所有人会在集中的时间读和写这些数据，多个人读一个数据。   小米手机每周二的秒杀，可能手机只有1万部，但瞬时进入的流量可能是几百几千万。 12306抢票，票是有限的，库存一份，瞬时流量非常多，都读相同的库存。读写冲">
+<meta property="og:description" content="秒杀业务为什么难做 im系统，例如qq或者微博，每个人都读自己的数据（好友列表、群列表、个人信息）； 微博系统，每个人读你关注的人的数据，一个人读多个人的数据； 秒杀系统，库存只有一份，所有人会在集中的时间读和写这些数据，多个人读一个数据。   小米手机每周二的秒杀，可能手机只有1万部，但瞬时进入的流量可能是几百几千万。   12306抢票，票是有限的，库存一份，瞬时流量非常多，都读相同的库存。读">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-12-01T05:52:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="做秒杀的几个思路">
-<meta name="twitter:description" content="秒杀业务为什么难做 im系统，例如qq或者微博，每个人都读自己的数据（好友列表、群列表、个人信息）； 微博系统，每个人读你关注的人的数据，一个人读多个人的数据； 秒杀系统，库存只有一份，所有人会在集中的时间读和写这些数据，多个人读一个数据。   小米手机每周二的秒杀，可能手机只有1万部，但瞬时进入的流量可能是几百几千万。 12306抢票，票是有限的，库存一份，瞬时流量非常多，都读相同的库存。读写冲">
+<meta name="twitter:description" content="秒杀业务为什么难做 im系统，例如qq或者微博，每个人都读自己的数据（好友列表、群列表、个人信息）； 微博系统，每个人读你关注的人的数据，一个人读多个人的数据； 秒杀系统，库存只有一份，所有人会在集中的时间读和写这些数据，多个人读一个数据。   小米手机每周二的秒杀，可能手机只有1万部，但瞬时进入的流量可能是几百几千万。   12306抢票，票是有限的，库存一份，瞬时流量非常多，都读相同的库存。读">
 
 
 
@@ -335,7 +336,9 @@
 </ol>
 <blockquote>
 <p>小米手机每周二的秒杀，可能手机只有1万部，但瞬时进入的流量可能是几百几千万。</p>
-<p>12306抢票，票是有限的，库存一份，瞬时流量非常多，都读相同的库存。读写冲突，锁非常严重，这是秒杀业务难的地方。那我们怎么优化秒杀业务的架构呢？（其实12306比淘宝要更难做，因为所有的都是动态库存，几百种sku。<a href="http://mp.weixin.qq.com/s?src=3&amp;timestamp=1483520302&amp;ver=1&amp;signature=oMV0qeEAoxDXix0z8h1QIV3pVyw4Bqm9EvLUMBtk8dsrtnHZe1fKK2M403x7M2w0ut03F2lv1oFCx65DJxfPl4PlFW1rZPzOaSQspD4bZqjZ7pcjPfvo-PsR3Ec7nmkZo9jni8iNFahs0QtAZ8R3eg==" target="_blank" rel="external">有兴趣请点击查看</a>）</p>
+</blockquote>
+<blockquote>
+<p>12306抢票，票是有限的，库存一份，瞬时流量非常多，都读相同的库存。读写冲突，锁非常严重，这是秒杀业务难的地方。那我们怎么优化秒杀业务的架构呢？（其实12306比淘宝要更难做，因为所有的都是动态库存，几百种sku。<a href="http://mp.weixin.qq.com/s?src=3&amp;timestamp=1483520302&amp;ver=1&amp;signature=oMV0qeEAoxDXix0z8h1QIV3pVyw4Bqm9EvLUMBtk8dsrtnHZe1fKK2M403x7M2w0ut03F2lv1oFCx65DJxfPl4PlFW1rZPzOaSQspD4bZqjZ7pcjPfvo-PsR3Ec7nmkZo9jni8iNFahs0QtAZ8R3eg==" target="_blank" rel="noopener">有兴趣请点击查看</a>）</p>
 </blockquote>
 <h1 id="优化方向"><a href="#优化方向" class="headerlink" title="优化方向"></a>优化方向</h1><ol>
 <li><p>将请求尽量拦截在系统上游（不要让锁冲突落到数据库上去）。传统秒杀系统之所以挂，请求都压倒了后端数据层，数据读写锁冲突严重，并发高响应慢，几乎所有请求都超时，流量虽大，下单成功的有效流量甚小。以12306为例，一趟火车其实只有2000张票，200w个人来买，基本没有人能买成功，请求有效率为0。</p>
@@ -535,7 +538,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -653,7 +656,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-"></i>
   </span>

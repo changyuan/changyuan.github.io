@@ -99,6 +99,7 @@
 <meta property="og:url" content="http://changyuan.github.io/2014/11/23/https/index.html">
 <meta property="og:site_name" content="Chang Crazy&#39;s Blog">
 <meta property="og:description" content="上一篇文章我介绍了 HTTP/2 协议 ，它只有在 HTTPS 环境才会生效。 为了升级到 HTTP/2 协议，必须先启用 HTTPS。如果你不了解 HTTPS 协议（学名 TLS 协议），可以参考我以前的文章。   《HTTPS 协议概述》 《图解 HTTPS 协议》 《HTTPS 协议的七个误解》 《HTTPS 协议的延迟有多大？》">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2016/bg2016082601.png">
 <meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2016/bg2016082602.png">
 <meta property="og:updated_time" content="2014-11-23T08:44:59.000Z">
@@ -331,14 +332,14 @@
       
 
       
-        <p>上一篇文章我介绍了 <a href="http://www.ruanyifeng.com/blog/2016/08/http.html" target="_blank" rel="external">HTTP/2 协议</a> ，它只有在 HTTPS 环境才会生效。</p>
+        <p>上一篇文章我介绍了 <a href="http://www.ruanyifeng.com/blog/2016/08/http.html" target="_blank" rel="noopener">HTTP/2 协议</a> ，它只有在 HTTPS 环境才会生效。</p>
 <p>为了升级到 HTTP/2 协议，必须先启用 HTTPS。如果你不了解 HTTPS 协议（学名 TLS 协议），可以参考我以前的文章。</p>
 <blockquote>
 <ul>
-<li><a href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html" target="_blank" rel="external">《HTTPS 协议概述》</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html" target="_blank" rel="external">《图解 HTTPS 协议》</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2011/02/seven_myths_about_https.html" target="_blank" rel="external">《HTTPS 协议的七个误解》</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2014/09/ssl-latency.html" target="_blank" rel="external">《HTTPS 协议的延迟有多大？》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html" target="_blank" rel="noopener">《HTTPS 协议概述》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html" target="_blank" rel="noopener">《图解 HTTPS 协议》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2011/02/seven_myths_about_https.html" target="_blank" rel="noopener">《HTTPS 协议的七个误解》</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/09/ssl-latency.html" target="_blank" rel="noopener">《HTTPS 协议的延迟有多大？》</a></li>
 </ul>
 </blockquote>
 <a id="more"></a>
@@ -348,9 +349,9 @@
 <p>证书是一个二进制文件，里面包含经过认证的网站公钥和一些元数据，要从经销商购买。</p>
 <blockquote>
 <ul>
-<li><a href="https://www.gogetssl.com/" target="_blank" rel="external">GoGetSSL</a></li>
-<li><a href="https://www.ssls.com/" target="_blank" rel="external">SSLs.com</a></li>
-<li><a href="https://sslmate.com/" target="_blank" rel="external">SSLmate.com</a></li>
+<li><a href="https://www.gogetssl.com/" target="_blank" rel="noopener">GoGetSSL</a></li>
+<li><a href="https://www.ssls.com/" target="_blank" rel="noopener">SSLs.com</a></li>
+<li><a href="https://sslmate.com/" target="_blank" rel="noopener">SSLmate.com</a></li>
 </ul>
 </blockquote>
 <p>证书有很多类型，首先分为三种认证级别。</p>
@@ -371,35 +372,35 @@
 </ul>
 </blockquote>
 <p>认证级别越高、覆盖范围越广的证书，价格越贵。</p>
-<p>还有一个免费证书的选择。为了推广HTTPS协议，电子前哨基金会EFF成立了 <a href="https://letsencrypt.org/" target="_blank" rel="external">Let’s Encrypt</a>，提供免费证书（<a href="https://www.digitalocean.com/community/tags/let-s-encrypt?type=tutorials" target="_blank" rel="external">教程</a>和<a href="https://certbot.eff.org/" target="_blank" rel="external">工具</a>）。</p>
-<p>拿到证书以后，可以用<a href="https://tools.keycdn.com/ssl" target="_blank" rel="external">SSL Certificate Check</a>检查一下，信息是否正确。</p>
+<p>还有一个免费证书的选择。为了推广HTTPS协议，电子前哨基金会EFF成立了 <a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a>，提供免费证书（<a href="https://www.digitalocean.com/community/tags/let-s-encrypt?type=tutorials" target="_blank" rel="noopener">教程</a>和<a href="https://certbot.eff.org/" target="_blank" rel="noopener">工具</a>）。</p>
+<p>拿到证书以后，可以用<a href="https://tools.keycdn.com/ssl" target="_blank" rel="noopener">SSL Certificate Check</a>检查一下，信息是否正确。</p>
 <h2 id="二、安装证书"><a href="#二、安装证书" class="headerlink" title="二、安装证书"></a>二、安装证书</h2><p>证书可以放在<code>/etc/ssl</code>目录（Linux 系统），然后根据你使用的Web服务器进行配置。</p>
 <blockquote>
 <ul>
-<li><a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/" target="_blank" rel="external">证书配置文件生成器</a>，by Mozilla</li>
-<li><a href="https://github.com/SSLMate/tlsconfigguide/tree/master/templates" target="_blank" rel="external">配置文件模板</a>，by SSLMate</li>
+<li><a href="https://mozilla.github.io/server-side-tls/ssl-config-generator/" target="_blank" rel="noopener">证书配置文件生成器</a>，by Mozilla</li>
+<li><a href="https://github.com/SSLMate/tlsconfigguide/tree/master/templates" target="_blank" rel="noopener">配置文件模板</a>，by SSLMate</li>
 </ul>
 </blockquote>
-<p>如果使用 Let’s Encrypt 证书，请使用自动安装工具<a href="https://certbot.eff.org/" target="_blank" rel="external">Certbot</a>。</p>
-<p>安装成功后，使用 <a href="https://www.ssllabs.com/ssltest/analyze.html" target="_blank" rel="external">SSL Labs Server Test</a> 检查一下证书是否生效。</p>
+<p>如果使用 Let’s Encrypt 证书，请使用自动安装工具<a href="https://certbot.eff.org/" target="_blank" rel="noopener">Certbot</a>。</p>
+<p>安装成功后，使用 <a href="https://www.ssllabs.com/ssltest/analyze.html" target="_blank" rel="noopener">SSL Labs Server Test</a> 检查一下证书是否生效。</p>
 <h2 id="三、修改链接"><a href="#三、修改链接" class="headerlink" title="三、修改链接"></a>三、修改链接</h2><p>下一步，网页加载的 HTTP 资源，全部改成 HTTPS 链接。因为加密网页内有非加密的资源，浏览器是不会加载的。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://foo.com/jquery.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://foo.com/jquery.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>上面这行加载命令，有两种改法。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 改法一 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://foo.com/jquery.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 改法二 --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//foo.com/jquery.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 改法一 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://foo.com/jquery.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 改法二 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"//foo.com/jquery.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>其中，改法二会根据当前网页的协议，加载相同协议的外部资源，更灵活一些。</p>
 <p>另外，如果页面头部用到了<code>rel=&quot;canonical&quot;</code>，也要改成HTTPS网址。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"canonical"</span> <span class="attr">href</span>=<span class="string">"https://foo.com/bar.html"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"canonical"</span> <span class="attr">href</span>=<span class="string">"https://foo.com/bar.html"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 <h2 id="四、301重定向"><a href="#四、301重定向" class="headerlink" title="四、301重定向"></a>四、301重定向</h2><p>下一步，修改 Web 服务器的配置文件，使用 301 重定向，将 HTTP 协议的访问导向 HTTPS 协议。</p>
-<p><a href="https://serverfault.com/questions/67316/in-nginx-how-can-i-rewrite-all-http-requests-to-https-while-maintaining-sub-dom" target="_blank" rel="external">Nginx 的写法</a>。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">  listen 80;</div><div class="line">  server_name domain.com www.domain.com;</div><div class="line">  return 301 https://domain.com$request_uri;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><a href="https://httpd.apache.org/docs/2.4/rewrite/remapping.html#canonicalhost" target="_blank" rel="external">Apache 的写法</a>（<code>.htaccess</code>文件）。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RewriteEngine On</div><div class="line">RewriteCond %&#123;HTTPS&#125; off</div><div class="line">RewriteRule (.*) https://%&#123;HTTP_HOST&#125;%&#123;REQUEST_URI&#125; [R=301,L]</div></pre></td></tr></table></figure>
+<p><a href="https://serverfault.com/questions/67316/in-nginx-how-can-i-rewrite-all-http-requests-to-https-while-maintaining-sub-dom" target="_blank" rel="noopener">Nginx 的写法</a>。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 80;</span><br><span class="line">  server_name domain.com www.domain.com;</span><br><span class="line">  return 301 https://domain.com$request_uri;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://httpd.apache.org/docs/2.4/rewrite/remapping.html#canonicalhost" target="_blank" rel="noopener">Apache 的写法</a>（<code>.htaccess</code>文件）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">RewriteEngine On</span><br><span class="line">RewriteCond %&#123;HTTPS&#125; off</span><br><span class="line">RewriteRule (.*) https://%&#123;HTTP_HOST&#125;%&#123;REQUEST_URI&#125; [R=301,L]</span><br></pre></td></tr></table></figure>
 <h2 id="五、安全措施"><a href="#五、安全措施" class="headerlink" title="五、安全措施"></a>五、安全措施</h2><p>以下措施可以进一步保证通信安全。</p>
 <h3 id="5-1-HTTP-Strict-Transport-Security-HSTS"><a href="#5-1-HTTP-Strict-Transport-Security-HSTS" class="headerlink" title="5.1 HTTP Strict Transport Security (HSTS)"></a>5.1 HTTP Strict Transport Security (HSTS)</h3><p>访问网站时，用户很少直接在地址栏输入<code>https://</code>，总是通过点击链接，或者3xx重定向，从HTTP页面进入HTTPS页面。攻击者完全可以在用户发出HTTP请求时，劫持并篡改该请求。</p>
 <p>另一种情况是恶意网站使用自签名证书，冒充另一个网站，这时浏览器会给出警告，但是许多用户会忽略警告继续访问。</p>
 <p>“HTTP严格传输安全”（简称 HSTS）的作用，就是强制浏览器只能发出HTTPS请求，并阻止用户接受不安全的证书。</p>
-<p>它在网站的响应头里面，加入一个强制性声明。以下例子摘自<a href="https://zh.wikipedia.org/wiki/HTTP%E4%B8%A5%E6%A0%BC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8" target="_blank" rel="external">维基百科</a>。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">Strict-Transport-Security</span>: max-age=31536000; includeSubDomains</div></pre></td></tr></table></figure>
+<p>它在网站的响应头里面，加入一个强制性声明。以下例子摘自<a href="https://zh.wikipedia.org/wiki/HTTP%E4%B8%A5%E6%A0%BC%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8" target="_blank" rel="noopener">维基百科</a>。</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Strict-Transport-Security</span>: max-age=31536000; includeSubDomains</span><br></pre></td></tr></table></figure>
 <p>上面这段头信息有两个作用。</p>
 <blockquote>
 <p>（1）在接下来的一年（即31536000秒）中，浏览器只要向<code>example.com</code>或其子域名发送HTTP请求时，必须采用HTTPS来发起连接。用户点击超链接或在地址栏输入<code>http://www.example.com/</code>，浏览器应当自动将<code>http</code>转写成<code>https</code>，然后直接向<code>https://www.example.com/</code>发送请求。</p>
@@ -409,11 +410,11 @@
 <p>该方法的主要不足是，用户首次访问网站发出HTTP请求时，是不受HSTS保护的。</p>
 <h3 id="5-2-Cookie"><a href="#5-2-Cookie" class="headerlink" title="5.2 Cookie"></a>5.2 Cookie</h3><p>另一个需要注意的地方是，确保浏览器只在使用 HTTPS 时，才发送Cookie。</p>
 <p>网站响应头里面，<code>Set-Cookie</code>字段加上<code>Secure</code>标志即可。</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">Set-Cookie</span>: LSID=DQAAAK…Eaem_vYg; Secure</div></pre></td></tr></table></figure>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Set-Cookie</span>: LSID=DQAAAK…Eaem_vYg; Secure</span><br></pre></td></tr></table></figure>
 <h2 id="六、参考链接"><a href="#六、参考链接" class="headerlink" title="六、参考链接"></a>六、参考链接</h2><ul>
-<li><a href="https://docs.google.com/document/d/1oRXJUIttqQxuxmjj2tgYjj096IKw4Zcw6eAoIKWZ2oQ/edit#" target="_blank" rel="external">How To Migrate To HTTPS</a>, by Chris Palmer</li>
-<li><a href="https://www.keycdn.com/blog/http-to-https/" target="_blank" rel="external">Complete Guide – How to Migrate from HTTP to HTTPS</a>, by KeyCDN</li>
-<li><a href="http://smallbiztrends.com/2015/04/changing-from-http-to-https.html" target="_blank" rel="external">What You Need to Know About Changing From Http to Https</a>, by Matt Mansfield</li>
+<li><a href="https://docs.google.com/document/d/1oRXJUIttqQxuxmjj2tgYjj096IKw4Zcw6eAoIKWZ2oQ/edit#" target="_blank" rel="noopener">How To Migrate To HTTPS</a>, by Chris Palmer</li>
+<li><a href="https://www.keycdn.com/blog/http-to-https/" target="_blank" rel="noopener">Complete Guide – How to Migrate from HTTP to HTTPS</a>, by KeyCDN</li>
+<li><a href="http://smallbiztrends.com/2015/04/changing-from-http-to-https.html" target="_blank" rel="noopener">What You Need to Know About Changing From Http to Https</a>, by Matt Mansfield</li>
 </ul>
 <p>（完）</p>
 
@@ -552,7 +553,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -670,7 +671,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-"></i>
   </span>

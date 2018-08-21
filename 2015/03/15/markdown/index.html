@@ -100,6 +100,7 @@
 <meta property="og:url" content="http://changyuan.github.io/2015/03/15/markdown/index.html">
 <meta property="og:site_name" content="Chang Crazy&#39;s Blog">
 <meta property="og:description" content="markdown 在 sublime text 3 中使用作为Windows/Mac/Linux下强大的文本编辑器，st提供了对Markdown语言的支持。通过设置可实现markdown预览和转换功能。而本文介绍的Markdown Preview支持Mathjax语法和目录自动生成。(Windows下）,打开st，按下组合键Control + `，出现控制台，输入">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-06-12T13:53:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Markdown">
@@ -330,7 +331,7 @@
 
       
         <h2 id="markdown-在-sublime-text-3-中使用"><a href="#markdown-在-sublime-text-3-中使用" class="headerlink" title="markdown 在 sublime text 3 中使用"></a>markdown 在 sublime text 3 中使用</h2><p>作为Windows/Mac/Linux下强大的文本编辑器，st提供了对Markdown语言的支持。通过设置可实现markdown预览和转换功能。而本文介绍的Markdown Preview支持Mathjax语法和目录自动生成。(Windows下）,<br>打开st，按下组合键Control + `，出现控制台，输入<br><a id="more"></a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">import  urllib.request,os;pf=<span class="string">'Package Control.sublime-package'</span>;ipp=sublime.installed_packages_path();urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler()));open(os.path.join(ipp,pf),<span class="string">'wb'</span>).write(urllib.request.urlopen(<span class="string">'http://sublime.wbond.net/'</span>+pf.replace(<span class="string">' '</span>,<span class="string">'%20'</span>)).<span class="built_in">read</span>())</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import  urllib.request,os;pf=<span class="string">'Package Control.sublime-package'</span>;ipp=sublime.installed_packages_path();urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler()));open(os.path.join(ipp,pf),<span class="string">'wb'</span>).write(urllib.request.urlopen(<span class="string">'http://sublime.wbond.net/'</span>+pf.replace(<span class="string">' '</span>,<span class="string">'%20'</span>)).<span class="built_in">read</span>())</span><br></pre></td></tr></table></figure>
 <p>当看到代码最后一行提示的时候说明安装成功，此时重启st，可在Preferences -&gt; Package Settings看到Package Control。<br>安装markdown preview<br>按下键Ctrl+Shift+p调出命令面板，找到Package Control: install Pakage这一项。搜索markdown preview，点击安装。</p>
 <p>使用<br>Markdown Preview较常用的功能是preview in browser和Export HTML in Sublime Text，前者可以在浏览器看到预览效果，后者可将markdown保存为html文件。</p>
 <p>preview in browser据称是实时的，但是实践上还是需要在st保存，然后浏览器刷新才能看到新的效果，好在markdown写得多的话也不需要每敲一行看一次效果。</p>
@@ -342,12 +343,12 @@
 </blockquote>
 <p>“alt+m”可设置为自己喜欢的按键。</p>
 <p>设置语法高亮和mathjax支持<br>在Preferences -&gt;Package Settings-&gt;Markdown Preview-&gt;Setting Default中的第31行和36行找到</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">&quot;enable_mathjax&quot;: false,</div><div class="line">&quot;enable_highlight&quot;: false,</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&quot;enable_mathjax&quot;: false,</span><br><span class="line">&quot;enable_highlight&quot;: false,</span><br></pre></td></tr></table></figure>
 <p>将 两个false改为true即可。<br>语法高亮跟编辑器的主题有关，可以在Preferences -&gt;Color Scheme找自己喜欢的主题。<br>关于目录生成，只要文章是按照markdown语法写作的。在需要生成目录的地方写<br>[TOC]<br>即可。</p>
 <h2 id="markdown-语法参考"><a href="#markdown-语法参考" class="headerlink" title="markdown 语法参考"></a>markdown 语法参考</h2><p>@changyuan</p>
 <p>Emphasis, aka italics, with <em>asterisks</em> or <em>underscores</em>.<br>Strong emphasis, aka bold, with <strong>asterisks</strong> or <strong>underscores</strong>.<br>Combined emphasis with <strong>asterisks and <em>underscores</em></strong>.<br>Strikethrough uses two tildes. <del>Scratch this.</del></p>
-<p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank" rel="external">参考1</a><br><a href="https://guides.github.com/features/mastering-markdown/" target="_blank" rel="external">参考2</a></p>
-<h2 id="emoji表情参考"><a href="#emoji表情参考" class="headerlink" title="emoji表情参考"></a>emoji表情参考</h2><p>:smile::thumbsup::thumbsup:<br><del>emo</del><br><a href="http://www.emoji-cheat-sheet.com/" target="_blank" rel="external">emoji表情参考</a></p>
+<p><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank" rel="noopener">参考1</a><br><a href="https://guides.github.com/features/mastering-markdown/" target="_blank" rel="noopener">参考2</a></p>
+<h2 id="emoji表情参考"><a href="#emoji表情参考" class="headerlink" title="emoji表情参考"></a>emoji表情参考</h2><p>:smile::thumbsup::thumbsup:<br><del>emo</del><br><a href="http://www.emoji-cheat-sheet.com/" target="_blank" rel="noopener">emoji表情参考</a></p>
 
       
     </div>
@@ -490,7 +491,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -608,7 +609,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-"></i>
   </span>

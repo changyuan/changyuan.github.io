@@ -99,6 +99,7 @@
 <meta property="og:url" content="http://changyuan.github.io/2016/01/28/ganji-design-msyql-rule/index.html">
 <meta property="og:site_name" content="Chang Crazy&#39;s Blog">
 <meta property="og:description" content="写在前面: ++ 总是在灾难发生后，才想起容灾的重要性；总是在吃过亏后，才记得曾经有人提醒过。++ 核心军规 不在数据库做运算：cpu计算务必移至业务层 控制单表数据量：单表记录控制在1000w 控制列数量：字段数控制在20以内 平衡范式与冗余：为提高效率牺牲范式设计，冗余数据 拒绝3B：拒绝大sql，大事物，大批量">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-01-28T05:52:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【转】赶集Mysql军规">
@@ -338,7 +339,7 @@
 <li>拒绝3B：拒绝大sql，大事物，大批量</li>
 </ol>
 <a id="more"></a>
-<h1 id="字段类军规"><a href="#字段类军规" class="headerlink" title="字段类军规"></a>字段类军规</h1><ol>
+<h1 id="字段类军规"><a href="#字段类军规" class="headerlink" title="字段类军规"></a>字段类军规</h1><ol start="7">
 <li>用好数值类型</li>
 </ol>
 <ul>
@@ -349,41 +350,41 @@
 <li>bigint(8Byte)</li>
 <li>bad case：int(1)/int(11)</li>
 </ul>
-<ol>
+<ol start="8">
 <li>字符转化为数字</li>
 </ol>
 <ul>
 <li>用int而不是char(15)存储ip</li>
 <li>优先使用enum或set,例如：<code>sex</code> enum (‘F’, ‘M’)</li>
-<li>避免使用NULL字段；NULL字段很难查询优化；NULL字段的索引需要额外空间；NULL字段的复合索引无效<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">bad case：</div><div class="line">`name` char(32) default null</div><div class="line">`age` int not null</div><div class="line">good case：</div><div class="line">`age` int not null default 0</div></pre></td></tr></table></figure>
+<li>避免使用NULL字段；NULL字段很难查询优化；NULL字段的索引需要额外空间；NULL字段的复合索引无效<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bad case：</span><br><span class="line">`name` char(32) default null</span><br><span class="line">`age` int not null</span><br><span class="line">good case：</span><br><span class="line">`age` int not null default 0</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<ol>
+<ol start="9">
 <li>少用text/blob<br>varchar的性能会比text高很多；实在避免不了blob，请拆表;不在数据库里存图片：是否需要解释？</li>
 </ol>
-<h1 id="索引类军规"><a href="#索引类军规" class="headerlink" title="索引类军规"></a>索引类军规</h1><ol>
+<h1 id="索引类军规"><a href="#索引类军规" class="headerlink" title="索引类军规"></a>索引类军规</h1><ol start="12">
 <li>谨慎合理使用索引；改善查询、减慢更新；索引一定不是越多越好（能不加就不加，要加的一定得加）；覆盖记录条数过多不适合建索引，例如“性别”</li>
 <li>字符字段必须建前缀索引</li>
 <li>不在索引做列运算：<code>select id where age +1 = 10;</code></li>
 <li>innodb主键推荐使用自增列（SK：博主不认可）;主键建立聚簇索引;主键不应该被修改；字符串不应该做主键；如果不指定主键，innodb会使用唯一且非空值索引代替</li>
 <li>不用外键；请由程序保证约束</li>
 </ol>
-<h1 id="sql类军规"><a href="#sql类军规" class="headerlink" title="sql类军规"></a>sql类军规</h1><ol>
+<h1 id="sql类军规"><a href="#sql类军规" class="headerlink" title="sql类军规"></a>sql类军规</h1><ol start="17">
 <li>sql语句尽可能简单；一条sql只能在一个cpu运算；大语句拆小语句，减少锁时间；一条大sql可以堵死整个库</li>
 <li>简单的事务,事务时间尽可能短。不好的例子：上传图片事务</li>
 <li>避免使用trig/func；触发器、函数不用；客户端程序取而代之</li>
 <li>不用select * ： 消耗cpu，io，内存，带宽，这种程序不具有扩展性</li>
 <li><p>OR改写为IN()；<code>or</code>的效率是n级别；<code>in</code>的消息时log(n)级别；in的个数建议控制在200以内</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select id from t where phone=’159′ or phone=’136′;</div><div class="line">=&gt;</div><div class="line">select id from t where phone in (’159′, ’136′);</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> phone=’<span class="number">159</span>′ <span class="keyword">or</span> phone=’<span class="number">136</span>′;</span><br><span class="line">=&gt;</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> phone <span class="keyword">in</span> (’<span class="number">159</span>′, ’<span class="number">136</span>′);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>OR改写为UNION<br>mysql的索引合并很弱智</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">select id from t where phone = ’159′ or name = ‘john’;</div><div class="line">=&gt;</div><div class="line">select id from t where phone=’159′</div><div class="line">union</div><div class="line">select id from t where name=’jonh’</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> phone = ’<span class="number">159</span>′ <span class="keyword">or</span> <span class="keyword">name</span> = ‘john’;</span><br><span class="line">=&gt;</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> phone=’<span class="number">159</span>′</span><br><span class="line"><span class="keyword">union</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">name</span>=’jonh’</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>避免负向%</p>
 </li>
 <li>慎用count(*)</li>
 <li><p>limit高效分页<br>limit越大，效率越低</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">select id from t limit 10000, 10;</div><div class="line">=&gt;</div><div class="line">select id from t where id &gt; 10000 limit 10;</div></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">limit</span> <span class="number">10000</span>, <span class="number">10</span>;</span><br><span class="line">=&gt;</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">id</span> &gt; <span class="number">10000</span> <span class="keyword">limit</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用<code>union all</code>替代<code>union</code>, <code>union</code>有去重开销</p>
 </li>
@@ -392,7 +393,7 @@
 <li>请使用同类型比较</li>
 <li>使用<code>load data</code>导数据<br>load data比insert快约20倍；</li>
 <li>打散批量更新</li>
-<li>新能分析工具<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">show</span> profile;</div><div class="line">mysqlsla;</div><div class="line">mysqldumpslow;</div><div class="line"><span class="keyword">explain</span>;</div><div class="line"><span class="keyword">show</span> slow <span class="keyword">log</span>;</div><div class="line"><span class="keyword">show</span> <span class="keyword">processlist</span>;</div><div class="line"><span class="keyword">show</span> query_response_time(percona)</div></pre></td></tr></table></figure></li>
+<li>新能分析工具<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> profile;</span><br><span class="line">mysqlsla;</span><br><span class="line">mysqldumpslow;</span><br><span class="line"><span class="keyword">explain</span>;</span><br><span class="line"><span class="keyword">show</span> slow <span class="keyword">log</span>;</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">processlist</span>;</span><br><span class="line"><span class="keyword">show</span> query_response_time(percona)</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
@@ -530,7 +531,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -648,7 +649,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-"></i>
   </span>

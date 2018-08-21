@@ -100,6 +100,7 @@
 <meta property="og:url" content="http://changyuan.github.io/2016/01/28/design-mysql/index.html">
 <meta property="og:site_name" content="Chang Crazy&#39;s Blog">
 <meta property="og:description" content="数据库的基本概念基本概念就一页PPT，让大家就一些数据库方面的概念达成一致。  “单库”。  “分片”，也就是水平切分，它是用来解决数据量大的问题。有一些数据库支持auto sharding，自动分片，例如mongoDB，后来发现auto sharding不太可控，不知道什么时候会进行数据迁移，数据迁移过程中会有大粒度的锁，读写被阻塞，业务会有抖动和毛刺，这些是业务不能接受的。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://changyuan.github.io/images/technology/snowflake-64bit.jpg">
 <meta property="og:updated_time" content="2016-01-28T09:21:06.000Z">
 <meta name="twitter:card" content="summary">
@@ -348,7 +349,7 @@
 <li><p>三个是路由服务。前面两个数据路由方法均有一个缺点，业务线需要耦合路由规则，如果路由规则发生变化，业务线是需要配合升级的。路由服务可以实现业务线与路由规则的解耦，业务线每次访问数据库之前先调用路由服务，来知道数据究竟存放在哪个分库上。</p>
 </li>
 </ol>
-<ol>
+<ol start="3">
 <li>“分组”与“复制”，这解决的是扩展读性能，保证读高可用的问题。<br>大部分互联网的业务都是读多写少。<br>淘宝、京东查询商品，搜索商品的请求可能占了99%，只有下单和支付的时候有写请求。<br>58同城搜索帖子，察看列表页，查看详情页都是读请求，发布帖子是写请求，写请求的量也是比较少的。<br>大部分互联网的场景都读多写少，一般来说读性能会最先成为瓶颈，怎么快速解决这个问题呢？</li>
 </ol>
 <p>我们通常使用<strong>读写分离</strong>，扩充读库的方式来提升系统的读性能，同时多个读库也保证了读的可用性，一台读库挂了，另外一台读库可以持续的提供服务。</p>
@@ -402,7 +403,7 @@
 <li>读性能的实践：传统的玩法是<strong>增加从库</strong>或者<strong>增加缓存</strong>。存在的问题是：主从可能不一致，同城的玩法是<strong>服务+数据库+缓存</strong>一套的方式来解决这些问题。</li>
 <li>一致性的实践，解决主从不一致性有两种方法:<br>增加中间件: 中间件记录哪些key上发生了写操作，在主从同步时间窗口之内的读操作也路由到主库。<br>强制读主: 数据库与缓存的一致性，我们的实践是双淘汰，在发生写请求的时候，淘汰缓存，写入数据库，再做一个延时的缓存淘汰操作。第二个实践是建议为所有的item设置一个超时时间。</li>
 </ul>
-<p><a href="http://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&amp;mid=400465735&amp;idx=1&amp;sn=8d7067de4cc8f73ea5558f07e0a9340e&amp;scene=21#wechat_redirect" target="_blank" rel="external">如何秒级扩容的结构？</a></p>
+<p><a href="http://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&amp;mid=400465735&amp;idx=1&amp;sn=8d7067de4cc8f73ea5558f07e0a9340e&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">如何秒级扩容的结构？</a></p>
 <blockquote>
 <ol>
 <li>提升从库 （把原来的shadow-master改成master）</li>
@@ -563,7 +564,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -681,7 +682,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-"></i>
   </span>

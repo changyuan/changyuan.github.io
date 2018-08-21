@@ -97,6 +97,7 @@
 <meta property="og:title" content="Chang Crazy&#39;s Blog">
 <meta property="og:url" content="http://changyuan.github.io/page/2/index.html">
 <meta property="og:site_name" content="Chang Crazy&#39;s Blog">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chang Crazy&#39;s Blog">
 
@@ -264,6 +265,120 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/01/25/awk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/25/awk/" itemprop="url">awk</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-25T12:08:15+08:00">
+                2017-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'&#123;pattern + action&#125;'</span> &#123;filenames&#125;</span><br><span class="line"></span><br><span class="line">变量名	含义 </span><br><span class="line">ARGC	命令行变元个数 </span><br><span class="line">ARGV	命令行变元数组 </span><br><span class="line">FILENAME	当前输入文件名 </span><br><span class="line">FNR	当前文件中的记录号 </span><br><span class="line">FS	输入域分隔符，默认为一个空格 </span><br><span class="line">RS	输入记录分隔符 </span><br><span class="line">NF	当前记录里域个数 </span><br><span class="line">NR	到目前为止记录数 </span><br><span class="line">OFS	输出域分隔符 </span><br><span class="line">ORS	输出记录分隔符</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/25/awk/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2016/12/23/mysql-bit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -330,7 +445,7 @@
       
         
           <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>&amp; : 按位与，二进制位同时都为1的位设为1。<br>| : 按位或，二进制位有一个位为1就为1.<br>^ : 位异或，对应位的二进制数不同时，对应位的结果才为1；如果两个对应位数都为0或者都为1，则对应位的结果为0。</p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$a = 6 转化为2进制为 110</div><div class="line">$b = 3 转化为2进制为 11</div><div class="line">$a &amp; $b即是 110 与 11</div><div class="line">将$a和$b中都为1的位设为1,位数不够的补0.即110 与 011</div><div class="line">运算结果010,转化为十进制结果为2</div></pre></td></tr></table></figure>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$a = 6 转化为2进制为 110</span><br><span class="line">$b = 3 转化为2进制为 11</span><br><span class="line">$a &amp; $b即是 110 与 11</span><br><span class="line">将$a和$b中都为1的位设为1,位数不够的补0.即110 与 011</span><br><span class="line">运算结果010,转化为十进制结果为2</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/12/23/mysql-bit/#more" rel="contents">
@@ -452,7 +567,9 @@
 </ol>
 <blockquote>
 <p>小米手机每周二的秒杀，可能手机只有1万部，但瞬时进入的流量可能是几百几千万。</p>
-<p>12306抢票，票是有限的，库存一份，瞬时流量非常多，都读相同的库存。读写冲突，锁非常严重，这是秒杀业务难的地方。那我们怎么优化秒杀业务的架构呢？（其实12306比淘宝要更难做，因为所有的都是动态库存，几百种sku。<a href="http://mp.weixin.qq.com/s?src=3&amp;timestamp=1483520302&amp;ver=1&amp;signature=oMV0qeEAoxDXix0z8h1QIV3pVyw4Bqm9EvLUMBtk8dsrtnHZe1fKK2M403x7M2w0ut03F2lv1oFCx65DJxfPl4PlFW1rZPzOaSQspD4bZqjZ7pcjPfvo-PsR3Ec7nmkZo9jni8iNFahs0QtAZ8R3eg==" target="_blank" rel="external">有兴趣请点击查看</a>）</p>
+</blockquote>
+<blockquote>
+<p>12306抢票，票是有限的，库存一份，瞬时流量非常多，都读相同的库存。读写冲突，锁非常严重，这是秒杀业务难的地方。那我们怎么优化秒杀业务的架构呢？（其实12306比淘宝要更难做，因为所有的都是动态库存，几百种sku。<a href="http://mp.weixin.qq.com/s?src=3&amp;timestamp=1483520302&amp;ver=1&amp;signature=oMV0qeEAoxDXix0z8h1QIV3pVyw4Bqm9EvLUMBtk8dsrtnHZe1fKK2M403x7M2w0ut03F2lv1oFCx65DJxfPl4PlFW1rZPzOaSQspD4bZqjZ7pcjPfvo-PsR3Ec7nmkZo9jni8iNFahs0QtAZ8R3eg==" target="_blank" rel="noopener">有兴趣请点击查看</a>）</p>
 </blockquote>
 <h1 id="优化方向"><a href="#优化方向" class="headerlink" title="优化方向"></a>优化方向</h1><ol>
 <li><p>将请求尽量拦截在系统上游（不要让锁冲突落到数据库上去）。传统秒杀系统之所以挂，请求都压倒了后端数据层，数据读写锁冲突严重，并发高响应慢，几乎所有请求都超时，流量虽大，下单成功的有效流量甚小。以12306为例，一趟火车其实只有2000张票，200w个人来买，基本没有人能买成功，请求有效率为0。</p>
@@ -624,7 +741,7 @@
 
       
         
-          <p>布局的传统解决方案，基于<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box_model" target="_blank" rel="external">盒状模型</a>，依赖 display属性 + position属性 + float属性。它对于那些特殊布局非常不方便，比如，<a href="https://css-tricks.com/centering-css-complete-guide/" target="_blank" rel="external">垂直居中</a>就不容易实现。</p>
+          <p>布局的传统解决方案，基于<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/box_model" target="_blank" rel="noopener">盒状模型</a>，依赖 display属性 + position属性 + float属性。它对于那些特殊布局非常不方便，比如，<a href="https://css-tricks.com/centering-css-complete-guide/" target="_blank" rel="noopener">垂直居中</a>就不容易实现。</p>
 <p>Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。<br>任何一个容器都可以指定为Flex布局。<br>
           <!--noindex-->
           <div class="post-button text-center">
@@ -856,7 +973,7 @@
           <p>配置文件是软件不可缺少的部分，怎么写配置也是一门学问。</p>
 <p>YAML 语言专门用来写配置文件，非常简洁和强大，远比 JSON 格式方便和灵活。</p>
 <p><img src="http://www.ruanyifeng.com/blogimg/asset/2016/bg2016070401.gif" alt=""></p>
-<p>本文介绍 YAML 的语法，以 <a href="https://github.com/nodeca/js-yaml" target="_blank" rel="external">JS-YAML</a> 实现为例。它有一个<a href="http://nodeca.github.io/js-yaml/" target="_blank" rel="external">在线 Demo</a>，你可以去那里验证下面的例子。<br>
+<p>本文介绍 YAML 的语法，以 <a href="https://github.com/nodeca/js-yaml" target="_blank" rel="noopener">JS-YAML</a> 实现为例。它有一个<a href="http://nodeca.github.io/js-yaml/" target="_blank" rel="noopener">在线 Demo</a>，你可以去那里验证下面的例子。<br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/11/23/yaml/#more" rel="contents">
@@ -1086,7 +1203,7 @@
 
       
         
-          <h3 id="VirtualBox，-Vagrant"><a href="#VirtualBox，-Vagrant" class="headerlink" title="VirtualBox， Vagrant"></a>VirtualBox， Vagrant</h3><p>安装<a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="external">VirtualBox</a>, 安装<a href="https://www.vagrantup.com/downloads.html" target="_blank" rel="external">vagrant</a></p>
+          <h3 id="VirtualBox，-Vagrant"><a href="#VirtualBox，-Vagrant" class="headerlink" title="VirtualBox， Vagrant"></a>VirtualBox， Vagrant</h3><p>安装<a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">VirtualBox</a>, 安装<a href="https://www.vagrantup.com/downloads.html" target="_blank" rel="noopener">vagrant</a></p>
 <h3 id="安装Box"><a href="#安装Box" class="headerlink" title="安装Box"></a>安装Box</h3><p>你可以把它想成是一个箱子，里面装了一些东西。在用 Vagrant 创建虚拟机的时候，需要用到 Box ，它里面会包装操作系统的镜像，不同的 Box 带的操作系统可能是不一样的，比如 CentOS，Ubuntu 等等，你可以基于它们去创建自己版本的 Box，比如在虚拟机上安装一些软件，然后把它重新打包成 Box。</p>
 <p>在 <code>vagrant添加 Box</code> ，Vagrant 提供的云服务 ,要把 Box 下载到本地的电脑上，交给 Vagrant 去管理，这样在创建虚拟机的时候，Vagrant 会复制一份你指定的 Box 到你的项目里面，这样你在这个虚拟机上的操作，就不会影响到其它的项目。</p>
           <!--noindex-->
@@ -1316,124 +1433,10 @@
 
       
         
-          <h3 id="安装篇"><a href="#安装篇" class="headerlink" title="安装篇"></a>安装篇</h3><h4 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel62-3.2.10.tgz</div><div class="line">tar zxvf mongodb-linux-x86_64-rhel62-3.2.10.tgz</div><div class="line">mv mongodb-linux-x86_64-rhel62-3.2.10 /usr/local/</div><div class="line">mv mongodb-linux-x86_64-rhel62-3.2.10 mongodb</div><div class="line"></div><div class="line">mkdir /data/db</div><div class="line">touch /var/logs/mongodb/mongodb.logs</div><div class="line">cd mongdb/bin &amp;&amp; vim mongodb.conf</div></pre></td></tr></table></figure>
+          <h3 id="安装篇"><a href="#安装篇" class="headerlink" title="安装篇"></a>安装篇</h3><h4 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel62-3.2.10.tgz</span><br><span class="line">tar zxvf mongodb-linux-x86_64-rhel62-3.2.10.tgz</span><br><span class="line">mv mongodb-linux-x86_64-rhel62-3.2.10 /usr/local/</span><br><span class="line">mv mongodb-linux-x86_64-rhel62-3.2.10 mongodb</span><br><span class="line"></span><br><span class="line">mkdir /data/db</span><br><span class="line">touch /var/logs/mongodb/mongodb.logs</span><br><span class="line">cd mongdb/bin &amp;&amp; vim mongodb.conf</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2016/11/02/MangoDB-cheatsheet/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2016/11/02/mysql-cheatsheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changyuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Chang Crazy's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/11/02/mysql-cheatsheet/" itemprop="url">mysql-cheatsheet</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-02T17:27:11+08:00">
-                2016-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="Connect-Disconnect"><a href="#Connect-Disconnect" class="headerlink" title="Connect/Disconnect"></a>Connect/Disconnect</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mysql -h &lt;host&gt; -u &lt;user&gt; -p&lt;passwd&gt;</div><div class="line">mysql -h &lt;host&gt; -u &lt;user&gt; -p</div><div class="line">Enter password: ********</div><div class="line">mysql -u user -p</div><div class="line">mysql</div><div class="line">mysql -h &lt;host&gt; -u &lt;user&gt; -p &lt;Database&gt;</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/11/02/mysql-cheatsheet/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1519,7 +1522,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1621,7 +1624,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-"></i>
   </span>

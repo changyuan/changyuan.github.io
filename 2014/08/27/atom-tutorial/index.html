@@ -99,6 +99,7 @@
 <meta property="og:url" content="http://changyuan.github.io/2014/08/27/atom-tutorial/index.html">
 <meta property="og:site_name" content="Chang Crazy&#39;s Blog">
 <meta property="og:description" content="how to use atomatom-flight-manual 在编辑器中，Command Palette 中输入 init script，由于这个输入框里使用的是 Fuzy matching, 你输入到 s 的时候，估计 Application: Open Your Init Script 已经排在第一位了，当它是第一位的时候，直接回车键就可以了…… 在 init script 文件里拷贝粘">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2014-08-27T07:58:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="atom tutorial">
@@ -328,13 +329,13 @@
       
 
       
-        <h2 id="how-to-use-atom"><a href="#how-to-use-atom" class="headerlink" title="how to use atom"></a>how to use atom</h2><p><a href="http://flight-manual.atom.io/using-atom/sections/atom-packages/" target="_blank" rel="external">atom-flight-manual</a></p>
-<p>在编辑器中，<code>Command Palette</code> 中输入 <code>init script</code>，由于这个输入框里使用的是 <code>Fuzy matching</code>, 你输入到 s 的时候，估计 <code>Application: Open Your Init Script</code> 已经排在第一位了，当它是第一位的时候，直接回车键就可以了…… 在 <code>init script</code> 文件里拷贝粘贴以下代码：<br><a id="more"></a><br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># move cursor across the ending symbols...</span></div><div class="line">EndingSymbolRegex = <span class="regexp">/\s*[)&#125;&gt;\]/</span><span class="string">'";:=-]/</span></div><div class="line">atom.commands.add 'atom-text-editor<span class="string">', '</span>custom:jump-over-symbol<span class="string">': (event) -&gt;</span></div><div class="line">  editor = atom.workspace.getActiveTextEditor()</div><div class="line">  cursorMoved = false</div><div class="line">  for cursor in editor.getCursors()</div><div class="line">    range = cursor.getCurrentWordBufferRange(wordRegex: EndingSymbolRegex)</div><div class="line">    unless range.isEmpty()</div><div class="line">      cursor.setBufferPosition(range.end)</div><div class="line">      cursorMoved = true</div><div class="line">  event.abortKeyBinding() unless cursorMoved</div></pre></td></tr></table></figure></p>
+        <h2 id="how-to-use-atom"><a href="#how-to-use-atom" class="headerlink" title="how to use atom"></a>how to use atom</h2><p><a href="http://flight-manual.atom.io/using-atom/sections/atom-packages/" target="_blank" rel="noopener">atom-flight-manual</a></p>
+<p>在编辑器中，<code>Command Palette</code> 中输入 <code>init script</code>，由于这个输入框里使用的是 <code>Fuzy matching</code>, 你输入到 s 的时候，估计 <code>Application: Open Your Init Script</code> 已经排在第一位了，当它是第一位的时候，直接回车键就可以了…… 在 <code>init script</code> 文件里拷贝粘贴以下代码：<br><a id="more"></a><br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># move cursor across the ending symbols...</span></span><br><span class="line">EndingSymbolRegex = <span class="regexp">/\s*[)&#125;&gt;\]/</span><span class="string">'";:=-]/</span></span><br><span class="line"><span class="string">atom.commands.add '</span>atom-text-editor<span class="string">', '</span>custom:jump-over-symbol<span class="string">': (event) -&gt;</span></span><br><span class="line"><span class="string">  editor = atom.workspace.getActiveTextEditor()</span></span><br><span class="line"><span class="string">  cursorMoved = false</span></span><br><span class="line"><span class="string">  for cursor in editor.getCursors()</span></span><br><span class="line"><span class="string">    range = cursor.getCurrentWordBufferRange(wordRegex: EndingSymbolRegex)</span></span><br><span class="line"><span class="string">    unless range.isEmpty()</span></span><br><span class="line"><span class="string">      cursor.setBufferPosition(range.end)</span></span><br><span class="line"><span class="string">      cursorMoved = true</span></span><br><span class="line"><span class="string">  event.abortKeyBinding() unless cursorMoved</span></span><br></pre></td></tr></table></figure></p>
 <p>然后用 呼出 <code>Command Palette</code>，在里面输入 <code>keymap</code>，你应该能看到<code>Application: Open Your keymap</code> 已经排在第一位了，当它是第一位的时候，直接回车键 ⏎ …… 在 Keymap 文件里拷贝粘贴以下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;enter&quot;: &quot;custom:jump-over-symbol&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;enter&quot;: &quot;custom:jump-over-symbol&quot;</span><br></pre></td></tr></table></figure>
 <p>现在，用呼出 Command Palette，在里面输入 reload，你应该能看到 <code>Window: Reload</code>,启动加载生效。</p>
 <h2 id="atom-Snippets"><a href="#atom-Snippets" class="headerlink" title="atom Snippets"></a>atom Snippets</h2><p>编写自己的 snippets 按照格式，可以把代码片段很快输入。<br>打开setting-&gt;install 可以添加 snippets 和 packages<br>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// apm是atom提供的一个安装工具</div><div class="line">apm install atom-yii2 //网上找的的一个yii2的snippets，还有laravel的，php的</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// apm是atom提供的一个安装工具</span><br><span class="line">apm install atom-yii2 //网上找的的一个yii2的snippets，还有laravel的，php的</span><br></pre></td></tr></table></figure>
 <p>可以在atom官方网站或者github中找到</p>
 <h2 id="atom-packages"><a href="#atom-packages" class="headerlink" title="atom packages"></a>atom packages</h2><p>GOOGLE 下面的词汇，会得到一些常用的包</p>
 <blockquote>
@@ -476,7 +477,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -594,7 +595,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-"></i>
   </span>

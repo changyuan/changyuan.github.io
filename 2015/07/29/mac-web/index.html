@@ -99,6 +99,7 @@
 <meta property="og:url" content="http://changyuan.github.io/2015/07/29/mac-web/index.html">
 <meta property="og:site_name" content="Chang Crazy&#39;s Blog">
 <meta property="og:description" content="Homebrew1234567//installruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;//usebrew search /apache*/brew install wgetbrew uninstall wget  官网">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2015-07-29T05:42:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mac 常见环境安装配置">
@@ -328,24 +329,24 @@
       
 
       
-        <h2 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//install</div><div class="line">ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div><div class="line"></div><div class="line">//use</div><div class="line">brew search /apache*/</div><div class="line">brew install wget</div><div class="line">brew uninstall wget</div></pre></td></tr></table></figure>
+        <h2 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//install</span><br><span class="line">ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br><span class="line"></span><br><span class="line">//use</span><br><span class="line">brew search /apache*/</span><br><span class="line">brew install wget</span><br><span class="line">brew uninstall wget</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p><a href="http://brew.sh/" target="_blank" rel="external">官网</a></p>
+<p><a href="http://brew.sh/" target="_blank" rel="noopener">官网</a></p>
 </blockquote>
 <a id="more"></a>
-<h2 id="zsh-bash"><a href="#zsh-bash" class="headerlink" title="zsh bash"></a>zsh bash</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></div></pre></td></tr></table></figure>
+<h2 id="zsh-bash"><a href="#zsh-bash" class="headerlink" title="zsh bash"></a>zsh bash</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></table></figure>
 <p>｀cat /etc/shells｀ 查看所有的sh<br><code>chsh -s /bin/bash</code>  或者 <code>chsh -s /bin/zsh</code></p>
-<p><a href="http://ohmyz.sh/" target="_blank" rel="external">zsh</a></p>
-<h2 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h2><p>mac自带一个版本，如果安装新的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install apache</div></pre></td></tr></table></figure></p>
-<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><p>自动安装依赖<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">brew install nginx</div><div class="line"></div><div class="line">sudo nginx</div><div class="line">nginx -s reload|reopen|stop|quit</div><div class="line">nginx -t</div></pre></td></tr></table></figure></p>
-<p>默认启用的8080端口，可以更改配置文件来设置端口。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim /usr/<span class="built_in">local</span>/etc/nginx/nginx.conf</div></pre></td></tr></table></figure></p>
-<p>默认访问目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="built_in">local</span>/Cellar/nginx/<span class="variable">$version</span>/html</div></pre></td></tr></table></figure></p>
-<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install mysql</div></pre></td></tr></table></figure>
+<p><a href="http://ohmyz.sh/" target="_blank" rel="noopener">zsh</a></p>
+<h2 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h2><p>mac自带一个版本，如果安装新的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install apache</span><br></pre></td></tr></table></figure></p>
+<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><p>自动安装依赖<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brew install nginx</span><br><span class="line"></span><br><span class="line">sudo nginx</span><br><span class="line">nginx -s reload|reopen|stop|quit</span><br><span class="line">nginx -t</span><br></pre></td></tr></table></figure></p>
+<p>默认启用的8080端口，可以更改配置文件来设置端口。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/<span class="built_in">local</span>/etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure></p>
+<p>默认访问目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/<span class="built_in">local</span>/Cellar/nginx/<span class="variable">$version</span>/html</span><br></pre></td></tr></table></figure></p>
+<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mysql</span><br></pre></td></tr></table></figure>
 <p>安装完成之后：<br>We’ve installed your MySQL database without a root password. To secure it run:<br>    <code>mysql_secure_installation</code><br>To connect run:<br>    <code>mysql -uroot</code><br>To have launchd start mysql now and restart at login:<br>  <code>brew services start mysql</code><br>Or, if you don’t want/need a background service you can just run:<br>  <code>mysql.server start</code></p>
-<p>在5.7版本之后，其自动初始化数据库，用｀mysql.erver start｀ 启动 ，<code>mysql -uroot</code> 链接使用.<br>在之前的需要初始化数据库。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql_install_db --verbose --user=<span class="string">'whoami'</span> --basedir=<span class="string">"<span class="variable">$(brew --prefix mysql)</span>"</span> --datadir=/usr/<span class="built_in">local</span>/var/mysql --tmpdir=/tmp</div></pre></td></tr></table></figure></p>
+<p>在5.7版本之后，其自动初始化数据库，用｀mysql.erver start｀ 启动 ，<code>mysql -uroot</code> 链接使用.<br>在之前的需要初始化数据库。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_install_db --verbose --user=<span class="string">'whoami'</span> --basedir=<span class="string">"<span class="variable">$(brew --prefix mysql)</span>"</span> --datadir=/usr/<span class="built_in">local</span>/var/mysql --tmpdir=/tmp</span><br></pre></td></tr></table></figure></p>
 <p><code>mysqladmin -u root password &#39;password&#39;</code></p>
 <h2 id="php"><a href="#php" class="headerlink" title="php"></a>php</h2><blockquote>
-<p><a href="https://github.com/Homebrew/homebrew-php" target="_blank" rel="external">参考</a><br>安装完成之后：</p>
+<p><a href="https://github.com/Homebrew/homebrew-php" target="_blank" rel="noopener">参考</a><br>安装完成之后：</p>
 </blockquote>
 <p>To enable PHP in Apache add the following to httpd.conf and restart Apache:<br>    <code>LoadModule php5_module    /usr/local/opt/php56/libexec/apache2/libphp5.so</code></p>
 <p>The php.ini file can be found in:<br>    <code>/usr/local/etc/php/5.6/php.ini</code></p>
@@ -364,20 +365,20 @@
 <p>You may also need to edit the plist to use the correct “UserName”.</p>
 <p>Please note that the plist was called ‘homebrew-php.josegonzalez.php56.plist’ in old versions<br>of this formula.</p>
 <p>To have launchd start homebrew/php/php56 now and restart at login:<br>  brew services start homebrew/php/php56<br>  brew services restart homebrew/php/php56</p>
-<h2 id="mac-的一些工具"><a href="#mac-的一些工具" class="headerlink" title="mac 的一些工具"></a>mac 的一些工具</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~</div><div class="line">//自己的环境变量</div><div class="line">curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.bash_profile</div><div class="line">// 一些颜色设置，并不好用（可选）</div><div class="line"><span class="comment"># curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.bash_prompt</span></div><div class="line">//unix的自定义别名</div><div class="line">curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases</div></pre></td></tr></table></figure>
+<h2 id="mac-的一些工具"><a href="#mac-的一些工具" class="headerlink" title="mac 的一些工具"></a>mac 的一些工具</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">//自己的环境变量</span><br><span class="line">curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.bash_profile</span><br><span class="line">// 一些颜色设置，并不好用（可选）</span><br><span class="line"><span class="comment"># curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.bash_prompt</span></span><br><span class="line">//unix的自定义别名</span><br><span class="line">curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases</span><br></pre></td></tr></table></figure>
 <p>一些工具替换产品</p>
 <blockquote>
 <ul>
-<li>Terminal → <a href="https://www.iterm2.com/" target="_blank" rel="external">iTerm</a></li>
-<li>Finder → <a href="http://totalfinder.binaryage.com/" target="_blank" rel="external">TotalFinder</a> / <a href="http://www.cocoatech.com/pathfinder/" target="_blank" rel="external">Path Finder</a></li>
-<li>Spotlight → <a href="https://qsapp.com/" target="_blank" rel="external">QuickSilver</a> / <a href="https://www.alfredapp.com/" target="_blank" rel="external">Alfred</a></li>
+<li>Terminal → <a href="https://www.iterm2.com/" target="_blank" rel="noopener">iTerm</a></li>
+<li>Finder → <a href="http://totalfinder.binaryage.com/" target="_blank" rel="noopener">TotalFinder</a> / <a href="http://www.cocoatech.com/pathfinder/" target="_blank" rel="noopener">Path Finder</a></li>
+<li>Spotlight → <a href="https://qsapp.com/" target="_blank" rel="noopener">QuickSilver</a> / <a href="https://www.alfredapp.com/" target="_blank" rel="noopener">Alfred</a></li>
 </ul>
 </blockquote>
-<p><a href="https://github.com/0nn0/terminal-mac-cheatsheet" target="_blank" rel="external">Terminal cheatsheet</a></p>
+<p><a href="https://github.com/0nn0/terminal-mac-cheatsheet" target="_blank" rel="noopener">Terminal cheatsheet</a></p>
 <h2 id="xcode"><a href="#xcode" class="headerlink" title="xcode"></a>xcode</h2><p>xcode-select –install</p>
-<h2 id="rvm"><a href="#rvm" class="headerlink" title="rvm"></a>rvm</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl -sSL https://get.rvm.io | bash -s stable</div><div class="line">rvm install 2.3.1</div><div class="line">rvm use 2.3.1</div></pre></td></tr></table></figure>
-<h2 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">brew install nvm</div><div class="line">nvm install 4</div><div class="line">nvm use 4</div></pre></td></tr></table></figure>
-<h2 id="atom"><a href="#atom" class="headerlink" title="atom"></a>atom</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew cask install atom</div></pre></td></tr></table></figure>
+<h2 id="rvm"><a href="#rvm" class="headerlink" title="rvm"></a>rvm</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https://get.rvm.io | bash -s stable</span><br><span class="line">rvm install 2.3.1</span><br><span class="line">rvm use 2.3.1</span><br></pre></td></tr></table></figure>
+<h2 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install nvm</span><br><span class="line">nvm install 4</span><br><span class="line">nvm use 4</span><br></pre></td></tr></table></figure>
+<h2 id="atom"><a href="#atom" class="headerlink" title="atom"></a>atom</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install atom</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -440,8 +441,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/09/22/observer-pattern/" rel="prev" title="观察者模式(observer pattern)">
-                观察者模式(observer pattern) <i class="fa fa-chevron-right"></i>
+              <a href="/2015/09/22/facade-pattern/" rel="prev" title="门面模式(facade pattern)">
+                门面模式(facade pattern) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -514,7 +515,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -632,7 +633,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-"></i>
   </span>

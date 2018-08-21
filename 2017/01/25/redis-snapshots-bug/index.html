@@ -99,6 +99,7 @@
 <meta property="og:url" content="http://changyuan.github.io/2017/01/25/redis-snapshots-bug/index.html">
 <meta property="og:site_name" content="Chang Crazy&#39;s Blog">
 <meta property="og:description" content="今天在redis中执行setrange name 1 chun 命令时报了如下错误提示： (error) MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-01-25T04:08:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis is configured to save RDB snapshots">
@@ -336,7 +337,7 @@
 <li>这是由于强制停止<code>redis</code>快照，不能持久化引起的，</li>
 </ol>
 <p>运行info命令查看<code>redis</code>快照的状态，如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rdb_last_bgsave_status:err</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdb_last_bgsave_status:err</span><br></pre></td></tr></table></figure>
 <p>解决方案如下：</p>
 <p>运行　<code>config set stop-writes-on-bgsave-error no</code>　命令</p>
 <p>关闭配置项<code>stop-writes-on-bgsave-error</code>解决该问题。</p>
@@ -392,8 +393,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/23/mysql-bit/" rel="next" title="mysql位运算简化一对多关系">
-                <i class="fa fa-chevron-left"></i> mysql位运算简化一对多关系
+              <a href="/2017/01/25/js-now-exec-func/" rel="next" title="javascript立即执行函数">
+                <i class="fa fa-chevron-left"></i> javascript立即执行函数
               </a>
             
           </div>
@@ -402,8 +403,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/25/js-now-exec-func/" rel="prev" title="javascript立即执行函数">
-                javascript立即执行函数 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/01/25/mrg_myisam/" rel="prev" title="Mysql MRG_MyISAM引擎分表法">
+                Mysql MRG_MyISAM引擎分表法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -467,7 +468,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -569,7 +570,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-"></i>
   </span>
