@@ -265,115 +265,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2018/08/22/2018/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changyuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Chang Crazy's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/22/2018/" itemprop="url">2018</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-22T00:24:13+08:00">
-                2018-08-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/09/02/daohuo/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1101,7 +992,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/01/25/redis-snapshots-bug/">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/01/25/yii-girdview/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changyuan">
@@ -1120,7 +1011,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/01/25/redis-snapshots-bug/" itemprop="url">Redis is configured to save RDB snapshots</a></h1>
+                <a class="post-title-link" href="/2017/01/25/yii-girdview/" itemprop="url">浅析Yii2中GridView</a></h1>
         
 
         <div class="post-meta">
@@ -1166,21 +1057,14 @@
 
       
         
-          
-            <p>今天在<code>redis</code>中执行<code>setrange name 1 chun</code> 命令时报了如下错误提示：</p>
-<p><code>(error) MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs for details about the error．</code></p>
-<p>大意为：（错误）<code>misconf redis</code>被配置以保存数据库快照，但<code>misconf redis</code>目前不能在硬盘上持久化。用来修改数据集合的命令不能用，请使用日志的错误详细信息。</p>
-<ol>
-<li>磁盘满了，快照无法写入</li>
-<li>这是由于强制停止<code>redis</code>快照，不能持久化引起的，</li>
-</ol>
-<p>运行info命令查看<code>redis</code>快照的状态，如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdb_last_bgsave_status:err</span><br></pre></td></tr></table></figure>
-<p>解决方案如下：</p>
-<p>运行　<code>config set stop-writes-on-bgsave-error no</code>　命令</p>
-<p>关闭配置项<code>stop-writes-on-bgsave-error</code>解决该问题。</p>
-
-          
+          <p>是否显示某列案例<br>我们举一个简单的案例<br>条件：有一个get形参数type<br>需求：仅且type的值等于1的时候，列name才显示，否则该列不显示<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/01/25/yii-girdview/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1356,7 +1240,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/01/25/yii-girdview/">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/01/25/redis-snapshots-bug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="changyuan">
@@ -1375,7 +1259,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/01/25/yii-girdview/" itemprop="url">浅析Yii2中GridView</a></h1>
+                <a class="post-title-link" href="/2017/01/25/redis-snapshots-bug/" itemprop="url">Redis is configured to save RDB snapshots</a></h1>
         
 
         <div class="post-meta">
@@ -1421,10 +1305,131 @@
 
       
         
-          <p>是否显示某列案例<br>我们举一个简单的案例<br>条件：有一个get形参数type<br>需求：仅且type的值等于1的时候，列name才显示，否则该列不显示<br>
+          
+            <p>今天在<code>redis</code>中执行<code>setrange name 1 chun</code> 命令时报了如下错误提示：</p>
+<p><code>(error) MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs for details about the error．</code></p>
+<p>大意为：（错误）<code>misconf redis</code>被配置以保存数据库快照，但<code>misconf redis</code>目前不能在硬盘上持久化。用来修改数据集合的命令不能用，请使用日志的错误详细信息。</p>
+<ol>
+<li>磁盘满了，快照无法写入</li>
+<li>这是由于强制停止<code>redis</code>快照，不能持久化引起的，</li>
+</ol>
+<p>运行info命令查看<code>redis</code>快照的状态，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdb_last_bgsave_status:err</span><br></pre></td></tr></table></figure>
+<p>解决方案如下：</p>
+<p>运行　<code>config set stop-writes-on-bgsave-error no</code>　命令</p>
+<p>关闭配置项<code>stop-writes-on-bgsave-error</code>解决该问题。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/01/25/awk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/25/awk/" itemprop="url">awk</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-25T12:08:15+08:00">
+                2017-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">'&#123;pattern + action&#125;'</span> &#123;filenames&#125;</span><br><span class="line"></span><br><span class="line">变量名	含义 </span><br><span class="line">ARGC	命令行变元个数 </span><br><span class="line">ARGV	命令行变元数组 </span><br><span class="line">FILENAME	当前输入文件名 </span><br><span class="line">FNR	当前文件中的记录号 </span><br><span class="line">FS	输入域分隔符，默认为一个空格 </span><br><span class="line">RS	输入记录分隔符 </span><br><span class="line">NF	当前记录里域个数 </span><br><span class="line">NR	到目前为止记录数 </span><br><span class="line">OFS	输出域分隔符 </span><br><span class="line">ORS	输出记录分隔符</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/01/25/yii-girdview/#more" rel="contents">
+            <a class="btn" href="/2017/01/25/awk/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1510,7 +1515,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
