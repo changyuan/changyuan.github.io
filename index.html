@@ -342,13 +342,6 @@
 <blockquote>
 <p>curl -X GET ‘<a href="http://localhost:9200/sample/_search&#39;" target="_blank" rel="noopener">http://localhost:9200/sample/_search&#39;</a></p>
 </blockquote>
-<p>query using URL parameters</p>
-<blockquote>
-<p>curl -X GET <a href="http://localhost:9200/samples/_search?q=school:Harvard" target="_blank" rel="noopener">http://localhost:9200/samples/_search?q=school:Harvard</a></p>
-</blockquote>
-<blockquote>
-<p>curl -XGET –header ‘Content-Type: application/json’ <a href="http://localhost:9200/samples/_search" target="_blank" rel="noopener">http://localhost:9200/samples/_search</a> -d ‘{<br>      “query” : {<br>        “match” : { “school”: “Harvard” }<br>    }<br>}’</p>
-</blockquote>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/30/elasticSearch/#more" rel="contents">

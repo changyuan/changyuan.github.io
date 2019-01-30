@@ -343,6 +343,7 @@
 <blockquote>
 <p>curl -X GET ‘<a href="http://localhost:9200/sample/_search&#39;" target="_blank" rel="noopener">http://localhost:9200/sample/_search&#39;</a></p>
 </blockquote>
+<a id="more"></a>
 <p>query using URL parameters</p>
 <blockquote>
 <p>curl -X GET <a href="http://localhost:9200/samples/_search?q=school:Harvard" target="_blank" rel="noopener">http://localhost:9200/samples/_search?q=school:Harvard</a></p>
@@ -350,7 +351,6 @@
 <blockquote>
 <p>curl -XGET –header ‘Content-Type: application/json’ <a href="http://localhost:9200/samples/_search" target="_blank" rel="noopener">http://localhost:9200/samples/_search</a> -d ‘{<br>      “query” : {<br>        “match” : { “school”: “Harvard” }<br>    }<br>}’</p>
 </blockquote>
-<a id="more"></a>
 <p>list index mapping</p>
 <blockquote>
 <p>curl -X GET <a href="http://localhost:9200/samples" target="_blank" rel="noopener">http://localhost:9200/samples</a></p>
