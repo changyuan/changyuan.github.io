@@ -1237,120 +1237,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/01/25/yii-girdview/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changyuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Chang Crazy's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/25/yii-girdview/" itemprop="url">浅析Yii2中GridView</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-25T12:08:15+08:00">
-                2017-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>是否显示某列案例<br>我们举一个简单的案例<br>条件：有一个get形参数type<br>需求：仅且type的值等于1的时候，列name才显示，否则该列不显示<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/01/25/yii-girdview/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/01/25/redis-snapshots-bug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1429,6 +1315,140 @@
 <p>解决方案如下：</p>
 <p>运行　<code>config set stop-writes-on-bgsave-error no</code>　命令</p>
 <p>关闭配置项<code>stop-writes-on-bgsave-error</code>解决该问题。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/01/25/js-now-exec-func/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/25/js-now-exec-func/" itemprop="url">javascript立即执行函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-25T12:08:15+08:00">
+                2017-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h3><p>立即执行函数：函数在定义后立即被执行，有特定的书写模式。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">123</span>);</span><br><span class="line">&#125;)&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">123</span>);</span><br><span class="line">&#125;())</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>这种模式本质上就是函数表达式(命名的或者匿名的)，在创建后立即执行；立即执行函数并不是标准的叫法，是自我理解的叫法。</p>
+</blockquote>
+<p>错误的写法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">123</span>);</span><br><span class="line">&#125;()</span><br></pre></td></tr></table></figure></p>
+<p>原因：在一个表达式后面加上括号()，该表达式会立即执行，但是在一个语句后面加上括号()，是完全不一样的意思，他的只是分组操作符。</p>
+<p>要解决上述问题，非常简单，我们只需要用大括弧将代码的代码全部括住就行了，因为JavaScript里括弧()里面不能包含语句，所以在这一点上，解析器在解析function关键字的时候，会将相应的代码解析成function表达式，而不是function声明。</p>
+<p>所以立即执行函数需要有一个（）！！！！</p>
+<h3 id="也常常应用于局部作用域或者只执行一次的的场景"><a href="#也常常应用于局部作用域或者只执行一次的的场景" class="headerlink" title="也常常应用于局部作用域或者只执行一次的的场景"></a>也常常应用于局部作用域或者只执行一次的的场景</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">var</span> days = [<span class="string">'Sun'</span>, <span class="string">'Mon'</span>, <span class="string">'Tue'</span>, <span class="string">'Wed'</span>, <span class="string">'Thu'</span>, <span class="string">'Fri'</span>, <span class="string">'Sat'</span>], </span><br><span class="line">    today = <span class="keyword">new</span> <span class="built_in">Date</span>(), </span><br><span class="line">    msg = <span class="string">'Today is '</span> + days[today.getDay()] + <span class="string">', '</span> + today.getDate(); </span><br><span class="line">    alert(msg); </span><br><span class="line">&#125; ());</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果代码没有被包裹在立即执行函数中，那么局部变量days，today和msg都将成为全局变量，初始化代码的遗留产物。</p>
+</blockquote>
+<h3 id="立即执行函数的参数"><a href="#立即执行函数的参数" class="headerlink" title="立即执行函数的参数"></a>立即执行函数的参数</h3><p>传递参数方式如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">global</span>) </span>&#123; </span><br><span class="line">	<span class="comment">// access the global object via `global` </span></span><br><span class="line">&#125;(<span class="keyword">this</span>));</span><br></pre></td></tr></table></figure></p>
+<p>例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">who, when</span>) </span>&#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"I met "</span> + who + <span class="string">" on "</span> + when); </span><br><span class="line">&#125; (<span class="string">"Joe Black"</span>, <span class="keyword">new</span> <span class="built_in">Date</span>()));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通常，全局变量被作为一个参数传递给立即执行参数，这样它在函数内部不使用window也可以被访问到：这种方式可以让代码在环境(除了浏览器)中更加通用：</p>
+</blockquote>
+<h3 id="立即执行函数的返回值"><a href="#立即执行函数的返回值" class="headerlink" title="立即执行函数的返回值"></a>立即执行函数的返回值</h3><p>例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> + <span class="number">2</span>; </span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure></p>
+<p>例子2：<br>先被计算并被储存在立即执行函数的闭包中<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> res = <span class="number">2</span> * <span class="number">9</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;());</span><br></pre></td></tr></table></figure></p>
+<p>例子3：<br>立即执行函数也可以用来定义对象的属性；</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123; </span><br><span class="line">    message: (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">var</span> who = <span class="string">"me"</span>, </span><br><span class="line">        what = <span class="string">"call"</span>; </span><br><span class="line">        <span class="keyword">return</span> what + <span class="string">" "</span> + who; </span><br><span class="line">    &#125; ()), </span><br><span class="line">    getMsg: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.message; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;; </span><br><span class="line"><span class="comment">// usage </span></span><br><span class="line">o.getMsg(); <span class="comment">// "call me" </span></span><br><span class="line">o.message; <span class="comment">// "call me" </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//jquery</span></span><br><span class="line"><span class="keyword">var</span> m = (<span class="function"><span class="keyword">function</span>(<span class="params">e, t</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> n = <span class="number">1</span>;</span><br><span class="line">	toArray: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> h.call(<span class="keyword">this</span>)</span><br><span class="line">	&#125;,</span><br><span class="line">	b.fn = &#123;</span><br><span class="line">		<span class="comment">//内容</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;)(<span class="built_in">window</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> counter = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    get: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> i;</span><br><span class="line">    &#125;,</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params"> val </span>)</span>&#123;</span><br><span class="line">      i = val;</span><br><span class="line">    &#125;,</span><br><span class="line">    increment: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> ++i;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;());</span><br><span class="line"></span><br><span class="line"><span class="comment">//counter.get(); // 0</span></span><br><span class="line"><span class="comment">//counter.set( 3 );</span></span><br><span class="line"><span class="comment">//counter.increment(); // 4</span></span><br><span class="line"><span class="comment">//counter.increment(); // 5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//counter.i; // undefined i并不是counter的属性</span></span><br><span class="line"><span class="comment">//i; // ReferenceError: i is not defined (函数内部的是局部变量)</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions" target="_blank" rel="noopener">参考</a></p>
 
           
         
