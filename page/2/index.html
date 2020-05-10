@@ -887,6 +887,127 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/01/25/redis-snapshots-bug/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/01/25/redis-snapshots-bug/" itemprop="url">Redis is configured to save RDB snapshots</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-25T12:08:15+08:00">
+                2017-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天在<code>redis</code>中执行<code>setrange name 1 chun</code> 命令时报了如下错误提示：</p>
+<p><code>(error) MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs for details about the error．</code></p>
+<p>大意为：（错误）<code>misconf redis</code>被配置以保存数据库快照，但<code>misconf redis</code>目前不能在硬盘上持久化。用来修改数据集合的命令不能用，请使用日志的错误详细信息。</p>
+<ol>
+<li>磁盘满了，快照无法写入</li>
+<li>这是由于强制停止<code>redis</code>快照，不能持久化引起的，</li>
+</ol>
+<p>运行info命令查看<code>redis</code>快照的状态，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdb_last_bgsave_status:err</span><br></pre></td></tr></table></figure>
+<p>解决方案如下：</p>
+<p>运行　<code>config set stop-writes-on-bgsave-error no</code>　命令</p>
+<p>关闭配置项<code>stop-writes-on-bgsave-error</code>解决该问题。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/01/25/mrg_myisam/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -966,127 +1087,6 @@
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function new_Article() &#123;  </span><br><span class="line">    $id  = $this-&gt;get_AI_ID();  </span><br><span class="line">    $table_name = $this-&gt;get_Table_Name($id);  </span><br><span class="line">    $sql = "<span class="keyword">insert</span> <span class="keyword">into</span> &#123;$table_name&#125; (<span class="keyword">id</span>,subject,<span class="keyword">content</span>) <span class="keyword">values</span>(<span class="string">'&#123;$id&#125;'</span>,<span class="string">'测试标题'</span>,<span class="string">'测试内容'</span>)<span class="string">";  </span></span><br><span class="line"><span class="string">    $this-&gt;db-&gt;query($sql);  </span></span><br><span class="line"><span class="string">&#125;  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">/** </span></span><br><span class="line"><span class="string"> * 用于根据id获取表名 </span></span><br><span class="line"><span class="string"> */  </span></span><br><span class="line"><span class="string">function get_Table_Name($id) &#123;  </span></span><br><span class="line"><span class="string">    return 'article_'.intval($id)%10;  </span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>其实很简单的，对吧，就是先获取id，然后根据id获取应该插入到哪个表，然后就很简单了。</p>
 <p>对于update的操作我想应该不需要再说了吧，无非是有了id，然后获取表名，然后进行update操作就好了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/01/25/redis-snapshots-bug/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="changyuan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Chang Crazy's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/25/redis-snapshots-bug/" itemprop="url">Redis is configured to save RDB snapshots</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-25T12:08:15+08:00">
-                2017-01-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天在<code>redis</code>中执行<code>setrange name 1 chun</code> 命令时报了如下错误提示：</p>
-<p><code>(error) MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs for details about the error．</code></p>
-<p>大意为：（错误）<code>misconf redis</code>被配置以保存数据库快照，但<code>misconf redis</code>目前不能在硬盘上持久化。用来修改数据集合的命令不能用，请使用日志的错误详细信息。</p>
-<ol>
-<li>磁盘满了，快照无法写入</li>
-<li>这是由于强制停止<code>redis</code>快照，不能持久化引起的，</li>
-</ol>
-<p>运行info命令查看<code>redis</code>快照的状态，如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rdb_last_bgsave_status:err</span><br></pre></td></tr></table></figure>
-<p>解决方案如下：</p>
-<p>运行　<code>config set stop-writes-on-bgsave-error no</code>　命令</p>
-<p>关闭配置项<code>stop-writes-on-bgsave-error</code>解决该问题。</p>
 
           
         
