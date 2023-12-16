@@ -1,0 +1,770 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="mysql,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="Connect/Disconnect123456mysql -h &amp;lt;host&amp;gt; -u &amp;lt;user&amp;gt; -p&amp;lt;passwd&amp;gt;mysql -h &amp;lt;host&amp;gt; -u &amp;lt;user&amp;gt; -pEnter password: ********mysql -u user -pmysqlmysql -h &amp;lt;host&amp;gt; -u &amp;lt;user&amp;gt;">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql-cheatsheet">
+<meta property="og:url" content="http://changyuan.github.io/2016/11/02/mysql-cheatsheet/index.html">
+<meta property="og:site_name" content="Chang Crazy&#39;s Blog">
+<meta property="og:description" content="Connect/Disconnect123456mysql -h &amp;lt;host&amp;gt; -u &amp;lt;user&amp;gt; -p&amp;lt;passwd&amp;gt;mysql -h &amp;lt;host&amp;gt; -u &amp;lt;user&amp;gt; -pEnter password: ********mysql -u user -pmysqlmysql -h &amp;lt;host&amp;gt; -u &amp;lt;user&amp;gt;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2016-11-02T09:27:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql-cheatsheet">
+<meta name="twitter:description" content="Connect/Disconnect123456mysql -h &amp;lt;host&amp;gt; -u &amp;lt;user&amp;gt; -p&amp;lt;passwd&amp;gt;mysql -h &amp;lt;host&amp;gt; -u &amp;lt;user&amp;gt; -pEnter password: ********mysql -u user -pmysqlmysql -h &amp;lt;host&amp;gt; -u &amp;lt;user&amp;gt;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://changyuan.github.io/2016/11/02/mysql-cheatsheet/">
+
+
+
+
+
+  <title>mysql-cheatsheet | Chang Crazy's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chang Crazy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">升级自己的操作系统</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2016/11/02/mysql-cheatsheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql-cheatsheet</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-02T17:27:11+08:00">
+                2016-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Connect-Disconnect"><a href="#Connect-Disconnect" class="headerlink" title="Connect/Disconnect"></a>Connect/Disconnect</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql -h &lt;host&gt; -u &lt;user&gt; -p&lt;passwd&gt;</span><br><span class="line">mysql -h &lt;host&gt; -u &lt;user&gt; -p</span><br><span class="line">Enter password: ********</span><br><span class="line">mysql -u user -p</span><br><span class="line">mysql</span><br><span class="line">mysql -h &lt;host&gt; -u &lt;user&gt; -p &lt;Database&gt;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">table</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> table1, table2, ...</span><br><span class="line"><span class="keyword">SELECT</span> field1, field2, ... <span class="keyword">FROM</span> table1, table2, ...</span><br><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> ... <span class="keyword">WHERE</span> condition</span><br><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> ... <span class="keyword">WHERE</span> condition <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">field</span></span><br><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> ... <span class="keyword">WHERE</span> condition <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">field</span> <span class="keyword">HAVING</span> condition2</span><br><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> ... <span class="keyword">WHERE</span> condition <span class="keyword">ORDER</span> <span class="keyword">BY</span> field1, field2</span><br><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> ... <span class="keyword">WHERE</span> condition <span class="keyword">ORDER</span> <span class="keyword">BY</span> field1, field2 <span class="keyword">DESC</span></span><br><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> ... <span class="keyword">WHERE</span> condition <span class="keyword">LIMIT</span> <span class="number">10</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> field1 <span class="keyword">FROM</span> ...</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> field1, field2 <span class="keyword">FROM</span> ...</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> t1 <span class="keyword">JOIN</span> t2 <span class="keyword">ON</span> t1.id1 = t2.id2 <span class="keyword">WHERE</span> condition</span><br><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> t1 <span class="keyword">LEFT</span> <span class="keyword">JOIN</span> t2 <span class="keyword">ON</span> t1.id1 = t2.id2 <span class="keyword">WHERE</span> condition</span><br><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> t1 <span class="keyword">JOIN</span> (t2 <span class="keyword">JOIN</span> t3 <span class="keyword">ON</span> ...) <span class="keyword">ON</span> ...</span><br><span class="line"><span class="keyword">SELECT</span> ... <span class="keyword">FROM</span> t1 <span class="keyword">JOIN</span> t2 <span class="keyword">USING</span>(<span class="keyword">id</span>) <span class="keyword">WHERE</span> condition</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 正则查询（RLIKE|REGEXP）</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="keyword">WHERE</span> <span class="keyword">column</span> REGEXP <span class="string">'^(A|B|C)'</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="keyword">table</span> <span class="keyword">WHERE</span> rec <span class="keyword">RLIKE</span> <span class="string">"^b$"</span>;  </span><br><span class="line"><span class="comment">-- 获得表或者行信息</span></span><br><span class="line"><span class="keyword">DESCRIBE</span> <span class="keyword">table</span> [<span class="keyword">column</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">--日期时间</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">CURRENT_DATE</span>, (<span class="keyword">YEAR</span>(<span class="keyword">CURRENT_DATE</span>)­<span class="keyword">YEAR</span>(date_col)) <span class="keyword">AS</span> time_diff [<span class="keyword">FROM</span> <span class="keyword">table</span>];</span><br></pre></td></tr></table></figure>
+<h3 id="Conditionals"><a href="#Conditionals" class="headerlink" title="Conditionals"></a>Conditionals</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">field1 = value1</span><br><span class="line">field1 &lt;&gt; value1</span><br><span class="line">field1 LIKE &apos;value _ %&apos;</span><br><span class="line">field1 IS NULL</span><br><span class="line">field1 IS NOT NULL</span><br><span class="line">field1 IN (value1, value2)</span><br><span class="line">field1 NOT IN (value1, value2)</span><br><span class="line">condition1 AND condition2</span><br><span class="line">condition1 OR condition2</span><br></pre></td></tr></table></figure>
+<h3 id="table-Index"><a href="#table-Index" class="headerlink" title="table Index"></a>table Index</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE [UNIQUE|FULLTEXT] INDEX index_name ON table (column,...)</span><br><span class="line">DROP INDEX index_name</span><br></pre></td></tr></table></figure>
+<h3 id="Data-Manipulation"><a href="#Data-Manipulation" class="headerlink" title="Data Manipulation"></a>Data Manipulation</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO table1 (field1, field2, ...) VALUES (value1, value2, ...)</span><br><span class="line">INSERT table1 SET field1=value_1, field2=value_2 ...</span><br><span class="line"></span><br><span class="line">LOAD DATA INFILE &apos;/tmp/mydata.txt&apos; INTO TABLE table1</span><br><span class="line">FIELDS TERMINATED BY &apos;,&apos; OPTIONALLY ENCLOSED BY &apos;&quot;&apos; ESCAPED BY &apos;\\&apos;</span><br><span class="line"></span><br><span class="line">DELETE FROM table1 / TRUNCATE table1</span><br><span class="line">DELETE FROM table1 WHERE condition</span><br><span class="line">-- join:</span><br><span class="line">DELETE FROM table1, table2 WHERE table1.id1 = table2.id2 AND condition</span><br><span class="line"></span><br><span class="line">UPDATE table1 SET field1=new_value1 WHERE condition</span><br><span class="line">-- join:</span><br><span class="line">UPDATE table1, table2 SET field1=new_value1, field2=new_value2, ...</span><br><span class="line">WHERE table1.id1 = table2.id2 AND condition</span><br></pre></td></tr></table></figure>
+<h3 id="Browsing"><a href="#Browsing" class="headerlink" title="Browsing"></a>Browsing</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">SHOW DATABASES</span><br><span class="line">SHOW TABLES</span><br><span class="line">SHOW FIELDS FROM table</span><br><span class="line">-- 几种查询表信息方法</span><br><span class="line">SHOW COLUMNS FROM table </span><br><span class="line">DESCRIBE table </span><br><span class="line">DESC table </span><br><span class="line">EXPLAIN table</span><br><span class="line"></span><br><span class="line">SHOW CREATE TABLE table</span><br><span class="line">SHOW CREATE TRIGGER trigger</span><br><span class="line">SHOW TRIGGERS LIKE &apos;%update%&apos;</span><br><span class="line">SHOW PROCESSLIST</span><br><span class="line">KILL process_number</span><br><span class="line">SELECT table_name, table_rows FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = &apos;**yourdbname**&apos;;</span><br><span class="line"></span><br><span class="line">mysqlshow</span><br><span class="line">mysqlshow database</span><br><span class="line"></span><br><span class="line">SELECT current_database()</span><br></pre></td></tr></table></figure>
+<h3 id="Create-delete-select-alter-database"><a href="#Create-delete-select-alter-database" class="headerlink" title="Create / delete / select / alter database"></a>Create / delete / select / alter database</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE [IF NOT EXISTS] mabase [CHARACTER SET charset] [COLLATE collation]</span><br><span class="line"> CREATE DATABASE mabase CHARACTER SET utf8</span><br><span class="line"> DROP DATABASE mabase</span><br><span class="line"> USE mabase</span><br><span class="line"></span><br><span class="line"> ALTER DATABASE mabase CHARACTER SET utf8</span><br></pre></td></tr></table></figure>
+<h3 id="Create-table"><a href="#Create-table" class="headerlink" title="Create table"></a>Create table</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE table (field1 type1, field2 type2, ...)</span><br><span class="line"> CREATE TABLE table (field1 type1 unsigned not null auto_increment, field2 type2, ...)</span><br><span class="line"> CREATE TABLE table (field1 type1, field2 type2, ..., INDEX (field))</span><br><span class="line"> CREATE TABLE table (field1 type1, field2 type2, ..., PRIMARY KEY (field1))</span><br><span class="line"> CREATE TABLE table (field1 type1, field2 type2, ..., PRIMARY KEY (field1, field2))</span><br><span class="line"> CREATE TABLE table1 (fk_field1 type1, field2 type2, ...,</span><br><span class="line">   FOREIGN KEY (fk_field1) REFERENCES table2 (t2_fieldA)</span><br><span class="line">     [ON UPDATE] [CASCADE|SET NULL|RESTRICT]</span><br><span class="line">     [ON DELETE] [CASCADE|SET NULL|RESTRICT])</span><br><span class="line"> CREATE TABLE table1 (fk_field1 type1, fk_field2 type2, ...,</span><br><span class="line">   FOREIGN KEY (fk_field1, fk_field2) REFERENCES table2 (t2_fieldA, t2_fieldB))</span><br><span class="line"> CREATE TABLE table IF NOT EXISTS (...)</span><br><span class="line"></span><br><span class="line"> CREATE TABLE new_tbl_name LIKE tbl_name</span><br><span class="line">   [SELECT ... FROM tbl_name ...]</span><br><span class="line"></span><br><span class="line"> CREATE TEMPORARY TABLE table (...)</span><br><span class="line"></span><br><span class="line"> CREATE table new_table_name as SELECT [ *|column1, column2 ] FROM table_name</span><br></pre></td></tr></table></figure>
+<h3 id="delete-table"><a href="#delete-table" class="headerlink" title="delete table"></a>delete table</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE table</span><br><span class="line"> DROP TABLE IF EXISTS table</span><br><span class="line"> DROP TABLE table1, table2, ...</span><br><span class="line"> DROP TEMPORARY TABLE table</span><br></pre></td></tr></table></figure>
+<h3 id="modify-table"><a href="#modify-table" class="headerlink" title="modify table"></a>modify table</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> ALTER TABLE table MODIFY field1 type1 </span><br><span class="line"> ALTER TABLE table MODIFY field1 type1 NOT NULL ... </span><br><span class="line"> ALTER TABLE table CHANGE old_name_field1 new_name_field1 type1</span><br><span class="line"> ALTER TABLE table CHANGE old_name_field1 new_name_field1 type1 NOT NULL ...</span><br><span class="line"> ALTER TABLE table ALTER field1 SET DEFAULT ...</span><br><span class="line"> ALTER TABLE table ALTER field1 DROP DEFAULT</span><br><span class="line"> ALTER TABLE table ADD new_name_field1 type1</span><br><span class="line"> ALTER TABLE table ADD new_name_field1 type1 FIRST</span><br><span class="line"> ALTER TABLE table ADD new_name_field1 type1 AFTER another_field</span><br><span class="line"> ALTER TABLE table DROP field1</span><br><span class="line"> ALTER TABLE table ADD INDEX (field);</span><br><span class="line"> ALTER TABLE table ADD PRIMARY KEY (field);</span><br><span class="line"></span><br><span class="line"> -- Change field order:</span><br><span class="line"> ALTER TABLE table MODIFY field1 type1 FIRST</span><br><span class="line"> ALTER TABLE table MODIFY field1 type1 AFTER another_field</span><br><span class="line"> ALTER TABLE table CHANGE old_name_field1 new_name_field1 type1 FIRST</span><br><span class="line"> ALTER TABLE table CHANGE old_name_field1 new_name_field1 type1 AFTER another_field</span><br><span class="line"></span><br><span class="line"> ALTER TABLE old_name RENAME new_name;</span><br><span class="line">Keys</span><br><span class="line"> CREATE TABLE table (..., PRIMARY KEY (field1, field2))</span><br><span class="line"> CREATE TABLE table (..., FOREIGN KEY (field1, field2) REFERENCES table2 (t2_field1, t2_field2))</span><br><span class="line"> ALTER TABLE table ADD PRIMARY KEY (field);</span><br><span class="line"> ALTER TABLE table ADD CONSTRAINT constraint_name PRIMARY KEY (field, field2);</span><br></pre></td></tr></table></figure>
+<h3 id="create-modify-drop-view"><a href="#create-modify-drop-view" class="headerlink" title="create/modify/drop view"></a>create/modify/drop view</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW view AS SELECT ... FROM table WHERE ...</span><br></pre></td></tr></table></figure>
+<h3 id="Privileges"><a href="#Privileges" class="headerlink" title="Privileges"></a>Privileges</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &apos;user&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;password&apos;;</span><br><span class="line"></span><br><span class="line"> GRANT ALL PRIVILEGES ON base.* TO &apos;user&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;password&apos;;</span><br><span class="line"> GRANT SELECT, INSERT, DELETE ON base.* TO &apos;user&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;password&apos;;</span><br><span class="line"> REVOKE ALL PRIVILEGES ON base.* FROM &apos;user&apos;@&apos;host&apos;; -- one permission only</span><br><span class="line"> REVOKE ALL PRIVILEGES, GRANT OPTION FROM &apos;user&apos;@&apos;host&apos;; -- all permissions</span><br><span class="line"></span><br><span class="line"> SET PASSWORD = PASSWORD(&apos;new_pass&apos;)</span><br><span class="line"> SET PASSWORD FOR &apos;user&apos;@&apos;host&apos; = PASSWORD(&apos;new_pass&apos;)</span><br><span class="line"> SET PASSWORD = OLD_PASSWORD(&apos;new_pass&apos;)</span><br><span class="line"></span><br><span class="line"> DROP USER &apos;user&apos;@&apos;host&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="Main-data-types"><a href="#Main-data-types" class="headerlink" title="Main data types"></a>Main data types</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">TINYINT   (1o: -127+128) </span><br><span class="line">SMALLINT  (2o: +-65 000)</span><br><span class="line">MEDIUMINT (3o: +-16 000 000) </span><br><span class="line">INT       (4o: +-2 000 000 000)</span><br><span class="line">BIGINT    (8o: +-9.10^18)</span><br><span class="line">  Precise interval: -(2^(8*N-1)) -&gt; (2^8*N)-1</span><br><span class="line">  /!\ INT(2) = &quot;2 digits displayed&quot; -- NOT &quot;number with 2 digits max&quot;</span><br><span class="line">INT NOT NULL auto_increment PRIMARY KEY -- auto-counter for PK</span><br><span class="line">FLOAT(M,D) DOUBLE(M,D) FLOAT(D=0-&gt;53) </span><br><span class="line">  /!\ 8,3 -&gt; 12345,678 -- NOT 12345678,123!</span><br><span class="line">TIME (HH:MM) YEAR (AAAA) DATE (AAAA-MM-JJ) DATETIME (AAAA-MM-JJ HH:MM; années 1000-&gt;9999)</span><br><span class="line">  TIMESTAMP (like DATETIME, but 1970-&gt;2038, compatible with Unix)</span><br><span class="line">VARCHAR (single-line; explicit size)  </span><br><span class="line">TEXT (multi-lines; max size=65535) </span><br><span class="line">BLOB (binary; max size=65535)</span><br><span class="line">  Variants for TEXT&amp;BLOB: TINY (max=255) MEDIUM (max=~16000) LONG (max=4Go)</span><br><span class="line"> Ex: VARCHAR(32), TINYTEXT, LONGBLOB, MEDIUMTEXT</span><br><span class="line">ENUM (&apos;value1&apos;, &apos;value2&apos;, ...) -- (default NULL, or &apos;&apos; if NOT NULL)</span><br></pre></td></tr></table></figure>
+<h3 id="Forgot-root-password"><a href="#Forgot-root-password" class="headerlink" title="Forgot root password?"></a>Forgot root password?</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ /etc/init.d/mysql stop</span><br><span class="line">$ mysqld_safe --skip-grant-tables &amp;</span><br><span class="line">$ mysql # on another terminal</span><br><span class="line">mysql &gt; UPDATE mysql.user SET password=PASSWORD(&apos;nouveau&apos;) WHERE user=&apos;root&apos;;</span><br><span class="line">## Kill mysqld_safe from the terminal, using Control + \</span><br><span class="line">$ /etc/init.d/mysql start</span><br></pre></td></tr></table></figure>
+<h3 id="Repair-tables-after-unclean-shutdown"><a href="#Repair-tables-after-unclean-shutdown" class="headerlink" title="Repair tables after unclean shutdown"></a>Repair tables after unclean shutdown</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqlcheck --all-databases</span><br><span class="line">mysqlcheck --all-databases --fast</span><br></pre></td></tr></table></figure>
+<h3 id="Loading-data"><a href="#Loading-data" class="headerlink" title="Loading data"></a>Loading data</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SOURCE input_file</span><br><span class="line">mysql -uroot database &lt; filename-20120201.sql</span><br><span class="line"></span><br><span class="line">cat filename-20120201.sql | mysql database</span><br><span class="line"></span><br><span class="line">mysqldump -u [username] -p [database] &gt; data_backup.sql;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Load tab­delimited data into a table (Use \n f or NULL)</span></span><br><span class="line"><span class="keyword">LOAD</span> <span class="keyword">DATA</span> <span class="keyword">LOCAL</span> <span class="keyword">INFILE</span> <span class="string">"infile.txt"</span> <span class="keyword">INTO</span> <span class="keyword">TABLE</span> table_name;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>分享即是成长</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="changyuan WeChat Pay">
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/16/big-data-time/" rel="next" title="《智能时代》">
+                <i class="fa fa-chevron-left"></i> 《智能时代》
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/02/MangoDB-cheatsheet/" rel="prev" title="MangoDB 学习指南">
+                MangoDB 学习指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="changyuan">
+          <p class="site-author-name" itemprop="name">changyuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">不断升级自己的操作系统</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/changyuan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/changocean1" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/changyuan2011" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/changyuanyuan" target="_blank" title="Zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Connect-Disconnect"><span class="nav-number">1.</span> <span class="nav-text">Connect/Disconnect</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Query"><span class="nav-number">2.</span> <span class="nav-text">Query</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conditionals"><span class="nav-number">3.</span> <span class="nav-text">Conditionals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#table-Index"><span class="nav-number">4.</span> <span class="nav-text">table Index</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Manipulation"><span class="nav-number">5.</span> <span class="nav-text">Data Manipulation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Browsing"><span class="nav-number">6.</span> <span class="nav-text">Browsing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-delete-select-alter-database"><span class="nav-number">7.</span> <span class="nav-text">Create / delete / select / alter database</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-table"><span class="nav-number">8.</span> <span class="nav-text">Create table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#delete-table"><span class="nav-number">9.</span> <span class="nav-text">delete table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modify-table"><span class="nav-number">10.</span> <span class="nav-text">modify table</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#create-modify-drop-view"><span class="nav-number">11.</span> <span class="nav-text">create/modify/drop view</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Privileges"><span class="nav-number">12.</span> <span class="nav-text">Privileges</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Main-data-types"><span class="nav-number">13.</span> <span class="nav-text">Main data types</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forgot-root-password"><span class="nav-number">14.</span> <span class="nav-text">Forgot root password?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Repair-tables-after-unclean-shutdown"><span class="nav-number">15.</span> <span class="nav-text">Repair tables after unclean shutdown</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loading-data"><span class="nav-number">16.</span> <span class="nav-text">Loading data</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changyuan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,787 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="mysql,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="高可用数据库架构一般来说数据库集群会是主从架构：或者主主架构：">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="怎么快速恢复数据？">
+<meta property="og:url" content="http://changyuan.github.io/2016/11/23/restore-db/index.html">
+<meta property="og:site_name" content="Chang Crazy&#39;s Blog">
+<meta property="og:description" content="高可用数据库架构一般来说数据库集群会是主从架构：或者主主架构：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://changyuan.github.io/images/restore-db/master-slave.png">
+<meta property="og:image" content="http://changyuan.github.io/images/restore-db/master-master.png">
+<meta property="og:image" content="http://changyuan.github.io/images/restore-db/all_bak.png">
+<meta property="og:image" content="http://changyuan.github.io/images/restore-db/inc_bak.png">
+<meta property="og:image" content="http://changyuan.github.io/images/restore-db/delay_bak.png">
+<meta property="og:updated_time" content="2016-11-23T13:46:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="怎么快速恢复数据？">
+<meta name="twitter:description" content="高可用数据库架构一般来说数据库集群会是主从架构：或者主主架构：">
+<meta name="twitter:image" content="http://changyuan.github.io/images/restore-db/master-slave.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://changyuan.github.io/2016/11/23/restore-db/">
+
+
+
+
+
+  <title>怎么快速恢复数据？ | Chang Crazy's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chang Crazy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">升级自己的操作系统</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2016/11/23/restore-db/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">怎么快速恢复数据？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-23T21:46:52+08:00">
+                2016-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="高可用数据库架构"><a href="#高可用数据库架构" class="headerlink" title="高可用数据库架构"></a>高可用数据库架构</h3><p>一般来说数据库集群会是主从架构：<br><img src="/images/restore-db/master-slave.png" alt><br>或者主主架构：<br><img src="/images/restore-db/master-master.png" alt><br><a id="more"></a><br>如果此时主库宕机，可以：</p>
+<blockquote>
+<ol>
+<li>一个从库顶上，重建集群</li>
+<li>流量迁移到另一个主库</li>
+</ol>
+</blockquote>
+<p>来保证数据的安全性与服务的可用性。</p>
+<p>但是，如果人为不小心执行了“删全库”操作，命令会同步给其他从（主）库，导致所有库上的数据全部丢失，这下怎么办呢？<br>可以问问自己，当这种情况发生的时候：</p>
+<blockquote>
+<ol>
+<li>能不能恢复数据？（应该没有公司不能）</li>
+<li>多久能够恢复数据？<br>保证数据的安全性是DBA第一要务。</li>
+</ol>
+</blockquote>
+<h3 id="全量备份-增量备份"><a href="#全量备份-增量备份" class="headerlink" title="全量备份+增量备份"></a>全量备份+增量备份</h3><p>常见的数据库安全性策略是：全量备份+增量备份。</p>
+<p>全量备份：定期（例如一个月）将库文件全量备份<br> <img src="/images/restore-db/all_bak.png" alt></p>
+<p>增量备份：定期（例如每天）将binlog增量备份<br> <img src="/images/restore-db/inc_bak.png" alt><br>如果不小心误删了全库，可以这么恢复：<br>（1）将最近一次全量备份的全库找到，拷贝回来（文件一般比较大），解压，应用<br>（2）将最近一次全量备份后，每一天的增量binlog找到，拷贝回来（文件较多），依次重放<br>（3）将最近一次增量备份后，到执行“删全库”之前的binlog找到，重放<br>恢复完毕。<br>为了保证方案的可靠性，建议定期进行恢复演练。</p>
+<p>方案优点：能够找回数据<br>方案缺点：恢复时间非常长<br>有没有更优，更快恢复的方案呢？</p>
+<h3 id="1小时延时从"><a href="#1小时延时从" class="headerlink" title="1小时延时从"></a>1小时延时从</h3><p>使用1小时延时从库，可大大加速“删全库”恢复时间。</p>
+<p>什么是1小时延时从？<br>增加一个从库，这个从库不是实时与主库保持同步的，而是每隔1个小时同步一次主库，同步完之后立马断开1小时，这个从库会与主库保持1个小时的数据差距。<br>当“删全库”事故发生时，只需要：<br>（1）应用1小时延时从<br>（2）将1小时延时从最近一次同步时间到，将执行“删全库”之前的binlog找到，重放<br>快速恢复完毕。</p>
+<p>方案优点：能够快速找回数据<br>潜在不足：万一，万一，万一，1小时延时从正在连上主库进行同步的一小段时间内，发生了“删全库”事故，那怎么办咧？</p>
+<h3 id="双份1小时延时从"><a href="#双份1小时延时从" class="headerlink" title="双份1小时延时从"></a>双份1小时延时从</h3><p>使用双份1小时延时从库，可以避免上述“万一，万一，万一”的事故发生。</p>
+<p>什么是双份1小时延时从？<br>如图所示，两个1小时延时从，他们连主库同步数据的时间“岔开半小时”。<br>这样，即使一个延时从连上主库进行同步的一小段时间内，发生了“删全库”事故，依然有另一个延时从保有半小时之前的数据，可以实施快速恢复。</p>
+<p><img src="/images/restore-db/delay_bak.png" alt></p>
+<p>方案<strong>优点</strong>：没有万一，都能快速恢复数据<br>潜在<strong>不足</strong>：资源利用率有点低，为了保证数据的安全性，多了2台延时从，降低了从库利用率</p>
+<h3 id="提高从库效率"><a href="#提高从库效率" class="headerlink" title="提高从库效率"></a>提高从库效率</h3><p>1小时延时从也不是完全没有用，对于一些“允许延时”的业务，可以使用1小时延时从，例如：<br>（1）运营后台，产品后台<br>（2）BI进行数据同步<br>（3）研发进行数据抽样，调研<br>但需要注意的是，毕竟这是从库，只能够提供“只读”服务哟。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>保证数据的安全性是DBA第一要务，需要进行：<br>（1）全量备份+增量备份，并定期进行恢复演练，但该方案恢复时间较久，对系统可用性影响大<br>（2）1小时延时从，双份1小时延时从能极大加速数据库恢复时间<br>（3）个人建议1小时延时从足够，后台只读服务可以连1小时延时从，提高资源利用率</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>分享即是成长</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="changyuan WeChat Pay">
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/23/yaml/" rel="next" title="YAML 语言教程">
+                <i class="fa fa-chevron-left"></i> YAML 语言教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/30/flex/" rel="prev" title="flex布局">
+                flex布局 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="changyuan">
+          <p class="site-author-name" itemprop="name">changyuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">不断升级自己的操作系统</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/changyuan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/changocean1" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/changyuan2011" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/changyuanyuan" target="_blank" title="Zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#高可用数据库架构"><span class="nav-number">1.</span> <span class="nav-text">高可用数据库架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全量备份-增量备份"><span class="nav-number">2.</span> <span class="nav-text">全量备份+增量备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1小时延时从"><span class="nav-number">3.</span> <span class="nav-text">1小时延时从</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双份1小时延时从"><span class="nav-number">4.</span> <span class="nav-text">双份1小时延时从</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提高从库效率"><span class="nav-number">5.</span> <span class="nav-text">提高从库效率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changyuan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

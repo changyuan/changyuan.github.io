@@ -1,0 +1,888 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="mysql,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="官方文档mysql 5.7 json官方文档mysql 5.7 json functions 官方文档mysql 8.0 json">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql 5.7 以上版本对JSON字段的操作">
+<meta property="og:url" content="http://changyuan.github.io/2020/05/02/mysql57-json/index.html">
+<meta property="og:site_name" content="Chang Crazy&#39;s Blog">
+<meta property="og:description" content="官方文档mysql 5.7 json官方文档mysql 5.7 json functions 官方文档mysql 8.0 json">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-02T07:10:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mysql 5.7 以上版本对JSON字段的操作">
+<meta name="twitter:description" content="官方文档mysql 5.7 json官方文档mysql 5.7 json functions 官方文档mysql 8.0 json">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://changyuan.github.io/2020/05/02/mysql57-json/">
+
+
+
+
+
+  <title>Mysql 5.7 以上版本对JSON字段的操作 | Chang Crazy's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chang Crazy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">升级自己的操作系统</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2020/05/02/mysql57-json/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mysql 5.7 以上版本对JSON字段的操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-02T15:10:23+08:00">
+                2020-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://dev.mysql.com/doc/refman/5.7/en/json.html" target="_blank" rel="noopener">官方文档mysql 5.7 json</a><br><a href="https://dev.mysql.com/doc/refman/5.7/en/json-functions.html" target="_blank" rel="noopener">官方文档mysql 5.7 json functions</a></p>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/json.html" target="_blank" rel="noopener">官方文档mysql 8.0 json</a></p>
+<a id="more"></a>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-&gt;</td>
+<td>Return value from JSON column after evaluating path; equivalent to JSON_EXTRACT().</td>
+</tr>
+<tr>
+<td>-&gt;&gt;?(introduced 5.7.13)</td>
+<td>Return value from JSON column after evaluating path and unquoting the result; equivalent to JSON_UNQUOTE(JSON_EXTRACT()).</td>
+</tr>
+<tr>
+<td>JSON_APPEND()?(deprecated)</td>
+<td>Append data to JSON document</td>
+</tr>
+<tr>
+<td>JSON_ARRAY()</td>
+<td>Create JSON array</td>
+</tr>
+<tr>
+<td>JSON_ARRAY_APPEND()</td>
+<td>Append data to JSON document</td>
+</tr>
+<tr>
+<td>JSON_ARRAY_INSERT()</td>
+<td>Insert into JSON array</td>
+</tr>
+<tr>
+<td>JSON_CONTAINS()</td>
+<td>Whether JSON document contains specific object at path</td>
+</tr>
+<tr>
+<td>JSON_CONTAINS_PATH()</td>
+<td>Whether JSON document contains any data at path</td>
+</tr>
+<tr>
+<td>JSON_DEPTH()</td>
+<td>Maximum depth of JSON document</td>
+</tr>
+<tr>
+<td>JSON_EXTRACT()</td>
+<td>Return data from JSON document</td>
+</tr>
+<tr>
+<td>JSON_INSERT()</td>
+<td>Insert data into JSON document</td>
+</tr>
+<tr>
+<td>JSON_KEYS()</td>
+<td>Array of keys from JSON document</td>
+</tr>
+<tr>
+<td>JSON_LENGTH()</td>
+<td>Number of elements in JSON document</td>
+</tr>
+<tr>
+<td>JSON_MERGE()?(deprecated 5.7.22)</td>
+<td>“Merge JSON documents</td>
+<td>preserving duplicate keys. Deprecated synonym for JSON_MERGE_PRESERVE()”</td>
+</tr>
+<tr>
+<td>JSON_MERGE_PATCH()?(introduced 5.7.22)</td>
+<td>“Merge JSON documents</td>
+<td>replacing values of duplicate keys”</td>
+</tr>
+<tr>
+<td>JSON_MERGE_PRESERVE()?(introduced 5.7.22)</td>
+<td>“Merge JSON documents</td>
+<td>preserving duplicate keys”</td>
+</tr>
+<tr>
+<td>JSON_OBJECT()</td>
+<td>Create JSON object</td>
+</tr>
+<tr>
+<td>JSON_PRETTY()?(introduced 5.7.22)</td>
+<td>Print a JSON document in human-readable format</td>
+</tr>
+<tr>
+<td>JSON_QUOTE()</td>
+<td>Quote JSON document</td>
+</tr>
+<tr>
+<td>JSON_REMOVE()</td>
+<td>Remove data from JSON document</td>
+</tr>
+<tr>
+<td>JSON_REPLACE()</td>
+<td>Replace values in JSON document</td>
+</tr>
+<tr>
+<td>JSON_SEARCH()</td>
+<td>Path to value within JSON document</td>
+</tr>
+<tr>
+<td>JSON_SET()</td>
+<td>Insert data into JSON document</td>
+</tr>
+<tr>
+<td>JSON_STORAGE_SIZE()?(introduced 5.7.22)</td>
+<td>Space used for storage of binary representation of a JSON document</td>
+</tr>
+<tr>
+<td>JSON_TYPE()</td>
+<td>Type of JSON value</td>
+</tr>
+<tr>
+<td>JSON_UNQUOTE()</td>
+<td>Unquote JSON value</td>
+</tr>
+<tr>
+<td>JSON_VALID()</td>
+<td>Whether JSON value is valid</td>
+</tr>
+</tbody>
+</table>
+<p>JSON_ARRAY  json数组</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT JSON_ARRAY(1, "abc", NULL, TRUE, CURTIME());</span><br><span class="line">+<span class="comment">---------------------------------------------+</span></span><br><span class="line">| JSON_ARRAY(1, "abc", NULL, TRUE, CURTIME()) |</span><br><span class="line">+<span class="comment">---------------------------------------------+</span></span><br><span class="line">| [1, "abc", null, true, "11:30:24.000000"]   |</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- write table</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> t1(jdoc <span class="keyword">json</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> t1(jdoc) <span class="keyword">values</span>(json_array(<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="keyword">now</span>()));</span><br></pre></td></tr></table></figure>
+<p>JSON_OBJECT</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT JSON_OBJECT('key1', 1, 'key2', 'abc');</span><br><span class="line">+<span class="comment">---------------------------------------+</span></span><br><span class="line">| JSON_OBJECT('key1', 1, 'key2', 'abc') |</span><br><span class="line">+<span class="comment">---------------------------------------+</span></span><br><span class="line">| &#123;"key1": 1, "key2": "abc"&#125;            |</span><br><span class="line">+<span class="comment">---------------------------------------+</span></span><br></pre></td></tr></table></figure>
+<p>JSON_EXTRACT 查询json列  同 column-&gt;path</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT JSON_EXTRACT('&#123;"id": 14, "name": "Aztalan"&#125;', '$.name');</span><br><span class="line">+<span class="comment">---------------------------------------------------------+</span></span><br><span class="line">| JSON_EXTRACT('&#123;"id": 14, "name": "Aztalan"&#125;', '$.name') |</span><br><span class="line">+<span class="comment">---------------------------------------------------------+</span></span><br><span class="line">| "Aztalan"                                               |</span><br><span class="line">+<span class="comment">---------------------------------------------------------+</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- demo</span></span><br><span class="line"><span class="comment">-- 对于某一列是json而言，需要使用内置的函数 json_extract(列名,'$.key') --这个函数有2个参数，第一个参数是json列的列名，第二个参数$.key 其中key为json字符串中某一个key。</span></span><br><span class="line"></span><br><span class="line">&gt; SELECT uid,json_extract(info,'$.mail') AS 'mail',json_extract(info,'$.name') AS 'name' FROM USER;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT c, JSON_EXTRACT(c, "$.id"), g</span><br><span class="line">     &gt; FROM jemp</span><br><span class="line">     &gt; WHERE JSON_EXTRACT(c, "$.id") &gt; 1</span><br><span class="line">     &gt; ORDER BY JSON_EXTRACT(c, "$.name");</span><br><span class="line">+<span class="comment">-------------------------------+-----------+------+</span></span><br><span class="line">| c                             | c-&gt;"$.id" | g    |</span><br><span class="line">+<span class="comment">-------------------------------+-----------+------+</span></span><br><span class="line">| &#123;"id": "3", "name": "Barney"&#125; | "3"       |    3 |</span><br><span class="line">| &#123;"id": "4", "name": "Betty"&#125;  | "4"       |    4 |</span><br><span class="line">| &#123;"id": "2", "name": "Wilma"&#125;  | "2"       |    2 |</span><br><span class="line">+<span class="comment">-------------------------------+-----------+------+</span></span><br><span class="line">3 rows in <span class="keyword">set</span> (<span class="number">0.00</span> sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; <span class="keyword">SELECT</span> c, c-&gt;<span class="string">"$.id"</span>, g</span><br><span class="line">     &gt; <span class="keyword">FROM</span> jemp</span><br><span class="line">     &gt; <span class="keyword">WHERE</span> c-&gt;<span class="string">"$.id"</span> &gt; <span class="number">1</span></span><br><span class="line">     &gt; <span class="keyword">ORDER</span> <span class="keyword">BY</span> c-&gt;<span class="string">"$.name"</span>;</span><br><span class="line">+<span class="comment">-------------------------------+-----------+------+</span></span><br><span class="line">| c                             | c-&gt;"$.id" | g    |</span><br><span class="line">+<span class="comment">-------------------------------+-----------+------+</span></span><br><span class="line">| &#123;"id": "3", "name": "Barney"&#125; | "3"       |    3 |</span><br><span class="line">| &#123;"id": "4", "name": "Betty"&#125;  | "4"       |    4 |</span><br><span class="line">| &#123;"id": "2", "name": "Wilma"&#125;  | "2"       |    2 |</span><br><span class="line">+<span class="comment">-------------------------------+-----------+------+</span></span><br></pre></td></tr></table></figure>
+<p>column-&gt;&gt;path</p>
+<p>等价于</p>
+<blockquote>
+<p>JSON_UNQUOTE( JSON_EXTRACT(column, path) )</p>
+</blockquote>
+<blockquote>
+<p>JSON_UNQUOTE(column -&gt; path)</p>
+</blockquote>
+<blockquote>
+<p>column-&gt;&gt;path</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT * FROM jemp WHERE g &gt; 2;</span><br><span class="line">+-------------------------------+------+</span><br><span class="line">| c                             | g    |</span><br><span class="line">+-------------------------------+------+</span><br><span class="line">| &#123;&quot;id&quot;: &quot;3&quot;, &quot;name&quot;: &quot;Barney&quot;&#125; |    3 |</span><br><span class="line">| &#123;&quot;id&quot;: &quot;4&quot;, &quot;name&quot;: &quot;Betty&quot;&#125;  |    4 |</span><br><span class="line">+-------------------------------+------+</span><br><span class="line">2 rows in set (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT c-&gt;&apos;$.name&apos; AS name</span><br><span class="line">    -&gt;     FROM jemp WHERE g &gt; 2;</span><br><span class="line">+----------+</span><br><span class="line">| name     |</span><br><span class="line">+----------+</span><br><span class="line">| &quot;Barney&quot; |</span><br><span class="line">| &quot;Betty&quot;  |</span><br><span class="line">+----------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT JSON_UNQUOTE(c-&gt;&apos;$.name&apos;) AS name</span><br><span class="line">    -&gt;     FROM jemp WHERE g &gt; 2;</span><br><span class="line">+--------+</span><br><span class="line">| name   |</span><br><span class="line">+--------+</span><br><span class="line">| Barney |</span><br><span class="line">| Betty  |</span><br><span class="line">+--------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT c-&gt;&gt;&apos;$.name&apos; AS name</span><br><span class="line">    -&gt;     FROM jemp WHERE g &gt; 2;</span><br><span class="line">+--------+</span><br><span class="line">| name   |</span><br><span class="line">+--------+</span><br><span class="line">| Barney |</span><br><span class="line">| Betty  |</span><br><span class="line">+--------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>JSON_TYPE</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT JSON_TYPE('["a", "b", 1]');</span><br><span class="line">+<span class="comment">----------------------------+</span></span><br><span class="line">| JSON_TYPE('["a", "b", 1]') |</span><br><span class="line">+<span class="comment">----------------------------+</span></span><br><span class="line">| ARRAY                      |</span><br><span class="line">+<span class="comment">----------------------------+</span></span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT JSON_TYPE('"hello"');</span><br><span class="line">+<span class="comment">----------------------+</span></span><br><span class="line">| JSON_TYPE('"hello"') |</span><br><span class="line">+<span class="comment">----------------------+</span></span><br><span class="line">| STRING               |</span><br><span class="line">+<span class="comment">----------------------+</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- error</span></span><br><span class="line">mysql&gt; SELECT JSON_TYPE('hello');</span><br><span class="line">ERROR 3146 (22032): Invalid data type for JSON data in argument 1</span><br><span class="line">to function json_type; a JSON string or JSON type is required.</span><br></pre></td></tr></table></figure>
+<p>JSON_MERGE</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT JSON_MERGE('["a", 1]', '&#123;"key": "value"&#125;');</span><br><span class="line">+<span class="comment">--------------------------------------------+</span></span><br><span class="line">| JSON_MERGE('["a", 1]', '&#123;"key": "value"&#125;') |</span><br><span class="line">+<span class="comment">--------------------------------------------+</span></span><br><span class="line">| ["a", 1, &#123;"key": "value"&#125;]                 |</span><br><span class="line">+<span class="comment">--------------------------------------------+</span></span><br></pre></td></tr></table></figure>
+<p>JSON_SEARCH(json_doc, one_or_all, search_str[, escape_char[, path] …])</p>
+<p>如果json_doc，search_str或path参数中的任何一个为NULL，则返回NULL；否则返回NULL。文档内没有路径；或找不到search_str。<br>如果json_doc参数不是有效的JSON文档，任何路径参数不是有效的路径表达式，one_or_all不是’one’或’all’或escape_char不是常量表达式，则会发生错误。</p>
+<p>要在搜索字符串中指定文字％或_字符，请在其前面加上转义字符。如果escape_char参数丢失或为NULL，则默认值为\。否则，scape_char必须为空或一个字符的常量。<br>search_str:  % 匹配任意的字符（含0）, _  完全匹配一个字符</p>
+<p>如果在准备好的语句中使用了JSON_SEARCH（），并且使用？提供了escape_char参数？参数，参数值在执行时可能是恒定的，但在编译时却不是。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SET @j = '["abc", [&#123;"k": "10"&#125;, "def"], &#123;"x":"abc"&#125;, &#123;"y":"bcd"&#125;]';</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT JSON_SEARCH(@j, 'one', 'abc');</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">| JSON_SEARCH(@j, 'one', 'abc') |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">| "$[0]"                        |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT JSON_SEARCH(@j, 'all', 'abc');</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">| JSON_SEARCH(@j, 'all', 'abc') |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">| ["$[0]", "$[2].x"]            |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT JSON_SEARCH(@j, 'all', 'ghi');</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">| JSON_SEARCH(@j, 'all', 'ghi') |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">| NULL                          |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br></pre></td></tr></table></figure>
+<p>JSON_CONTAINS(target, candidate[, path])</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SET @j = '&#123;"a": 1, "b": 2, "c": &#123;"d": 4&#125;&#125;';</span><br><span class="line">mysql&gt; SET @j2 = '1';</span><br><span class="line">mysql&gt; SELECT JSON_CONTAINS(@j, @j2, '$.a');</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">| JSON_CONTAINS(@j, @j2, '$.a') |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">|                             1 |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">mysql&gt; SELECT JSON_CONTAINS(@j, @j2, '$.b');</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">| JSON_CONTAINS(@j, @j2, '$.b') |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">|                             0 |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line"></span><br><span class="line">mysql&gt; SET @j2 = '&#123;"d": 4&#125;';</span><br><span class="line">mysql&gt; SELECT JSON_CONTAINS(@j, @j2, '$.a');</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">| JSON_CONTAINS(@j, @j2, '$.a') |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">|                             0 |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">mysql&gt; SELECT JSON_CONTAINS(@j, @j2, '$.c');</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">| JSON_CONTAINS(@j, @j2, '$.c') |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br><span class="line">|                             1 |</span><br><span class="line">+<span class="comment">-------------------------------+</span></span><br></pre></td></tr></table></figure>
+<p>JSON_CONTAINS_PATH(json_doc, one_or_all, path[, path] …)</p>
+<p>one’: 1 if at least one path exists within the document, 0 otherwise.<br>‘all’: 1 if all paths exist within the document, 0 otherwise.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SET @j = '&#123;"a": 1, "b": 2, "c": &#123;"d": 4&#125;&#125;';</span><br><span class="line">mysql&gt; SELECT JSON_CONTAINS_PATH(@j, 'one', '$.a', '$.e');</span><br><span class="line">+<span class="comment">---------------------------------------------+</span></span><br><span class="line">| JSON_CONTAINS_PATH(@j, 'one', '$.a', '$.e') |</span><br><span class="line">+<span class="comment">---------------------------------------------+</span></span><br><span class="line">|                                           1 |</span><br><span class="line">+<span class="comment">---------------------------------------------+</span></span><br><span class="line">mysql&gt; SELECT JSON_CONTAINS_PATH(@j, 'all', '$.a', '$.e');</span><br><span class="line">+<span class="comment">---------------------------------------------+</span></span><br><span class="line">| JSON_CONTAINS_PATH(@j, 'all', '$.a', '$.e') |</span><br><span class="line">+<span class="comment">---------------------------------------------+</span></span><br><span class="line">|                                           0 |</span><br><span class="line">+<span class="comment">---------------------------------------------+</span></span><br><span class="line">mysql&gt; SELECT JSON_CONTAINS_PATH(@j, 'one', '$.c.d');</span><br><span class="line">+<span class="comment">----------------------------------------+</span></span><br><span class="line">| JSON_CONTAINS_PATH(@j, 'one', '$.c.d') |</span><br><span class="line">+<span class="comment">----------------------------------------+</span></span><br><span class="line">|                                      1 |</span><br><span class="line">+<span class="comment">----------------------------------------+</span></span><br><span class="line">mysql&gt; SELECT JSON_CONTAINS_PATH(@j, 'one', '$.a.d');</span><br><span class="line">+<span class="comment">----------------------------------------+</span></span><br><span class="line">| JSON_CONTAINS_PATH(@j, 'one', '$.a.d') |</span><br><span class="line">+<span class="comment">----------------------------------------+</span></span><br><span class="line">|                                      0 |</span><br><span class="line">+<span class="comment">----------------------------------------+</span></span><br></pre></td></tr></table></figure>
+<p>JSON_SET() replaces existing values and adds nonexisting values.</p>
+<p>JSON_INSERT() inserts values without replacing existing values.</p>
+<p>JSON_REPLACE() replaces only existing values.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SET @j = '&#123; "a": 1, "b": [2, 3]&#125;';</span><br><span class="line">mysql&gt; SELECT JSON_SET(@j, '$.a', 10, '$.c', '[true, false]');</span><br><span class="line">+<span class="comment">-------------------------------------------------+</span></span><br><span class="line">| JSON_SET(@j, '$.a', 10, '$.c', '[true, false]') |</span><br><span class="line">+<span class="comment">-------------------------------------------------+</span></span><br><span class="line">| &#123;"a": 10, "b": [2, 3], "c": "[true, false]"&#125;    |</span><br><span class="line">+<span class="comment">-------------------------------------------------+</span></span><br><span class="line">mysql&gt; SELECT JSON_INSERT(@j, '$.a', 10, '$.c', '[true, false]');</span><br><span class="line">+<span class="comment">----------------------------------------------------+</span></span><br><span class="line">| JSON_INSERT(@j, '$.a', 10, '$.c', '[true, false]') |</span><br><span class="line">+<span class="comment">----------------------------------------------------+</span></span><br><span class="line">| &#123;"a": 1, "b": [2, 3], "c": "[true, false]"&#125;        |</span><br><span class="line">+<span class="comment">----------------------------------------------------+</span></span><br><span class="line">mysql&gt; SELECT JSON_REPLACE(@j, '$.a', 10, '$.c', '[true, false]');</span><br><span class="line">+<span class="comment">-----------------------------------------------------+</span></span><br><span class="line">| JSON_REPLACE(@j, '$.a', 10, '$.c', '[true, false]') |</span><br><span class="line">+<span class="comment">-----------------------------------------------------+</span></span><br><span class="line">| &#123;"a": 10, "b": [2, 3]&#125;                              |</span><br><span class="line">+<span class="comment">-----------------------------------------------------+</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>分享即是成长</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="changyuan WeChat Pay">
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/02/google-use-skill/" rel="next" title="Google 搜索技巧">
+                <i class="fa fa-chevron-left"></i> Google 搜索技巧
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/02/go-cheatsheet/" rel="prev" title="Go Cheat Sheet">
+                Go Cheat Sheet <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="changyuan">
+          <p class="site-author-name" itemprop="name">changyuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">不断升级自己的操作系统</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/changyuan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/changocean1" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/changyuan2011" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/changyuanyuan" target="_blank" title="Zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changyuan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,871 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="本文将以“帖子中心”为例，介绍“1对多”类业务，随着数据量的逐步增大，数据库性能显著降低，数据库水平切分相关的架构实践：  如何来实施水平切分 水平切分后常见的问题 典型问题的优化思路及实践  一、什么是1对多关系所谓的“1对1”，“1对多”，“多对多”，来自数据库设计中的“实体-关系”ER模型，用来描述实体之间的映射关系。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1对多类业务架构分割">
+<meta property="og:url" content="http://changyuan.github.io/2017/07/11/one2more-db-separation/index.html">
+<meta property="og:site_name" content="Chang Crazy&#39;s Blog">
+<meta property="og:description" content="本文将以“帖子中心”为例，介绍“1对多”类业务，随着数据量的逐步增大，数据库性能显著降低，数据库水平切分相关的架构实践：  如何来实施水平切分 水平切分后常见的问题 典型问题的优化思路及实践  一、什么是1对多关系所谓的“1对1”，“1对多”，“多对多”，来自数据库设计中的“实体-关系”ER模型，用来描述实体之间的映射关系。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-07-11T02:10:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1对多类业务架构分割">
+<meta name="twitter:description" content="本文将以“帖子中心”为例，介绍“1对多”类业务，随着数据量的逐步增大，数据库性能显著降低，数据库水平切分相关的架构实践：  如何来实施水平切分 水平切分后常见的问题 典型问题的优化思路及实践  一、什么是1对多关系所谓的“1对1”，“1对多”，“多对多”，来自数据库设计中的“实体-关系”ER模型，用来描述实体之间的映射关系。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://changyuan.github.io/2017/07/11/one2more-db-separation/">
+
+
+
+
+
+  <title>1对多类业务架构分割 | Chang Crazy's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chang Crazy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">升级自己的操作系统</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/07/11/one2more-db-separation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">1对多类业务架构分割</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T10:10:25+08:00">
+                2017-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文将以“帖子中心”为例，介绍“1对多”类业务，随着数据量的逐步增大，数据库性能显著降低，数据库水平切分相关的架构实践：</p>
+<ul>
+<li>如何来实施水平切分</li>
+<li>水平切分后常见的问题</li>
+<li>典型问题的优化思路及实践</li>
+</ul>
+<p>一、什么是1对多关系<br>所谓的“1对1”，“1对多”，“多对多”，来自数据库设计中的“实体-关系”ER模型，用来描述实体之间的映射关系。</p>
+ <a id="more"></a>
+<p>1对1</p>
+<ul>
+<li>一个用户只有一个登录名，一个登录名只对应一个用户</li>
+<li>一个uid对应一个login_name，一个login_name只对应一个uid<br>这是一个1对1的关系。</li>
+</ul>
+<p>1对多</p>
+<ul>
+<li>一个用户可以发多条微博，一条微博只有一个发送者</li>
+<li>一个uid对应多个msg_id，一个msg_id只对应一个uid<br>这是一个1对多的关系。</li>
+</ul>
+<p>多对多</p>
+<ul>
+<li>一个用户可以关注多个用户</li>
+<li>一个用户也可以被多个粉丝关注<br>这是一个多对多的关系。</li>
+</ul>
+<p>二、帖子中心业务分析</p>
+<p>帖子中心是一个典型的1对多业务。</p>
+<p>一个用户可以发布多个帖子，一个帖子只对应一个发布者。</p>
+<p>任何脱离业务的架构设计都是耍流氓，先来看看帖子中心对应的业务需求。</p>
+<p>帖子中心，是一个提供帖子发布/修改/删除/查看/搜索的服务。</p>
+<p>写操作：</p>
+<ul>
+<li>发布(insert)帖子</li>
+<li>修改(update)帖子</li>
+<li>删除(delete)帖子</li>
+</ul>
+<p>读操作：</p>
+<ul>
+<li>通过tid查询(select)帖子实体，单行查询</li>
+<li>通过uid查询(select)用户发布过的帖子，列表查询</li>
+<li>帖子检索(search)，例如通过时间、标题、内容搜索符合条件的帖子</li>
+</ul>
+<p>在数据量较大，并发量较大的时候，通常通过元数据与索引数据分离的架构来满足不同类型的需求：</p>
+<p>架构中的几个关键点：</p>
+<ul>
+<li>tiezi-center：帖子服务</li>
+<li>tiezi-db：提供元数据存储</li>
+<li>tiezi-search：帖子搜索服务</li>
+<li>tiezi-index：提供索引数据存储</li>
+<li>MQ：tiezi-center与tiezi-search通讯媒介，一般不直接使用RPC调用，而是通过MQ对两个子系统解耦（为何这么解耦，请参见《到底什么时候该使用MQ？》）</li>
+</ul>
+<p>其中，tiezi-center和tiezi-search分别满足两类不同的读需求：</p>
+<p>如上图所示：</p>
+<ul>
+<li>tid和uid上的查询需求，可以由tiezi-center从元数据读取并返回</li>
+<li>其他类检索需求，可以由tiezi-search从索引数据检索并返回</li>
+</ul>
+<p>对于写需求：</p>
+<p>如上图所示：</p>
+<ul>
+<li>增加，修改，删除的操作都会从tiezi-center发起</li>
+<li>tiezi-center修改元数据</li>
+<li>tiezi-center将信息修改通知发送给MQ</li>
+<li>tiezi-search从MQ接受修改信息</li>
+<li>tiezi-search修改索引数据</li>
+</ul>
+<p>tiezi-search，搜索架构不是本文的重点（外置索引架构设计，请参见《100亿数据1万属性数据架构设计》），后文将重点描述帖子中心元数据这一块的水平切分设计。</p>
+<p>三、帖子中心元数据设计<br>通过帖子中心业务分析，很容易了解到，其核心元数据为：<br>Tiezi(tid, uid, time, title, content, …);<br>其中：</p>
+<ul>
+<li>tid为帖子ID，主键</li>
+<li>uid为用户ID，发帖人</li>
+<li>time, title, content …等为帖子属性</li>
+</ul>
+<p>数据库设计上，在业务初期，单库就能满足元数据存储要求，其典型的架构设计为：</p>
+<ul>
+<li>tiezi-center：帖子中心服务，对调用者提供友好的RPC接口</li>
+<li>tiezi-db：对帖子数据进行存储</li>
+</ul>
+<p>在相关字段上建立索引，就能满足相关业务需求：</p>
+<ul>
+<li>帖子记录查询，通过tid查询，约占读请求量90%<br>select * from t_tiezi where tid=$tid</li>
+<li>帖子列表查询，通过uid查询其发布的所有帖子，约占读请求量10%<br>select * from t_tiezi where uid=$uid</li>
+</ul>
+<p>四、帖子中心水平切分-tid切分法<br>当数据量越来越大时，需要对帖子数据的存储进行线性扩展。</p>
+<p>既然是帖子中心，并且帖子记录查询量占了总请求的90%，很容易想到通过tid字段取模来进行水平切分：</p>
+<p>这个方法简单直接，优点：</p>
+<ul>
+<li>100%写请求可以直接定位到库</li>
+<li>90%的读请求可以直接定位到库</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>一个用户发布的所有帖子可能会落到不同的库上，10%的请求通过uid来查询会比较麻烦</li>
+</ul>
+<p>如上图，一个uid访问需要遍历所有库。</p>
+<p>五、帖子中心水平切分-uid切分法<br>有没有一种切分方法，确保同一个用户发布的所有帖子都落在同一个库上，而在查询一个用户发布的所有帖子时，不需要去遍历所有的库呢？<br>答：使用uid来分库可以解决这个问题。</p>
+<p>新出现的问题：如果使用uid来分库，确保了一个用户的帖子数据落在同一个库上，那通过tid来查询，就不知道这个帖子落在哪个库上了，岂不是还需要遍历全库，需要怎么优化呢？<br>答：tid的查询是单行记录查询，只要在数据库（或者缓存）记录tid到uid的映射关系，就能解决这个问题。</p>
+<p>新增一个索引库：<br>t_mapping(tid, uid);</p>
+<ul>
+<li>这个库只有两列，可以承载很多数据</li>
+<li>即使数据量过大，索引库可以利用tid水平切分</li>
+<li>这类kv形式的索引结构，可以很好的利用cache优化查询性能</li>
+<li>一旦帖子发布，tid和uid的映射关系就不会发生变化，cache的命中率会非常高</li>
+</ul>
+<p>使用uid分库，并增加索引库记录tid到uid的映射关系之后，每当有uid上的查询：</p>
+<p>可以通过uid直接定位到库。</p>
+<p>每当有tid上的查询：</p>
+<ul>
+<li>先查询索引表，通过tid查询到对应的uid</li>
+<li>再通过uid定位到库</li>
+</ul>
+<p>这个方法的优点：</p>
+<ul>
+<li>一个用户发布的所以帖子落在同一个库上</li>
+<li>10%的请求过过uid来查询列表，可以直接定位到库</li>
+<li>索引表cache命中率非常高，因为tid与uid的映射关系不会变</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>90%的tid请求，以及100%的修改请求，不能直接定位到库，需要先进行一次索引表的查询，当然这个查询非常块，通常在5ms内可以返回</li>
+<li>数据插入时需要操作元数据与索引表，可能引发潜在的一致性问题</li>
+</ul>
+<p>六、帖子中心水平切分-基因法<br>有没有一种方法，既能够通过uid定位到库，又不需要建立索引表来进行二次查询呢，这就是本文要叙述的“1对多”业务分库最佳实践，基因法。</p>
+<p>什么是分库基因？<br>通过uid分库，假设分为16个库，采用uid%16的方式来进行数据库路由，这里的uid%16，其本质是uid的最后4个bit决定这行数据落在哪个库上，这4个bit，就是分库基因。</p>
+<p>什么是基因法分库？<br>在“1对多”的业务场景，使用“1”分库，在“多”的数据id生成时，id末端加入分库基因，就能同时满足“1”和“多”的分库查询需求。</p>
+<p>如上图所示，uid=666的用户发布了一条帖子（666的二进制表示为：1010011010）：</p>
+<ul>
+<li>使用uid%16分库，决定这行数据要插入到哪个库中</li>
+<li>分库基因是uid的最后4个bit，即1010</li>
+<li>在生成tid时，先使用一种分布式ID生成算法生成前60bit（上图中绿色部分）</li>
+<li>将分库基因加入到tid的最后4个bit（上图中粉色部分）</li>
+<li>拼装成最终的64bit帖子tid（上图中蓝色部分）<br>（怎么生成60bit分布式唯一ID，请参见《分布式ID生成算法》）</li>
+</ul>
+<p>这般，保证了同一个用户发布的所有帖子的tid，都落在同一个库上，tid的最后4个bit都相同，于是：</p>
+<ul>
+<li>通过uid%16能够定位到库</li>
+<li>通过tid%16也能定位到库</li>
+</ul>
+<p>潜在问题一：同一个uid发布的tid落在同一个库上，会不会出现数据不均衡？<br>答：只要uid是均衡的，每个用户发布的平均帖子数是均衡的，每个库的数据就是均衡的。</p>
+<p>潜在问题二：最开始分16库，分库基因是4bit，未来要扩充成32库，分库基因变成了5bit，那怎么办？<br>答：需要提前做好容量预估，例如事先规划好5年内数据增长256库足够，就提前预留8bit基因。</p>
+<p>七、总结<br>将以“帖子中心”为典型的“1对多”类业务，在架构上，采用元数据与索引数据分离的架构设计方法：</p>
+<ul>
+<li>帖子服务，元数据满足uid和tid的查询需求</li>
+<li>搜索服务，索引数据满足复杂搜索寻求</li>
+</ul>
+<p>对于元数据的存储，在数据量较大的情况下，有三种常见的切分方法：</p>
+<ul>
+<li>tid切分法，按照tid分库，同一个用户发布的帖子落在不同的库上，通过uid来查询要遍历所有库</li>
+<li>uid切分法，按照uid分库，同一个用户发布的帖子落在同一个库上，需要通过索引表或者缓存来记录tid与uid的映射关系，通过tid来查询时，先查到uid，再通过uid定位库</li>
+<li>基因法，按照uid分库，在生成tid里加入uid上的分库基因，保证通过uid和tid都能直接定位到库</li>
+</ul>
+<p>对于1对多的业务场景，分库架构不再是瓶颈。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>分享即是成长</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="changyuan WeChat Pay">
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/11/JavaScript-Standard-Style/" rel="next" title="JavaScript Standard Style">
+                <i class="fa fa-chevron-left"></i> JavaScript Standard Style
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/31/docker-tutorial/" rel="prev" title="Docker入门">
+                Docker入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="changyuan">
+          <p class="site-author-name" itemprop="name">changyuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">不断升级自己的操作系统</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/changyuan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/changocean1" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/changyuan2011" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/changyuanyuan" target="_blank" title="Zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changyuan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

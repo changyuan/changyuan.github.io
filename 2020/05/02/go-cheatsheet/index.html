@@ -1,0 +1,1012 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Go,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="Go Cheat Sheet一个整理了很多语言的cs GO cheatsheet GO cheatsheet 类库和框架等 Index Basic Syntax Operators Arithmetic Comparison Logical Other   Declarations Functions Functions as values and closures Variadic Functi">
+<meta name="keywords" content="Go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go Cheat Sheet">
+<meta property="og:url" content="http://changyuan.github.io/2020/05/02/go-cheatsheet/index.html">
+<meta property="og:site_name" content="Chang Crazy&#39;s Blog">
+<meta property="og:description" content="Go Cheat Sheet一个整理了很多语言的cs GO cheatsheet GO cheatsheet 类库和框架等 Index Basic Syntax Operators Arithmetic Comparison Logical Other   Declarations Functions Functions as values and closures Variadic Functi">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-02T07:12:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go Cheat Sheet">
+<meta name="twitter:description" content="Go Cheat Sheet一个整理了很多语言的cs GO cheatsheet GO cheatsheet 类库和框架等 Index Basic Syntax Operators Arithmetic Comparison Logical Other   Declarations Functions Functions as values and closures Variadic Functi">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://changyuan.github.io/2020/05/02/go-cheatsheet/">
+
+
+
+
+
+  <title>Go Cheat Sheet | Chang Crazy's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chang Crazy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">升级自己的操作系统</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2020/05/02/go-cheatsheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Go Cheat Sheet</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-02T15:12:31+08:00">
+                2020-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Go-Cheat-Sheet"><a href="#Go-Cheat-Sheet" class="headerlink" title="Go Cheat Sheet"></a>Go Cheat Sheet</h1><p><a href="https://devhints.io/" target="_blank" rel="noopener">一个整理了很多语言的cs</a></p>
+<p><a href="https://devhints.io/go" target="_blank" rel="noopener">GO cheatsheet</a></p>
+<p><a href="https://dev.to/devmount/a-cheatsheet-of-128-cheatsheets-for-developers-f4m" target="_blank" rel="noopener">GO cheatsheet</a></p>
+<p><a href="https://github.com/golang/go/wiki/LearnServerProgramming" target="_blank" rel="noopener">类库和框架等</a></p>
+<h1 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h1><ol>
+<li><a href="#basic-syntax">Basic Syntax</a></li>
+<li><a href="#operators">Operators</a><ul>
+<li><a href="#arithmetic">Arithmetic</a></li>
+<li><a href="#comparison">Comparison</a></li>
+<li><a href="#logical">Logical</a></li>
+<li><a href="#other">Other</a></li>
+</ul>
+</li>
+<li><a href="#declarations">Declarations</a></li>
+<li><a href="#functions">Functions</a><ul>
+<li><a href="#functions-as-values-and-closures">Functions as values and closures</a></li>
+<li><a href="#variadic-functions">Variadic Functions</a></li>
+</ul>
+</li>
+<li><a href="#built-in-types">Built-in Types</a></li>
+<li><a href="#type-conversions">Type Conversions</a></li>
+<li><a href="#packages">Packages</a></li>
+<li><a href="#control-structures">Control structures</a><ul>
+<li><a href="#if">If</a></li>
+<li><a href="#loops">Loops</a></li>
+<li><a href="#switch">Switch</a></li>
+</ul>
+</li>
+<li><a href="#arrays-slices-ranges">Arrays, Slices, Ranges</a><ul>
+<li><a href="#arrays">Arrays</a></li>
+<li><a href="#slices">Slices</a></li>
+<li><a href="#operations-on-arrays-and-slices">Operations on Arrays and Slices</a></li>
+</ul>
+</li>
+<li><a href="#maps">Maps</a></li>
+<li><a href="#structs">Structs</a></li>
+<li><a href="#pointers">Pointers</a></li>
+<li><a href="#interfaces">Interfaces</a></li>
+<li><a href="#embedding">Embedding</a></li>
+<li><a href="#errors">Errors</a></li>
+<li><a href="#concurrency">Concurrency</a><ul>
+<li><a href="#goroutines">Goroutines</a></li>
+<li><a href="#channels">Channels</a></li>
+<li><a href="#channel-axioms">Channel Axioms</a></li>
+</ul>
+</li>
+<li><a href="#printing">Printing</a></li>
+<li><a href="#reflection">Reflection</a><ul>
+<li><a href="#type-switch">Type Switch</a></li>
+<li><a href="https://github.com/a8m/reflect-examples" target="_blank" rel="noopener">Examples</a></li>
+</ul>
+</li>
+<li><a href="#snippets">Snippets</a><ul>
+<li><a href="#http-server">Http-Server</a></li>
+</ul>
+</li>
+</ol>
+<a id="more"></a>
+<h2 id="Credits"><a href="#Credits" class="headerlink" title="Credits"></a>Credits</h2><p>Most example code taken from <a href="http://tour.golang.org/" target="_blank" rel="noopener">A Tour of Go</a>, which is an excellent introduction to Go.<br>If you’re new to Go, do that tour. Seriously.</p>
+<h2 id="Go-in-a-Nutshell"><a href="#Go-in-a-Nutshell" class="headerlink" title="Go in a Nutshell"></a>Go in a Nutshell</h2><ul>
+<li>Imperative language</li>
+<li>Statically typed</li>
+<li>Syntax tokens similar to C (but less parentheses and no semicolons) and the structure to Oberon-2</li>
+<li>Compiles to native code (no JVM)</li>
+<li>No classes, but structs with methods</li>
+<li>Interfaces</li>
+<li>No implementation inheritance. There’s <a href="http://golang.org/doc/effective%5Fgo.html#embedding" target="_blank" rel="noopener">type embedding</a>, though.</li>
+<li>Functions are first class citizens</li>
+<li>Functions can return multiple values</li>
+<li>Has closures</li>
+<li>Pointers, but not pointer arithmetic</li>
+<li>Built-in concurrency primitives: Goroutines and Channels</li>
+</ul>
+<h1 id="Basic-Syntax"><a href="#Basic-Syntax" class="headerlink" title="Basic Syntax"></a>Basic Syntax</h1><h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>File <code>hello.go</code>:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello Go"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>$ go run hello.go</code></p>
+<h2 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h2><h3 id="Arithmetic"><a href="#Arithmetic" class="headerlink" title="Arithmetic"></a>Arithmetic</h3><table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code></td>
+<td>addition</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>subtraction</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>multiplication</td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>quotient</td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>remainder</td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td>bitwise and</td>
+</tr>
+<tr>
+<td>`\</td>
+<td>`</td>
+<td>bitwise or</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>bitwise xor</td>
+</tr>
+<tr>
+<td><code>&amp;^</code></td>
+<td>bit clear (and not)</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code></td>
+<td>left shift</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>right shift</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h3><table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>==</code></td>
+<td>equal</td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td>not equal</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>less than</td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>less than or equal</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>greater than</td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>greater than or equal</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Logical"><a href="#Logical" class="headerlink" title="Logical"></a>Logical</h3><table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&amp;&amp;</code></td>
+<td>logical and</td>
+</tr>
+<tr>
+<td>`\</td>
+<td>\</td>
+<td>`</td>
+<td>logical or</td>
+</tr>
+<tr>
+<td><code>!</code></td>
+<td>logical not</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h3><table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&amp;</code></td>
+<td>address of / create pointer</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>dereference pointer</td>
+</tr>
+<tr>
+<td><code>&lt;-</code></td>
+<td>send / receive operator (see ‘Channels’ below)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Declarations"><a href="#Declarations" class="headerlink" title="Declarations"></a>Declarations</h2><p>Type goes after identifier!<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo <span class="keyword">int</span> <span class="comment">// declaration without initialization</span></span><br><span class="line"><span class="keyword">var</span> foo <span class="keyword">int</span> = <span class="number">42</span> <span class="comment">// declaration with initialization</span></span><br><span class="line"><span class="keyword">var</span> foo, bar <span class="keyword">int</span> = <span class="number">42</span>, <span class="number">1302</span> <span class="comment">// declare and init multiple vars at once</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="number">42</span> <span class="comment">// type omitted, will be inferred</span></span><br><span class="line">foo := <span class="number">42</span> <span class="comment">// shorthand, only in func bodies, omit var keyword, type is always implicit</span></span><br><span class="line"><span class="keyword">const</span> constant = <span class="string">"This is a constant"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// iota can be used for incrementing numbers, starting from 0</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    _ = <span class="literal">iota</span></span><br><span class="line">    a</span><br><span class="line">    b</span><br><span class="line">    c = <span class="number">1</span> &lt;&lt; <span class="literal">iota</span></span><br><span class="line">    d</span><br><span class="line">)</span><br><span class="line">    fmt.Println(a, b) <span class="comment">// 1 2 (0 is skipped)</span></span><br><span class="line">    fmt.Println(c, d) <span class="comment">// 8 16 (2^3, 2^4)</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a simple function</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">functionName</span><span class="params">()</span></span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// function with parameters (again, types go after identifiers)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">functionName</span><span class="params">(param1 <span class="keyword">string</span>, param2 <span class="keyword">int</span>)</span></span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// multiple parameters of the same type</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">functionName</span><span class="params">(param1, param2 <span class="keyword">int</span>)</span></span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// return type declaration</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">functionName</span><span class="params">()</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">42</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Can return multiple values at once</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">returnMulti</span><span class="params">()</span> <span class="params">(<span class="keyword">int</span>, <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">42</span>, <span class="string">"foobar"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> x, str = returnMulti()</span><br><span class="line"></span><br><span class="line"><span class="comment">// Return multiple named results simply by return</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">returnMulti2</span><span class="params">()</span> <span class="params">(n <span class="keyword">int</span>, s <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    n = <span class="number">42</span></span><br><span class="line">    s = <span class="string">"foobar"</span></span><br><span class="line">    <span class="comment">// n and s will be returned</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> x, str = returnMulti2()</span><br></pre></td></tr></table></figure>
+<h3 id="Functions-As-Values-And-Closures"><a href="#Functions-As-Values-And-Closures" class="headerlink" title="Functions As Values And Closures"></a>Functions As Values And Closures</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// assign a function to a name</span></span><br><span class="line">    add := <span class="function"><span class="keyword">func</span><span class="params">(a, b <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">        <span class="keyword">return</span> a + b</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// use the name to call the function</span></span><br><span class="line">    fmt.Println(add(<span class="number">3</span>, <span class="number">4</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Closures, lexically scoped: Functions can access values that were</span></span><br><span class="line"><span class="comment">// in scope when defining the function</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">scope</span><span class="params">()</span> <span class="title">func</span><span class="params">()</span> <span class="title">int</span></span>&#123;</span><br><span class="line">    outer_var := <span class="number">2</span></span><br><span class="line">    foo := <span class="function"><span class="keyword">func</span><span class="params">()</span> <span class="title">int</span></span> &#123; <span class="keyword">return</span> outer_var&#125;</span><br><span class="line">    <span class="keyword">return</span> foo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">another_scope</span><span class="params">()</span> <span class="title">func</span><span class="params">()</span> <span class="title">int</span></span>&#123;</span><br><span class="line">    <span class="comment">// won't compile because outer_var and foo not defined in this scope</span></span><br><span class="line">    outer_var = <span class="number">444</span></span><br><span class="line">    <span class="keyword">return</span> foo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// Closures</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">outer</span><span class="params">()</span> <span class="params">(<span class="keyword">func</span>()</span> <span class="title">int</span>, <span class="title">int</span>)</span> &#123;</span><br><span class="line">    outer_var := <span class="number">2</span></span><br><span class="line">    inner := <span class="function"><span class="keyword">func</span><span class="params">()</span> <span class="title">int</span></span> &#123;</span><br><span class="line">        outer_var += <span class="number">99</span> <span class="comment">// outer_var from outer scope is mutated.</span></span><br><span class="line">        <span class="keyword">return</span> outer_var</span><br><span class="line">    &#125;</span><br><span class="line">    inner()</span><br><span class="line">    <span class="keyword">return</span> inner, outer_var <span class="comment">// return inner func and mutated outer_var 101</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Variadic-Functions"><a href="#Variadic-Functions" class="headerlink" title="Variadic Functions"></a>Variadic Functions</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(adder(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)) 	<span class="comment">// 6</span></span><br><span class="line">	fmt.Println(adder(<span class="number">9</span>, <span class="number">9</span>))	<span class="comment">// 18</span></span><br><span class="line"></span><br><span class="line">	nums := []<span class="keyword">int</span>&#123;<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>&#125;</span><br><span class="line">	fmt.Println(adder(nums...))	<span class="comment">// 60</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// By using ... before the type name of the last parameter you can indicate that it takes zero or more of those parameters.</span></span><br><span class="line"><span class="comment">// The function is invoked like any other function except we can pass as many arguments as we want.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">adder</span><span class="params">(args ...<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">	total := <span class="number">0</span></span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> args &#123; <span class="comment">// Iterates over the arguments whatever the number.</span></span><br><span class="line">		total += v</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> total</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Built-in-Types"><a href="#Built-in-Types" class="headerlink" title="Built-in Types"></a>Built-in Types</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">bool</span><br><span class="line"></span><br><span class="line">string</span><br><span class="line"></span><br><span class="line">int  int8  int16  int32  int64</span><br><span class="line">uint uint8 uint16 uint32 uint64 uintptr</span><br><span class="line"></span><br><span class="line">byte // alias for uint8</span><br><span class="line"></span><br><span class="line">rune // alias for int32 ~= a character (Unicode code point) - very Viking</span><br><span class="line"></span><br><span class="line">float32 float64</span><br><span class="line"></span><br><span class="line">complex64 complex128</span><br></pre></td></tr></table></figure>
+<h2 id="Type-Conversions"><a href="#Type-Conversions" class="headerlink" title="Type Conversions"></a>Type Conversions</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i <span class="keyword">int</span> = <span class="number">42</span></span><br><span class="line"><span class="keyword">var</span> f <span class="keyword">float64</span> = <span class="keyword">float64</span>(i)</span><br><span class="line"><span class="keyword">var</span> u <span class="keyword">uint</span> = <span class="keyword">uint</span>(f)</span><br><span class="line"></span><br><span class="line"><span class="comment">// alternative syntax</span></span><br><span class="line">i := <span class="number">42</span></span><br><span class="line">f := <span class="keyword">float64</span>(i)</span><br><span class="line">u := <span class="keyword">uint</span>(f)</span><br></pre></td></tr></table></figure>
+<h2 id="Packages"><a href="#Packages" class="headerlink" title="Packages"></a>Packages</h2><ul>
+<li>Package declaration at top of every source file</li>
+<li>Executables are in package <code>main</code></li>
+<li>Convention: package name == last name of import path (import path <code>math/rand</code> =&gt; package <code>rand</code>)</li>
+<li>Upper case identifier: exported (visible from other packages)</li>
+<li>Lower case identifier: private (not visible from other packages)</li>
+</ul>
+<h2 id="Control-structures"><a href="#Control-structures" class="headerlink" title="Control structures"></a>Control structures</h2><h3 id="If"><a href="#If" class="headerlink" title="If"></a>If</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Basic one</span></span><br><span class="line">	<span class="keyword">if</span> x &gt; <span class="number">10</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> x</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> x == <span class="number">10</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">10</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> -x</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// You can put one statement before the condition</span></span><br><span class="line">	<span class="keyword">if</span> a := b + c; a &lt; <span class="number">42</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> a</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> a - <span class="number">42</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Type assertion inside if</span></span><br><span class="line">	<span class="keyword">var</span> val <span class="keyword">interface</span>&#123;&#125;</span><br><span class="line">	val = <span class="string">"foo"</span></span><br><span class="line">	<span class="keyword">if</span> str, ok := val.(<span class="keyword">string</span>); ok &#123;</span><br><span class="line">		fmt.Println(str)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Loops"><a href="#Loops" class="headerlink" title="Loops"></a>Loops</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">// There's only `for`, no `while`, no `until`</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">1</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> ; i &lt; <span class="number">10</span>;  &#123; <span class="comment">// while - loop</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> i &lt; <span class="number">10</span>  &#123; <span class="comment">// you can omit semicolons if there is only a condition</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> &#123; <span class="comment">// you can omit the condition ~ while (true)</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// use break/continue on current loop</span></span><br><span class="line">    <span class="comment">// use break/continue with label on outer loop</span></span><br><span class="line">here:</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">2</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">for</span> j := i + <span class="number">1</span>; j &lt; <span class="number">3</span>; j++ &#123;</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span> &#123;</span><br><span class="line">                <span class="keyword">continue</span> here</span><br><span class="line">            &#125;</span><br><span class="line">            fmt.Println(j)</span><br><span class="line">            <span class="keyword">if</span> j == <span class="number">2</span> &#123;</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">there:</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">2</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">for</span> j := i + <span class="number">1</span>; j &lt; <span class="number">3</span>; j++ &#123;</span><br><span class="line">            <span class="keyword">if</span> j == <span class="number">1</span> &#123;</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            &#125;</span><br><span class="line">            fmt.Println(j)</span><br><span class="line">            <span class="keyword">if</span> j == <span class="number">2</span> &#123;</span><br><span class="line">                <span class="keyword">break</span> there</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Switch"><a href="#Switch" class="headerlink" title="Switch"></a>Switch</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// switch statement</span></span><br><span class="line"><span class="keyword">switch</span> operatingSystem &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="string">"darwin"</span>:</span><br><span class="line">    fmt.Println(<span class="string">"Mac OS Hipster"</span>)</span><br><span class="line">    <span class="comment">// cases break automatically, no fallthrough by default</span></span><br><span class="line"><span class="keyword">case</span> <span class="string">"linux"</span>:</span><br><span class="line">    fmt.Println(<span class="string">"Linux Geek"</span>)</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    <span class="comment">// Windows, BSD, ...</span></span><br><span class="line">    fmt.Println(<span class="string">"Other"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// as with for and if, you can have an assignment statement before the switch value</span></span><br><span class="line"><span class="keyword">switch</span> os := runtime.GOOS; os &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="string">"darwin"</span>: ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// you can also make comparisons in switch cases</span></span><br><span class="line">number := <span class="number">42</span></span><br><span class="line"><span class="keyword">switch</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> number &lt; <span class="number">42</span>:</span><br><span class="line">        fmt.Println(<span class="string">"Smaller"</span>)</span><br><span class="line">    <span class="keyword">case</span> number == <span class="number">42</span>:</span><br><span class="line">        fmt.Println(<span class="string">"Equal"</span>)</span><br><span class="line">    <span class="keyword">case</span> number &gt; <span class="number">42</span>:</span><br><span class="line">        fmt.Println(<span class="string">"Greater"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// cases can be presented in comma-separated lists</span></span><br><span class="line"><span class="keyword">var</span> char <span class="keyword">byte</span> = <span class="string">'?'</span></span><br><span class="line"><span class="keyword">switch</span> char &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">' '</span>, <span class="string">'?'</span>, <span class="string">'&amp;'</span>, <span class="string">'='</span>, <span class="string">'#'</span>, <span class="string">'+'</span>, <span class="string">'%'</span>:</span><br><span class="line">        fmt.Println(<span class="string">"Should escape"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Arrays-Slices-Ranges"><a href="#Arrays-Slices-Ranges" class="headerlink" title="Arrays, Slices, Ranges"></a>Arrays, Slices, Ranges</h2><h3 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a [<span class="number">10</span>]<span class="keyword">int</span> <span class="comment">// declare an int array with length 10. Array length is part of the type!</span></span><br><span class="line">a[<span class="number">3</span>] = <span class="number">42</span>     <span class="comment">// set elements</span></span><br><span class="line">i := a[<span class="number">3</span>]     <span class="comment">// read elements</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// declare and initialize</span></span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">2</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>&#125;</span><br><span class="line">a := [<span class="number">2</span>]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>&#125; <span class="comment">//shorthand</span></span><br><span class="line">a := [...]<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>&#125; <span class="comment">// elipsis -&gt; Compiler figures out array length</span></span><br></pre></td></tr></table></figure>
+<h3 id="Slices"><a href="#Slices" class="headerlink" title="Slices"></a>Slices</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a []<span class="keyword">int</span>                              <span class="comment">// declare a slice - similar to an array, but length is unspecified</span></span><br><span class="line"><span class="keyword">var</span> a = []<span class="keyword">int</span> &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;               <span class="comment">// declare and initialize a slice (backed by the array given implicitly)</span></span><br><span class="line">a := []<span class="keyword">int</span>&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;                   <span class="comment">// shorthand</span></span><br><span class="line">chars := []<span class="keyword">string</span>&#123;<span class="number">0</span>:<span class="string">"a"</span>, <span class="number">2</span>:<span class="string">"c"</span>, <span class="number">1</span>: <span class="string">"b"</span>&#125;  <span class="comment">// ["a", "b", "c"]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = a[lo:hi]	<span class="comment">// creates a slice (view of the array) from index lo to hi-1</span></span><br><span class="line"><span class="keyword">var</span> b = a[<span class="number">1</span>:<span class="number">4</span>]		<span class="comment">// slice from index 1 to 3</span></span><br><span class="line"><span class="keyword">var</span> b = a[:<span class="number">3</span>]		<span class="comment">// missing low index implies 0</span></span><br><span class="line"><span class="keyword">var</span> b = a[<span class="number">3</span>:]		<span class="comment">// missing high index implies len(a)</span></span><br><span class="line">a =  <span class="built_in">append</span>(a,<span class="number">17</span>,<span class="number">3</span>)	<span class="comment">// append items to slice a</span></span><br><span class="line">c := <span class="built_in">append</span>(a,b...)	<span class="comment">// concatenate slices a and b</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// create a slice with make</span></span><br><span class="line">a = <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">5</span>, <span class="number">5</span>)	<span class="comment">// first arg length, second capacity</span></span><br><span class="line">a = <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">5</span>)	<span class="comment">// capacity is optional</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// create a slice from an array</span></span><br><span class="line">x := [<span class="number">3</span>]<span class="keyword">string</span>&#123;<span class="string">"Лайка"</span>, <span class="string">"Белка"</span>, <span class="string">"Стрелка"</span>&#125;</span><br><span class="line">s := x[:] <span class="comment">// a slice referencing the storage of x</span></span><br></pre></td></tr></table></figure>
+<h3 id="Operations-on-Arrays-and-Slices"><a href="#Operations-on-Arrays-and-Slices" class="headerlink" title="Operations on Arrays and Slices"></a>Operations on Arrays and Slices</h3><p><code>len(a)</code> gives you the length of an array/a slice. It’s a built-in function, not a attribute/method on the array.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// loop over an array/a slice</span></span><br><span class="line"><span class="keyword">for</span> i, e := <span class="keyword">range</span> a &#123;</span><br><span class="line">    <span class="comment">// i is the index, e the element</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// if you only need e:</span></span><br><span class="line"><span class="keyword">for</span> _, e := <span class="keyword">range</span> a &#123;</span><br><span class="line">    <span class="comment">// e is the element</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...and if you only need the index</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="keyword">range</span> a &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// In Go pre-1.4, you'll get a compiler error if you're not using i and e.</span></span><br><span class="line"><span class="comment">// Go 1.4 introduced a variable-free form, so that you can do this</span></span><br><span class="line"><span class="keyword">for</span> <span class="keyword">range</span> time.Tick(time.Second) &#123;</span><br><span class="line">    <span class="comment">// do it once a sec</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> m <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span></span><br><span class="line">m = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>)</span><br><span class="line">m[<span class="string">"key"</span>] = <span class="number">42</span></span><br><span class="line">fmt.Println(m[<span class="string">"key"</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">delete</span>(m, <span class="string">"key"</span>)</span><br><span class="line"></span><br><span class="line">elem, ok := m[<span class="string">"key"</span>] <span class="comment">// test if key "key" is present and retrieve it, if so</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// map literal</span></span><br><span class="line"><span class="keyword">var</span> m = <span class="keyword">map</span>[<span class="keyword">string</span>]Vertex&#123;</span><br><span class="line">    <span class="string">"Bell Labs"</span>: &#123;<span class="number">40.68433</span>, <span class="number">-74.39967</span>&#125;,</span><br><span class="line">    <span class="string">"Google"</span>:    &#123;<span class="number">37.42202</span>, <span class="number">-122.08408</span>&#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// iterate over map content</span></span><br><span class="line"><span class="keyword">for</span> key, value := <span class="keyword">range</span> m &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Structs"><a href="#Structs" class="headerlink" title="Structs"></a>Structs</h2><p>There are no classes, only structs. Structs can have methods.<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// A struct is a type. It's also a collection of fields</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Declaration</span></span><br><span class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</span><br><span class="line">    X, Y <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Creating</span></span><br><span class="line"><span class="keyword">var</span> v = Vertex&#123;<span class="number">1</span>, <span class="number">2</span>&#125;</span><br><span class="line"><span class="keyword">var</span> v = Vertex&#123;X: <span class="number">1</span>, Y: <span class="number">2</span>&#125; <span class="comment">// Creates a struct by defining values with keys</span></span><br><span class="line"><span class="keyword">var</span> v = []Vertex&#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;,&#123;<span class="number">5</span>,<span class="number">2</span>&#125;,&#123;<span class="number">5</span>,<span class="number">5</span>&#125;&#125; <span class="comment">// Initialize a slice of structs</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Accessing members</span></span><br><span class="line">v.X = <span class="number">4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// You can declare methods on structs. The struct you want to declare the</span></span><br><span class="line"><span class="comment">// method on (the receiving type) comes between the the func keyword and</span></span><br><span class="line"><span class="comment">// the method name. The struct is copied on each method call(!)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v Vertex)</span> <span class="title">Abs</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> math.Sqrt(v.X*v.X + v.Y*v.Y)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Call method</span></span><br><span class="line">v.Abs()</span><br><span class="line"></span><br><span class="line"><span class="comment">// For mutating methods, you need to use a pointer (see below) to the Struct</span></span><br><span class="line"><span class="comment">// as the type. With this, the struct value is not copied for the method call.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v *Vertex)</span> <span class="title">add</span><span class="params">(n <span class="keyword">float64</span>)</span></span> &#123;</span><br><span class="line">    v.X += n</span><br><span class="line">    v.Y += n</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>Anonymous structs:</strong><br>Cheaper and safer than using <code>map[string]interface{}</code>.<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">point := <span class="keyword">struct</span> &#123;</span><br><span class="line">	X, Y <span class="keyword">int</span></span><br><span class="line">&#125;&#123;<span class="number">1</span>, <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Pointers"><a href="#Pointers" class="headerlink" title="Pointers"></a>Pointers</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">p := Vertex&#123;<span class="number">1</span>, <span class="number">2</span>&#125;  <span class="comment">// p is a Vertex</span></span><br><span class="line">q := &amp;p            <span class="comment">// q is a pointer to a Vertex</span></span><br><span class="line">r := &amp;Vertex&#123;<span class="number">1</span>, <span class="number">2</span>&#125; <span class="comment">// r is also a pointer to a Vertex</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// The type of a pointer to a Vertex is *Vertex</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> s *Vertex = <span class="built_in">new</span>(Vertex) <span class="comment">// new creates a pointer to a new struct instance</span></span><br></pre></td></tr></table></figure>
+<h2 id="Interfaces"><a href="#Interfaces" class="headerlink" title="Interfaces"></a>Interfaces</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// interface declaration</span></span><br><span class="line"><span class="keyword">type</span> Awesomizer <span class="keyword">interface</span> &#123;</span><br><span class="line">    Awesomize() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// types do *not* declare to implement interfaces</span></span><br><span class="line"><span class="keyword">type</span> Foo <span class="keyword">struct</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// instead, types implicitly satisfy an interface if they implement all required methods</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(foo Foo)</span> <span class="title">Awesomize</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Awesome!"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Embedding"><a href="#Embedding" class="headerlink" title="Embedding"></a>Embedding</h2><p>There is no subclassing in Go. Instead, there is interface and struct embedding.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ReadWriter implementations must satisfy both Reader and Writer</span></span><br><span class="line"><span class="keyword">type</span> ReadWriter <span class="keyword">interface</span> &#123;</span><br><span class="line">    Reader</span><br><span class="line">    Writer</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Server exposes all the methods that Logger has</span></span><br><span class="line"><span class="keyword">type</span> Server <span class="keyword">struct</span> &#123;</span><br><span class="line">    Host <span class="keyword">string</span></span><br><span class="line">    Port <span class="keyword">int</span></span><br><span class="line">    *log.Logger</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// initialize the embedded type the usual way</span></span><br><span class="line">server := &amp;Server&#123;<span class="string">"localhost"</span>, <span class="number">80</span>, log.New(...)&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// methods implemented on the embedded struct are passed through</span></span><br><span class="line">server.Log(...) <span class="comment">// calls server.Logger.Log(...)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// the field name of the embedded type is its type name (in this case Logger)</span></span><br><span class="line"><span class="keyword">var</span> logger *log.Logger = server.Logger</span><br></pre></td></tr></table></figure>
+<h2 id="Errors"><a href="#Errors" class="headerlink" title="Errors"></a>Errors</h2><p>There is no exception handling. Functions that might produce an error just declare an additional return value of type <code>Error</code>. This is the <code>Error</code> interface:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> error <span class="keyword">interface</span> &#123;</span><br><span class="line">    Error() <span class="keyword">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>A function that might return an error:<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">doStuff</span><span class="params">()</span> <span class="params">(<span class="keyword">int</span>, error)</span></span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    result, err := doStuff()</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="comment">// handle error</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// all is good, use result</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h1><h2 id="Goroutines"><a href="#Goroutines" class="headerlink" title="Goroutines"></a>Goroutines</h2><p>Goroutines are lightweight threads (managed by Go, not OS threads). <code>go f(a, b)</code> starts a new goroutine which runs <code>f</code> (given <code>f</code> is a function).</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// just a function (which can be later started as a goroutine)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">doStuff</span><span class="params">(s <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// using a named function in a goroutine</span></span><br><span class="line">    <span class="keyword">go</span> doStuff(<span class="string">"foobar"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// using an anonymous inner function in a goroutine</span></span><br><span class="line">    <span class="keyword">go</span> <span class="function"><span class="keyword">func</span> <span class="params">(x <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">        <span class="comment">// function body goes here</span></span><br><span class="line">    &#125;(<span class="number">42</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Channels"><a href="#Channels" class="headerlink" title="Channels"></a>Channels</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>) <span class="comment">// create a channel of type int</span></span><br><span class="line">ch &lt;- <span class="number">42</span>             <span class="comment">// Send a value to the channel ch.</span></span><br><span class="line">v := &lt;-ch            <span class="comment">// Receive a value from ch</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Non-buffered channels block. Read blocks when no value is available, write blocks until there is a read.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Create a buffered channel. Writing to a buffered channels does not block if less than &lt;buffer size&gt; unread values have been written.</span></span><br><span class="line">ch := <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">close</span>(ch) <span class="comment">// closes the channel (only sender should close)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// read from channel and test if it has been closed</span></span><br><span class="line">v, ok := &lt;-ch</span><br><span class="line"></span><br><span class="line"><span class="comment">// if ok is false, channel has been closed</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Read from channel until it is closed</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="keyword">range</span> ch &#123;</span><br><span class="line">    fmt.Println(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// select blocks on multiple channel operations, if one unblocks, the corresponding case is executed</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">doStuff</span><span class="params">(channelOut, channelIn <span class="keyword">chan</span> <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> channelOut &lt;- <span class="number">42</span>:</span><br><span class="line">        fmt.Println(<span class="string">"We could write to channelOut!"</span>)</span><br><span class="line">    <span class="keyword">case</span> x := &lt;- channelIn:</span><br><span class="line">        fmt.Println(<span class="string">"We could read from channelIn"</span>)</span><br><span class="line">    <span class="keyword">case</span> &lt;-time.After(time.Second * <span class="number">1</span>):</span><br><span class="line">        fmt.Println(<span class="string">"timeout"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Channel-Axioms"><a href="#Channel-Axioms" class="headerlink" title="Channel Axioms"></a>Channel Axioms</h3><ul>
+<li><p>A send to a nil channel blocks forever</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c <span class="keyword">chan</span> <span class="keyword">string</span></span><br><span class="line">c &lt;- <span class="string">"Hello, World!"</span></span><br><span class="line"><span class="comment">// fatal error: all goroutines are asleep - deadlock!</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>A receive from a nil channel blocks forever</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c <span class="keyword">chan</span> <span class="keyword">string</span></span><br><span class="line">fmt.Println(&lt;-c)</span><br><span class="line"><span class="comment">// fatal error: all goroutines are asleep - deadlock!</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>A send to a closed channel panics</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">string</span>, <span class="number">1</span>)</span><br><span class="line">c &lt;- <span class="string">"Hello, World!"</span></span><br><span class="line"><span class="built_in">close</span>(c)</span><br><span class="line">c &lt;- <span class="string">"Hello, Panic!"</span></span><br><span class="line"><span class="comment">// panic: send on closed channel</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>A receive from a closed channel returns the zero value immediately</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = <span class="built_in">make</span>(<span class="keyword">chan</span> <span class="keyword">int</span>, <span class="number">2</span>)</span><br><span class="line">c &lt;- <span class="number">1</span></span><br><span class="line">c &lt;- <span class="number">2</span></span><br><span class="line"><span class="built_in">close</span>(c)</span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"%d "</span>, &lt;-c)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1 2 0</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Printing"><a href="#Printing" class="headerlink" title="Printing"></a>Printing</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(<span class="string">"Hello, 你好, नमस्ते, Привет, ᎣᏏᏲ"</span>) <span class="comment">// basic print, plus newline</span></span><br><span class="line">p := <span class="keyword">struct</span> &#123; X, Y <span class="keyword">int</span> &#125;&#123; <span class="number">17</span>, <span class="number">2</span> &#125;</span><br><span class="line">fmt.Println( <span class="string">"My point:"</span>, p, <span class="string">"x coord="</span>, p.X ) <span class="comment">// print structs, ints, etc</span></span><br><span class="line">s := fmt.Sprintln( <span class="string">"My point:"</span>, p, <span class="string">"x coord="</span>, p.X ) <span class="comment">// print to string variable</span></span><br><span class="line"></span><br><span class="line">fmt.Printf(<span class="string">"%d hex:%x bin:%b fp:%f sci:%e"</span>,<span class="number">17</span>,<span class="number">17</span>,<span class="number">17</span>,<span class="number">17.0</span>,<span class="number">17.0</span>) <span class="comment">// c-ish format</span></span><br><span class="line">s2 := fmt.Sprintf( <span class="string">"%d %f"</span>, <span class="number">17</span>, <span class="number">17.0</span> ) <span class="comment">// formatted print to string variable</span></span><br><span class="line"></span><br><span class="line">hellomsg := <span class="string">`</span></span><br><span class="line"><span class="string"> "Hello" in Chinese is 你好 ('Ni Hao')</span></span><br><span class="line"><span class="string"> "Hello" in Hindi is नमस्ते ('Namaste')</span></span><br><span class="line"><span class="string">`</span> <span class="comment">// multi-line string literal, using back-tick at beginning and end</span></span><br></pre></td></tr></table></figure>
+<h2 id="Reflection"><a href="#Reflection" class="headerlink" title="Reflection"></a>Reflection</h2><h3 id="Type-Switch"><a href="#Type-Switch" class="headerlink" title="Type Switch"></a>Type Switch</h3><p>A type switch is like a regular switch statement, but the cases in a type switch specify types (not values), and those values are compared against the type of the value held by the given interface value.<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">do</span><span class="params">(i <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</span><br><span class="line">	<span class="keyword">switch</span> v := i.(<span class="keyword">type</span>) &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="keyword">int</span>:</span><br><span class="line">		fmt.Printf(<span class="string">"Twice %v is %v\n"</span>, v, v*<span class="number">2</span>)</span><br><span class="line">	<span class="keyword">case</span> <span class="keyword">string</span>:</span><br><span class="line">		fmt.Printf(<span class="string">"%q is %v bytes long\n"</span>, v, <span class="built_in">len</span>(v))</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		fmt.Printf(<span class="string">"I don't know about type %T!\n"</span>, v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	do(<span class="number">21</span>)</span><br><span class="line">	do(<span class="string">"hello"</span>)</span><br><span class="line">	do(<span class="literal">true</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="Snippets"><a href="#Snippets" class="headerlink" title="Snippets"></a>Snippets</h1><h2 id="HTTP-Server"><a href="#HTTP-Server" class="headerlink" title="HTTP Server"></a>HTTP Server</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"net/http"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// define a type for the response</span></span><br><span class="line"><span class="keyword">type</span> Hello <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// let that type implement the ServeHTTP method (defined in interface http.Handler)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(h Hello)</span> <span class="title">ServeHTTP</span><span class="params">(w http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">    fmt.Fprint(w, <span class="string">"Hello!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> h Hello</span><br><span class="line">    http.ListenAndServe(<span class="string">"localhost:4000"</span>, h)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Here's the method signature of http.ServeHTTP:</span></span><br><span class="line"><span class="comment">// type Handler interface &#123;</span></span><br><span class="line"><span class="comment">//     ServeHTTP(w http.ResponseWriter, r *http.Request)</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>分享即是成长</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="changyuan WeChat Pay">
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go/" rel="tag"># Go</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/02/mysql57-json/" rel="next" title="Mysql 5.7 以上版本对JSON字段的操作">
+                <i class="fa fa-chevron-left"></i> Mysql 5.7 以上版本对JSON字段的操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/02/go-concurrency/" rel="prev" title="Go 并发">
+                Go 并发 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="changyuan">
+          <p class="site-author-name" itemprop="name">changyuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">不断升级自己的操作系统</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/changyuan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/changocean1" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/changyuan2011" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/changyuanyuan" target="_blank" title="Zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Go-Cheat-Sheet"><span class="nav-number">1.</span> <span class="nav-text">Go Cheat Sheet</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Index"><span class="nav-number">2.</span> <span class="nav-text">Index</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Credits"><span class="nav-number">2.1.</span> <span class="nav-text">Credits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go-in-a-Nutshell"><span class="nav-number">2.2.</span> <span class="nav-text">Go in a Nutshell</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Basic-Syntax"><span class="nav-number">3.</span> <span class="nav-text">Basic Syntax</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-number">3.1.</span> <span class="nav-text">Hello World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operators"><span class="nav-number">3.2.</span> <span class="nav-text">Operators</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Arithmetic"><span class="nav-number">3.2.1.</span> <span class="nav-text">Arithmetic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Comparison"><span class="nav-number">3.2.2.</span> <span class="nav-text">Comparison</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logical"><span class="nav-number">3.2.3.</span> <span class="nav-text">Logical</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other"><span class="nav-number">3.2.4.</span> <span class="nav-text">Other</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Declarations"><span class="nav-number">3.3.</span> <span class="nav-text">Declarations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Functions"><span class="nav-number">3.4.</span> <span class="nav-text">Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Functions-As-Values-And-Closures"><span class="nav-number">3.4.1.</span> <span class="nav-text">Functions As Values And Closures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Variadic-Functions"><span class="nav-number">3.4.2.</span> <span class="nav-text">Variadic Functions</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Built-in-Types"><span class="nav-number">3.5.</span> <span class="nav-text">Built-in Types</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Type-Conversions"><span class="nav-number">3.6.</span> <span class="nav-text">Type Conversions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Packages"><span class="nav-number">3.7.</span> <span class="nav-text">Packages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Control-structures"><span class="nav-number">3.8.</span> <span class="nav-text">Control structures</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#If"><span class="nav-number">3.8.1.</span> <span class="nav-text">If</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loops"><span class="nav-number">3.8.2.</span> <span class="nav-text">Loops</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Switch"><span class="nav-number">3.8.3.</span> <span class="nav-text">Switch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arrays-Slices-Ranges"><span class="nav-number">3.9.</span> <span class="nav-text">Arrays, Slices, Ranges</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Arrays"><span class="nav-number">3.9.1.</span> <span class="nav-text">Arrays</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slices"><span class="nav-number">3.9.2.</span> <span class="nav-text">Slices</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Operations-on-Arrays-and-Slices"><span class="nav-number">3.9.3.</span> <span class="nav-text">Operations on Arrays and Slices</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maps"><span class="nav-number">3.10.</span> <span class="nav-text">Maps</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Structs"><span class="nav-number">3.11.</span> <span class="nav-text">Structs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pointers"><span class="nav-number">3.12.</span> <span class="nav-text">Pointers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Interfaces"><span class="nav-number">3.13.</span> <span class="nav-text">Interfaces</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Embedding"><span class="nav-number">3.14.</span> <span class="nav-text">Embedding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Errors"><span class="nav-number">3.15.</span> <span class="nav-text">Errors</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Concurrency"><span class="nav-number">4.</span> <span class="nav-text">Concurrency</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Goroutines"><span class="nav-number">4.1.</span> <span class="nav-text">Goroutines</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Channels"><span class="nav-number">4.2.</span> <span class="nav-text">Channels</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Channel-Axioms"><span class="nav-number">4.2.1.</span> <span class="nav-text">Channel Axioms</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Printing"><span class="nav-number">4.3.</span> <span class="nav-text">Printing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reflection"><span class="nav-number">4.4.</span> <span class="nav-text">Reflection</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Type-Switch"><span class="nav-number">4.4.1.</span> <span class="nav-text">Type Switch</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Snippets"><span class="nav-number">5.</span> <span class="nav-text">Snippets</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP-Server"><span class="nav-number">5.1.</span> <span class="nav-text">HTTP Server</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changyuan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

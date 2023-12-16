@@ -1,0 +1,936 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="db,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="安装篇下载安装12345678curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel62-3.2.10.tgztar zxvf mongodb-linux-x86_64-rhel62-3.2.10.tgzmv mongodb-linux-x86_64-rhel62-3.2.10 /usr/local/mv mongodb">
+<meta name="keywords" content="db">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MangoDB 学习指南">
+<meta property="og:url" content="http://changyuan.github.io/2016/11/02/MangoDB-cheatsheet/index.html">
+<meta property="og:site_name" content="Chang Crazy&#39;s Blog">
+<meta property="og:description" content="安装篇下载安装12345678curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel62-3.2.10.tgztar zxvf mongodb-linux-x86_64-rhel62-3.2.10.tgzmv mongodb-linux-x86_64-rhel62-3.2.10 /usr/local/mv mongodb">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://changyuan.github.io/images/replica.jpg">
+<meta property="og:image" content="http://changyuan.github.io/images/mongo-cluster.jpg">
+<meta property="og:updated_time" content="2016-11-02T09:27:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MangoDB 学习指南">
+<meta name="twitter:description" content="安装篇下载安装12345678curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel62-3.2.10.tgztar zxvf mongodb-linux-x86_64-rhel62-3.2.10.tgzmv mongodb-linux-x86_64-rhel62-3.2.10 /usr/local/mv mongodb">
+<meta name="twitter:image" content="http://changyuan.github.io/images/replica.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://changyuan.github.io/2016/11/02/MangoDB-cheatsheet/">
+
+
+
+
+
+  <title>MangoDB 学习指南 | Chang Crazy's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chang Crazy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">升级自己的操作系统</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2016/11/02/MangoDB-cheatsheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MangoDB 学习指南</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-02T17:27:38+08:00">
+                2016-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="安装篇"><a href="#安装篇" class="headerlink" title="安装篇"></a>安装篇</h3><h4 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-rhel62-3.2.10.tgz</span><br><span class="line">tar zxvf mongodb-linux-x86_64-rhel62-3.2.10.tgz</span><br><span class="line">mv mongodb-linux-x86_64-rhel62-3.2.10 /usr/local/</span><br><span class="line">mv mongodb-linux-x86_64-rhel62-3.2.10 mongodb</span><br><span class="line"></span><br><span class="line">mkdir /data/db</span><br><span class="line">touch /var/logs/mongodb/mongodb.logs</span><br><span class="line">cd mongdb/bin &amp;&amp; vim mongodb.conf</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="配置mongodb-conf"><a href="#配置mongodb-conf" class="headerlink" title="配置mongodb.conf"></a>配置mongodb.conf</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dbpath=/data/db</span><br><span class="line">logpath=/var/logs/mongodb</span><br><span class="line">port=27017</span><br><span class="line">#fork=true</span><br><span class="line">#nohttpinterface=true</span><br></pre></td></tr></table></figure>
+<p>####　重新绑定mongodb的配置文件地址和访问IP</p>
+<p><code>/usr/local/mongodb/bin/mongod --bind_ip localhost -f /usr/local/mongodb/mongodb.conf</code><br>可以通过 <code>/usr/local/mongodb/bin/mongod --help</code> 查看帮助 ，其中 -f（–config） 配置文件，–bind_ip 绑定ip<br><code>/usr/local/mongodb/bin/mongod --config /usr/local/mongodb/mongodb.conf</code> 添加到 <code>/etc/rc.d/rc.local</code> 开机启动</p>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>其中 <code>mongod --config /usr/local/mongodb/mongodb.conf</code> 服务之后，启动 <code>/usr/local/mongodb/bin/mongo</code> 客户端，支持JavaScript 版本，<code>show dbs</code> 查看数据库，<code>db.version()</code> 查看版本</p>
+<h5 id="查看当前mongodb进程信息"><a href="#查看当前mongodb进程信息" class="headerlink" title="查看当前mongodb进程信息"></a>查看当前mongodb进程信息</h5><p>ps -ef | grep mongod  //查看进程号码<br>cat /proc/24283/limits //查看具体信息</p>
+<h3 id="php的扩展与测试"><a href="#php的扩展与测试" class="headerlink" title="php的扩展与测试"></a>php的扩展与测试</h3><p><a href="https://pecl.php.net/package/mongodb" target="_blank" rel="noopener">扩展包地址</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd mongodb-1.1.9</span><br><span class="line">/usr/php/bin/phpize</span><br><span class="line">./configure --with-php-config=/usr/askphp/bin/php-config </span><br><span class="line">make;make install</span><br></pre></td></tr></table></figure></p>
+<h4 id="PHP代码"><a href="#PHP代码" class="headerlink" title="PHP代码"></a>PHP代码</h4><h5 id="创建集合"><a href="#创建集合" class="headerlink" title="创建集合"></a>创建集合</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$m = <span class="keyword">new</span> \MongoClient();</span><br><span class="line">$db = $m-&gt;selectDB(<span class="string">"test"</span>);</span><br><span class="line">$collection = $db-&gt;createCollection(<span class="string">"my_col"</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="插入文档"><a href="#插入文档" class="headerlink" title="插入文档"></a>插入文档</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$m = <span class="keyword">new</span> \MongoClient();</span><br><span class="line">$db = $m-&gt;selectDB(<span class="string">"test"</span>);</span><br><span class="line">$collection = $db-&gt;my_col;</span><br><span class="line">$document = <span class="keyword">array</span>(</span><br><span class="line">            <span class="string">"title"</span> =&gt; <span class="string">"MongoDB"</span>,</span><br><span class="line">            <span class="string">"description"</span> =&gt; <span class="string">"database"</span>,</span><br><span class="line">            <span class="string">"likes"</span> =&gt; <span class="number">100</span>,</span><br><span class="line">            <span class="string">"url"</span> =&gt; <span class="string">"http://www.baidu.com"</span>,</span><br><span class="line">            <span class="string">"by"</span>=&gt;<span class="string">"change.net"</span></span><br><span class="line">            );</span><br><span class="line">$ret_ins  = $collection-&gt;insert($document);</span><br></pre></td></tr></table></figure>
+<h5 id="查找文档"><a href="#查找文档" class="headerlink" title="查找文档"></a>查找文档</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$m = <span class="keyword">new</span> \MongoClient();</span><br><span class="line">$db = $m-&gt;selectDB(<span class="string">"test"</span>);</span><br><span class="line">$collection = $db-&gt;my_col;</span><br><span class="line">$cursor = $collection-&gt;find();</span><br><span class="line"><span class="keyword">foreach</span> ($cursor <span class="keyword">as</span> $document) &#123;</span><br><span class="line">    <span class="keyword">echo</span> $document[<span class="string">"title"</span>] . <span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$m = <span class="keyword">new</span> \MongoClient();</span><br><span class="line">$db = $m-&gt;selectDB(<span class="string">"test"</span>);</span><br><span class="line">$collection = $db-&gt;my_col;</span><br><span class="line">$collection-&gt;update(<span class="keyword">array</span>(<span class="string">"title"</span>=&gt;<span class="string">"MongoDB"</span>), <span class="keyword">array</span>(<span class="string">'$set'</span>=&gt;<span class="keyword">array</span>(<span class="string">"title"</span>=&gt;<span class="string">"MongoDB"</span>)));</span><br><span class="line">$cursor = $collection-&gt;find();</span><br><span class="line"><span class="keyword">foreach</span> ($cursor <span class="keyword">as</span> $document) &#123;</span><br><span class="line">    <span class="keyword">echo</span> $document[<span class="string">"title"</span>] . <span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$m = <span class="keyword">new</span> \MongoClient();</span><br><span class="line">$db = $m-&gt;selectDB(<span class="string">"test"</span>);</span><br><span class="line">$collection = $db-&gt;my_col;</span><br><span class="line">$collection-&gt;remove(<span class="keyword">array</span>(<span class="string">"title"</span>=&gt;<span class="string">"MongoDB"</span>),  <span class="keyword">array</span>(<span class="string">"justOne"</span> =&gt; <span class="keyword">true</span>));</span><br><span class="line"></span><br><span class="line">$cursor = $collection-&gt;find();</span><br><span class="line"><span class="keyword">foreach</span> ($cursor <span class="keyword">as</span> $document) &#123;</span><br><span class="line">    <span class="keyword">echo</span> $document[<span class="string">"title"</span>] . <span class="string">"\n"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="使用篇"><a href="#使用篇" class="headerlink" title="使用篇"></a>使用篇</h3><h4 id="Start-Mongod-amp-amp-Command"><a href="#Start-Mongod-amp-amp-Command" class="headerlink" title="Start Mongod &amp;&amp; Command"></a>Start Mongod &amp;&amp; Command</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mongod</span><br><span class="line">ps aux | grep mongo</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Start the Mongo Shell</span></span><br><span class="line">mongo</span><br><span class="line"><span class="keyword">show</span> dbs</span><br><span class="line"><span class="keyword">use</span> meals-development</span><br><span class="line"><span class="keyword">show</span> collections</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">users</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">roles</span></span><br><span class="line"><span class="keyword">show</span> profile</span><br><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span></span><br><span class="line"></span><br><span class="line">db.auth()</span><br><span class="line">db.help()</span><br><span class="line"><span class="comment">-- collection 为集合的意思 查看更多帮助，查询帮助</span></span><br><span class="line">db.collection.help()</span><br><span class="line">db.collection.find().help()</span><br><span class="line"></span><br><span class="line">db.collection.findOne()</span><br><span class="line">db.collection.find().toArray()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">db.collection.insert()</span><br><span class="line">db.collection.update()</span><br><span class="line">db.collection.save()</span><br><span class="line">db.collection.remove()</span><br><span class="line">db.collection.drop()</span><br><span class="line">db.collection.createIndex()</span><br><span class="line">db.getSiblingDB()</span><br></pre></td></tr></table></figure>
+<h4 id="Data-Types-类型比较"><a href="#Data-Types-类型比较" class="headerlink" title="Data Types 类型比较"></a>Data Types 类型比较</h4><p><a href="https://docs.mongodb.com/v3.2/core/shell-types/#types" target="_blank" rel="noopener">参考</a></p>
+<h5 id="Date"><a href="#Date" class="headerlink" title="Date"></a>Date</h5><ul>
+<li>Date() method which returns the current date as a string.</li>
+<li>new Date() constructor which returns a Date object using the ISODate() wrapper.</li>
+<li>ISODate() constructor which returns a Date object using the ISODate() wrapper.</li>
+</ul>
+<h5 id="ObjectId"><a href="#ObjectId" class="headerlink" title="ObjectId"></a>ObjectId</h5><p>new ObjectId</p>
+<h5 id="NumberLong-amp-amp-NumberInt"><a href="#NumberLong-amp-amp-NumberInt" class="headerlink" title="NumberLong &amp;&amp;  NumberInt"></a>NumberLong &amp;&amp;  NumberInt</h5><p>NumberLong(“2090845886852”)。demo：</p>
+<blockquote>
+<p>db.collection.insert( { _id: 10, calc: NumberLong(“2090845886852”) } )<br>db.collection.update( { _id: 10 },{$set:{ calc: NumberLong(“2555555000000”)}})</p>
+</blockquote>
+<blockquote>
+<p>db.collection.update( { _id: 10 },{$inc:{ calc: NumberLong(5) } } )</p>
+</blockquote>
+<h4 id="Check-Types"><a href="#Check-Types" class="headerlink" title="Check Types"></a>Check Types</h4><ul>
+<li>instanceof – mydoc._id instanceof ObjectId</li>
+<li>typeof – typeof mydoc._id</li>
+</ul>
+<h4 id="SQL-amp-amp-MongoDB-Mapping-Chart"><a href="#SQL-amp-amp-MongoDB-Mapping-Chart" class="headerlink" title="SQL &amp;&amp;  MongoDB Mapping Chart"></a>SQL &amp;&amp;  MongoDB Mapping Chart</h4><p><a href="https://gist.github.com/aponxi/4380516" target="_blank" rel="noopener">sql与nosql的不同于区别参考</a></p>
+<h5 id="Executables"><a href="#Executables" class="headerlink" title="Executables"></a>Executables</h5><table>
+<thead>
+<tr>
+<th></th>
+<th>MySQL/Oracle</th>
+<th>MongoDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Database Server</td>
+<td>mysqld/oracle</td>
+<td>mongod</td>
+</tr>
+<tr>
+<td>Database Client</td>
+<td>mysql/sqlplus</td>
+<td>mongo</td>
+</tr>
+</tbody>
+</table>
+<h5 id="Terminology-and-Concepts"><a href="#Terminology-and-Concepts" class="headerlink" title="Terminology and Concepts"></a>Terminology and Concepts</h5><table>
+<thead>
+<tr>
+<th>SQL Terms/Concepts</th>
+<th>MongoDB Terms/Concepts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>database</td>
+<td>database</td>
+</tr>
+<tr>
+<td>table</td>
+<td>collection</td>
+</tr>
+<tr>
+<td>row</td>
+<td>document or BSON document</td>
+</tr>
+<tr>
+<td>column</td>
+<td>field</td>
+</tr>
+<tr>
+<td>index</td>
+<td>index</td>
+</tr>
+<tr>
+<td>table joins</td>
+<td>embedded documents and linking</td>
+</tr>
+<tr>
+<td>primary key,Specify any unique column or column combination as primary key.</td>
+<td>primary key,In MongoDB, the primary key is automatically set to the _id field.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="Create-and-Alter-and-CURD"><a href="#Create-and-Alter-and-CURD" class="headerlink" title="Create and Alter and CURD"></a>Create and Alter and CURD</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">db.users.insert( &#123;</span><br><span class="line">    user_id: <span class="string">"abc123"</span>,</span><br><span class="line">    age: <span class="number">55</span>,</span><br><span class="line">    <span class="keyword">status</span>: <span class="string">"A"</span></span><br><span class="line"> &#125; )</span><br><span class="line"> </span><br><span class="line"> <span class="comment">-- However, you can also explicitly create a collection:</span></span><br><span class="line"> db.createCollection(<span class="string">"users"</span>)</span><br><span class="line"> </span><br><span class="line"> db.users.ensureIndex( &#123; user_id: <span class="number">1</span> &#125; )</span><br><span class="line"> db.users.ensureIndex( &#123; user_id: <span class="number">1</span>, age: <span class="number">-1</span> &#125; )</span><br><span class="line"> db.users.drop()</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> db.users.find()</span><br><span class="line"> db.users.find(</span><br><span class="line">    &#123; &#125;,</span><br><span class="line">    &#123; user_id: <span class="number">1</span>, <span class="keyword">status</span>: <span class="number">1</span> &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">db.users.find(</span><br><span class="line">    &#123; &#125;,</span><br><span class="line">    &#123; user_id: <span class="number">1</span>, <span class="keyword">status</span>: <span class="number">1</span>, _id: <span class="number">0</span> &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">db.users.find(</span><br><span class="line">    &#123; <span class="keyword">status</span>: <span class="string">"A"</span> &#125;,</span><br><span class="line">    &#123; user_id: <span class="number">1</span>, <span class="keyword">status</span>: <span class="number">1</span>, _id: <span class="number">0</span> &#125;</span><br><span class="line">)</span><br><span class="line">db.users.find(</span><br><span class="line">   &#123; age: &#123; $gt: <span class="number">25</span>, $lte: <span class="number">50</span> &#125; &#125;</span><br><span class="line">)</span><br><span class="line">db.users.find(</span><br><span class="line">   &#123; user_id: /^bc/ &#125;</span><br><span class="line">)</span><br><span class="line">db.users.find( &#123; <span class="keyword">status</span>: <span class="string">"A"</span> &#125; ).sort( &#123; user_id: <span class="number">1</span> &#125; )</span><br><span class="line"></span><br><span class="line">db.users.count()</span><br><span class="line">db.users.find().count()</span><br><span class="line"></span><br><span class="line">db.users.count( &#123; user_id: &#123; $<span class="keyword">exists</span>: <span class="literal">true</span> &#125; &#125; )</span><br><span class="line">db.users.find( &#123; user_id: &#123; $<span class="keyword">exists</span>: <span class="literal">true</span> &#125; &#125; ).count()</span><br><span class="line"></span><br><span class="line">db.users.count( &#123; age: &#123; $gt: <span class="number">30</span> &#125; &#125; )</span><br><span class="line">db.users.find( &#123; age: &#123; $gt: <span class="number">30</span> &#125; &#125; ).count()</span><br><span class="line"></span><br><span class="line">db.users.distinct( <span class="string">"status"</span> )</span><br><span class="line"></span><br><span class="line">db.users.findOne()</span><br><span class="line">db.users.find().limit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">db.users.find().limit(<span class="number">5</span>).skip(<span class="number">10</span>)</span><br><span class="line">db.users.find( &#123; <span class="keyword">status</span>: <span class="string">"A"</span> &#125; ).explain()</span><br><span class="line"></span><br><span class="line">db.users.update(</span><br><span class="line">   &#123; age: &#123; $gt: <span class="number">25</span> &#125; &#125;,</span><br><span class="line">   &#123; $<span class="keyword">set</span>: &#123; <span class="keyword">status</span>: <span class="string">"C"</span> &#125; &#125;,</span><br><span class="line">   &#123; multi: <span class="literal">true</span> &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">db.users.update(</span><br><span class="line">   &#123; <span class="keyword">status</span>: <span class="string">"A"</span> &#125; ,</span><br><span class="line">   &#123; $inc: &#123; age: <span class="number">3</span> &#125; &#125;,</span><br><span class="line">   &#123; multi: <span class="literal">true</span> &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">db.users.remove( &#123; <span class="keyword">status</span>: <span class="string">"D"</span> &#125; )</span><br><span class="line">db.users.remove( )</span><br></pre></td></tr></table></figure>
+<h4 id="详细使用"><a href="#详细使用" class="headerlink" title="详细使用"></a>详细使用</h4><h5 id="INSERTING-DATA"><a href="#INSERTING-DATA" class="headerlink" title="INSERTING DATA"></a>INSERTING DATA</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">db.customers.insert(&#123;  </span><br><span class="line">    first_name: <span class="string">"chris"</span>,</span><br><span class="line">    last_name:  <span class="string">"aiv"</span> </span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">--Append a lot of data into a customer</span></span><br><span class="line">db.customers.insert(&#123;  </span><br><span class="line">    first_name: <span class="string">"Peter"</span>,</span><br><span class="line">    age: <span class="number">32</span>,</span><br><span class="line">    address: &#123;</span><br><span class="line">        street: <span class="string">"120 Main St"</span>,</span><br><span class="line">        city: <span class="string">"Chicago"</span>,</span><br><span class="line">        state: <span class="string">"Illinois"</span>,</span><br><span class="line">        zip: <span class="string">"38475"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    phone: &#123;</span><br><span class="line">        home: <span class="string">"5555555555"</span>,</span><br><span class="line">        <span class="keyword">work</span>: <span class="string">"4444444444"</span>,</span><br><span class="line">        mobile: <span class="string">"3333333333"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    services: [</span><br><span class="line">        &#123;</span><br><span class="line">            service_id: <span class="string">"time warner"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            service_id: <span class="string">"pge"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            service_id: <span class="string">"moviepass"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    services_count: <span class="number">3</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Append data to a customer</span></span><br><span class="line"></span><br><span class="line">db.customers.insert(&#123;  </span><br><span class="line">    first_name: <span class="string">"Billy"</span>,</span><br><span class="line">    last_name:  <span class="string">"Corgan"</span>,</span><br><span class="line">    gender: <span class="string">"m"</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Insert multiple customers in one query</span></span><br><span class="line"></span><br><span class="line">db.customers.insert([  </span><br><span class="line">    &#123;</span><br><span class="line">    first_name: <span class="string">"Jimmy"</span>,</span><br><span class="line">    last_name:  <span class="string">"Hendrix"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">    first_name: <span class="string">"Jimmy"</span>,</span><br><span class="line">    last_name:  <span class="string">"Page"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">    first_name: <span class="string">"Kurt"</span>,</span><br><span class="line">    last_name:  <span class="string">"Cobain"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">    first_name: <span class="string">"Adrian"</span>,</span><br><span class="line">    last_name:  <span class="string">"Belew"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">    first_name: <span class="string">"Billy"</span>,</span><br><span class="line">    last_name:  <span class="string">"Corgan"</span></span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h5 id="FINDING-DATA"><a href="#FINDING-DATA" class="headerlink" title="FINDING DATA"></a>FINDING DATA</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">db.customers.find(&#123; first_name: "Peter"&#125;, &#123; services: 1&#125;)  </span><br><span class="line">db.customers.find(&#123; first_name: "Peter"&#125;, &#123; "services.service_id": 1&#125;)  </span><br><span class="line">db.customers.findOne(  </span><br><span class="line">    &#123; first_name: /^billy$/i &#125;,</span><br><span class="line">    &#123; first_name: 1 &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">db.customers.find(&#123;  </span><br><span class="line">    gender: "male"</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">db.customers.find(&#123;  </span><br><span class="line">    gender: /(m|male)/i, first_name: /^billy$/i </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="UPDATING-DATA"><a href="#UPDATING-DATA" class="headerlink" title="UPDATING DATA"></a>UPDATING DATA</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 慎用，破坏式的更新</span></span><br><span class="line">db.customers.update(  </span><br><span class="line">    &#123; first_name: <span class="string">"Jimmy"</span> &#125;,</span><br><span class="line">    &#123; last_name:  <span class="string">"Hendrix"</span>&#125;</span><br><span class="line">)</span><br><span class="line"><span class="comment">-- Gentel Update </span></span><br><span class="line">db.customers.update(  </span><br><span class="line">    &#123; last_name: /^hendrix$/i &#125;,</span><br><span class="line">    &#123; $<span class="keyword">set</span>: &#123; first_name: <span class="string">"Jimmy"</span> &#125; &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Increment a value in a field</span></span><br><span class="line">db.customers.update(  </span><br><span class="line">    &#123; first_name: <span class="string">"Billy"</span> &#125;,</span><br><span class="line">    &#123; $inc: &#123; age: <span class="number">1</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Update or Insert a field using an object ID</span></span><br><span class="line">db.customers.update(  </span><br><span class="line">    &#123; _id: ObjectId(<span class="string">"581fef808e5fac221dea48ef"</span>) &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        $<span class="keyword">set</span>: &#123;</span><br><span class="line">            first_name:<span class="string">"Lucy"</span>,</span><br><span class="line">            gender: <span class="string">"m"</span>,</span><br><span class="line">            age: <span class="number">40</span>,</span><br><span class="line">            birthdate: <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"2016-11-02"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"><span class="comment">-- Update a field using someones first name</span></span><br><span class="line">db.customers.update(  </span><br><span class="line">    &#123; first_name: <span class="string">"Jimmy"</span> &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        $<span class="keyword">set</span>: &#123;</span><br><span class="line">            gender: <span class="string">"male"</span>,</span><br><span class="line">            age: <span class="number">50</span>,</span><br><span class="line">            birthdate: <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">"Aug 20, 1985"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; <span class="keyword">upsert</span>: <span class="literal">true</span> &#125;</span><br><span class="line">)</span><br><span class="line"><span class="comment">-- Add to an existing document</span></span><br><span class="line">db.customers.update(  </span><br><span class="line">    &#123; first_name: <span class="string">"Jimmy"</span> &#125;,</span><br><span class="line">    &#123; $push: &#123;</span><br><span class="line">        services: &#123;</span><br><span class="line">            service_id: <span class="string">'hosting windows'</span>,</span><br><span class="line">            service_name: <span class="string">"windows hosting"</span></span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"><span class="comment">-- 第三个参数,如果条件默认不存在，则新增为true表示新增的，默认为false，第四个参数表示全部更新</span></span><br><span class="line">db.customers.update(&#123;first_name:<span class="string">"jack"</span>&#125;,&#123;$inc:&#123;age:<span class="number">2</span>&#125;&#125;,<span class="literal">true</span>);</span><br><span class="line">db.customers.update(&#123;first_name:<span class="string">"Jimmy"</span>&#125;,&#123;$inc:&#123;age:<span class="number">3</span>&#125;&#125;,<span class="literal">false</span>,<span class="literal">true</span>);</span><br><span class="line">db.customers.update(&#123;first_name:<span class="string">"Kurt"</span>&#125;,&#123;$inc:&#123;age:<span class="number">-2</span>&#125;&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="REMOVING-DATA"><a href="#REMOVING-DATA" class="headerlink" title="REMOVING DATA"></a>REMOVING DATA</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--Remove a field</span></span><br><span class="line">db.customers.update(  </span><br><span class="line">    &#123; last_name: <span class="string">"Page"</span> &#125;,</span><br><span class="line">    &#123; </span><br><span class="line">        $unset: &#123; age: <span class="number">1</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">db.customers.update(&#123;first_name:<span class="string">"jack"</span>&#125;,&#123;$inc:&#123;age:<span class="number">1</span>&#125;&#125;)</span><br><span class="line"><span class="comment">--Remove a customer</span></span><br><span class="line">db.customers.remove(  </span><br><span class="line">    //!!! <span class="keyword">DO</span> <span class="keyword">NOT</span> US THIS</span><br><span class="line">    &#123; first_name: <span class="string">"Billy"</span>&#125;, <span class="literal">true</span> </span><br><span class="line">)</span><br><span class="line"><span class="comment">-- Remove any customer above the age of 31</span></span><br><span class="line">db.customers.remove(  </span><br><span class="line">    &#123; age: &#123; $gt: <span class="number">31</span> &#125; &#125;</span><br><span class="line">    , <span class="literal">true</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h5 id="DELETING-DATA"><a href="#DELETING-DATA" class="headerlink" title="DELETING DATA"></a>DELETING DATA</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- Delete a collection</span></span><br><span class="line">db.customers.drop()</span><br></pre></td></tr></table></figure>
+<h5 id="SEARCHING-DATA"><a href="#SEARCHING-DATA" class="headerlink" title="SEARCHING DATA"></a>SEARCHING DATA</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  _id: 1,</span><br><span class="line">  name: &#123; first: 'John', last: 'Backus' &#125;,</span><br><span class="line">  birth: new Date('Dec 03, 1924'),</span><br><span class="line">  death: new Date('Mar 17, 2007'),</span><br><span class="line">  contribs: [ 'Fortran', 'ALGOL', 'Backus-Naur Form', 'FP' ],</span><br><span class="line">  awards: [</span><br><span class="line">            &#123; award: 'National Medal',</span><br><span class="line">              year: 1975,</span><br><span class="line">              by: 'NSF' &#125;,</span><br><span class="line">            &#123; award: 'Turing Award',</span><br><span class="line">              year: 1977,</span><br><span class="line">              by: 'ACM' &#125;</span><br><span class="line">          ]</span><br><span class="line">&#125;</span><br><span class="line">db.users.find(&#123;awards: &#123;$elemMatch: &#123;award:'National Medal', year:1975&#125;&#125;&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--  $gt,gte,$lt,$lte,$ne</span></span><br><span class="line">db.col.find(&#123;"by":"菜鸟教程"&#125;).pretty()</span><br><span class="line">db.col.find(&#123;"likes":&#123;$lt:50&#125;&#125;).pretty()</span><br><span class="line">db.col.find(&#123;"likes":&#123;$ne:50&#125;&#125;).pretty()</span><br><span class="line">db.users.find(&#123;"likes" : &#123;$gt : 100&#125;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- and or 使用</span></span><br><span class="line">db.customers.find(&#123;$or: [&#123;key1: value1&#125;, &#123;key2:value2&#125;]&#125;).pretty()</span><br><span class="line">db.col.find(&#123;"likes": &#123;$gt:50&#125;, $or: [&#123;"by": "教程"&#125;,&#123;"title": "MongoDB 教程"&#125;]&#125;).pretty()</span><br><span class="line">//支持js</span><br><span class="line">db.customers.find(&#123;$where:function()&#123; return this.first_name=="jack"&#125;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 正则查询</span></span><br><span class="line"></span><br><span class="line">db.customers.find(&#123;name:&#123;$regex:"yaolan.com"&#125;&#125;)</span><br><span class="line"><span class="comment">-- 或者</span></span><br><span class="line">db.customers.find(&#123;name:/yaolan.com/&#125;)</span><br><span class="line"><span class="comment">-- 不区分大小写</span></span><br><span class="line">db.customers.find(&#123;name:&#123;$regex:"yaolan.com",$options:"$i"&#125;&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="关于统计，排序，分页，分组等"><a href="#关于统计，排序，分页，分组等" class="headerlink" title="关于统计，排序，分页，分组等"></a>关于统计，排序，分页，分组等</h4><ul>
+<li>db.collections.help() 查看更多操作</li>
+<li>db.collection.find().help();</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">db.customers.distinct("first_name");</span><br><span class="line">db.customers.count(&#123;first_name:"Jimmy",age:&#123;$gt:1&#125;&#125;);</span><br><span class="line">db.customers.count(&#123;first_name:"Jimmy",age:&#123;$in:[8,90]&#125;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 用于分页</span></span><br><span class="line">db.customers.find().limit(2).skip(1)</span><br><span class="line"><span class="comment">-- 用于排序，其中value为1 或 -1 分别为升降序</span></span><br><span class="line">db.customers.find().sort(&#123;first_name:1&#125;);</span><br><span class="line">db.customers.find().sort(&#123;first_name:-1&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 分组 </span></span><br><span class="line"><span class="comment">-- key ：按照那个字段分组</span></span><br><span class="line"><span class="comment">-- initial:初始化函数</span></span><br><span class="line"><span class="comment">-- reduce 函数第一个参数当前文档，第二个参数为前一个集合对象</span></span><br><span class="line"><span class="comment">-- condition: 这个就是过滤条件。</span></span><br><span class="line"><span class="comment">-- finalize: 每一组文档执行完后，多会触发此方法，那么在每组集合里面加上count也就是它的活了</span></span><br><span class="line">db.customers.group(&#123;</span><br><span class="line">    key:&#123;age:true&#125;,</span><br><span class="line">    initial:&#123;customers:[]&#125;,</span><br><span class="line">    reduce:function(curr,prev)&#123; prev.customers.push(curr.first_name) &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">db.customers.group(&#123;</span><br><span class="line">    key:&#123;age:true&#125;,</span><br><span class="line">    initial:&#123;obj:[]&#125;,</span><br><span class="line">    reduce:function(curr,prev)&#123; </span><br><span class="line">        prev.obj.push(curr.first_name); </span><br><span class="line">        prev.obj.push(curr.last_name);</span><br><span class="line">        prev.obj.push(&#123;address:"abc"&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 存储整个值</span></span><br><span class="line">db.customers.group(&#123;</span><br><span class="line">    key:&#123;age:true&#125;,</span><br><span class="line">    initial:&#123;obj:[]&#125;,</span><br><span class="line">    reduce:function(curr,prev)&#123; </span><br><span class="line">        prev.obj.push(JSON.stringify(curr)); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删选条件加，每次执行完事件</span></span><br><span class="line">db.customers.group(&#123;</span><br><span class="line">    key:&#123;age:true&#125;,</span><br><span class="line">    initial:&#123;obj:[]&#125;,</span><br><span class="line">    condition:&#123;age:&#123;$gt:7&#125;&#125;,</span><br><span class="line">    reduce:function(curr,prev)&#123; </span><br><span class="line">        prev.list = JSON.stringify(curr);   </span><br><span class="line">    &#125;,</span><br><span class="line">    finalize:function(prev)&#123;</span><br><span class="line">        prev.count =  prev.obj.length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="aggregate-聚合"><a href="#aggregate-聚合" class="headerlink" title="aggregate 聚合"></a>aggregate 聚合</h5><p>按照age分组，并以sum的value累计计算和, 聚合，实例类似sql语句： <code>select by_user, count(*) from mycol group by by_user</code>，在上面的例子中，我们通过字段by_user字段对数据进行分组，并计算by_user字段相同值的总和。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.customers.aggregate([&#123;$group : &#123;_id : "$by_user", num_tutorial : &#123;$sum : 1&#125;&#125;&#125;])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">db.customers.aggregate([&#123;$group : &#123;_id: "$age",num:&#123;$sum:2&#125;&#125;&#125;])</span><br><span class="line">db.customers.aggregate([&#123;$group : &#123;_id: "$age",num:&#123;$avg:1&#125;&#125;&#125;])</span><br></pre></td></tr></table></figure>
+<h5 id="管道的概念"><a href="#管道的概念" class="headerlink" title="管道的概念"></a>管道的概念</h5><p>管道在Unix和Linux中一般用于将当前命令的输出结果作为下一个命令的参数。</p>
+<blockquote>
+<ul>
+<li>$project：修改输入文档的结构。可以用来重命名、增加或删除域，也可以用于创建计算结果以及嵌套文档。</li>
+<li>$match：用于过滤数据，只输出符合条件的文档。<code>$match</code>使用MongoDB的标准查询操作。</li>
+<li>$limit：用来限制MongoDB聚合管道返回的文档数。</li>
+<li>$skip：在聚合管道中跳过指定数量的文档，并返回余下的文档。</li>
+<li>$unwind：将文档中的某一个数组类型字段拆分成多条，每条包含数组中的一个值。</li>
+<li>$group：将集合中的文档分组，可用于统计结果。</li>
+<li>$sort：将输入文档排序后输出。</li>
+<li>$geoNear：输出接近某一地理位置的有序文档。</li>
+</ul>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">db.article.aggregate(</span><br><span class="line">    &#123; $project : &#123;</span><br><span class="line">        title : 1 ,</span><br><span class="line">        author : 1 ,</span><br><span class="line">    &#125;&#125;</span><br><span class="line"> );</span><br><span class="line"></span><br><span class="line">db.customers.aggregate(&#123;$project:&#123;first_name:1,age:1&#125;&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">db.article.aggregate(</span><br><span class="line">&#123; $project : &#123;</span><br><span class="line">    _id : 0 ,</span><br><span class="line">    title : 1 ,</span><br><span class="line">    author : 1</span><br><span class="line">&#125;&#125;);</span><br><span class="line"><span class="comment">-- $match用于获取分数大于70小于或等于90记录，然后将符合条件的记录送到下一阶段$group管道操作符进行处理。</span></span><br><span class="line">db.articles.aggregate( [</span><br><span class="line">    &#123; $match : &#123; score : &#123; $gt : 70, $lte : 90 &#125; &#125; &#125;,</span><br><span class="line">    &#123; $group: &#123; _id: null, count: &#123; $sum: 1 &#125; &#125; &#125;</span><br><span class="line">   ] );</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 经过$skip管道操作符处理后，前五个文档被"过滤"掉。</span></span><br><span class="line">db.article.aggregate(&#123; $skip : 5 &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="mapReduce"><a href="#mapReduce" class="headerlink" title="mapReduce"></a>mapReduce</h3><p>Map-Reduce是一种计算模型，简单的说就是将大批量的工作（数据）分解（MAP）执行，然后再将结果合并成最终结果（REDUCE）。</p>
+<blockquote>
+<p>map ：映射函数 (生成键值对序列,作为 reduce 函数参数)。<br>reduce 统计函数，reduce函数的任务就是将key-values变成key-value，也就是把values数组变成一个单一的值value。。<br>out 统计结果存放集合 (不指定则使用临时集合,在客户端断开后自动删除)。<br>query 一个筛选条件，只有满足条件的文档才会调用map函数。（query。limit，sort可以随意组合）<br>sort 和limit结合的sort排序参数（也是在发往map函数前给文档排序），可以优化分组机制<br>limit 发往map函数的文档数量的上限（要是没有limit，单独使用sort的用处不大）</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">db.collection.mapReduce(</span><br><span class="line">   function() &#123;emit(key,value);&#125;,  //map 函数</span><br><span class="line">   function(key,<span class="keyword">values</span>) &#123;<span class="keyword">return</span> reduceFunction&#125;,   //reduce 函数</span><br><span class="line">   &#123;</span><br><span class="line">      <span class="keyword">out</span>: collection,</span><br><span class="line">      <span class="keyword">query</span>: <span class="keyword">document</span>,</span><br><span class="line">      <span class="keyword">sort</span>: <span class="keyword">document</span>,</span><br><span class="line">      <span class="keyword">limit</span>: <span class="built_in">number</span></span><br><span class="line">   &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- demo</span></span><br><span class="line">db.posts.mapReduce( </span><br><span class="line">   function() &#123; emit(this.user_name,1); &#125;, </span><br><span class="line">   function(key, <span class="keyword">values</span>) &#123;<span class="keyword">return</span> Array.sum(<span class="keyword">values</span>)&#125;, </span><br><span class="line">      &#123;  </span><br><span class="line">         <span class="keyword">query</span>:&#123;<span class="keyword">status</span>:<span class="string">"active"</span>&#125;,  </span><br><span class="line">         <span class="keyword">out</span>:<span class="string">"post_total"</span> </span><br><span class="line">      &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h3 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h3><p>针对这样的操作，result其实并没有获取到customers中的文档，而是申明一个“查询结构”,for或者next()一次性加载过来，然后让游标逐行读取，当我们枚举完了之后，游标销毁。<br>var result = db.customers.find().limit(2).skip(1)<br>var result = db.customers.find();<br>result.forEach(function(curr){<br>    print(curr.first_name);<br>});</p>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">-- 性能分析函数</span><br><span class="line">db.customers.find(&#123;age:7&#125;).explain();</span><br><span class="line">-- hint 强制使用索引</span><br><span class="line">db.customers.find(&#123;gender:&quot;M&quot;&#125;,&#123;user_name:1,_id:0&#125;).hint(&#123;gender:1,user_name:1&#125;)</span><br><span class="line">db.customers.find(&#123;gender:&quot;M&quot;&#125;,&#123;user_name:1,_id:0&#125;).hint(&#123;gender:1,user_name:1&#125;).explain();</span><br><span class="line"></span><br><span class="line">-- 建立索引 (`ensureIndex` 将要被 `createIndex` 替代)</span><br><span class="line">db.customers.ensureIndex(&#123;&quot;first_name&quot;:1&#125;)</span><br><span class="line">db.customers.createIndex(&#123;&quot;first_name&quot;:1&#125;)</span><br><span class="line">db.customers.createIndexes([&#123;&quot;first_name&quot;:1&#125;,&#123;&quot;age&quot;:-1&#125;])</span><br><span class="line">-- 唯一索引</span><br><span class="line">db.customers.ensureIndex(&#123;&quot;first_name&quot;:1&#125;,&#123;&quot;unique&quot;:true&#125;)</span><br><span class="line">-- 联合索引</span><br><span class="line">db.customers.ensureIndex(&#123;&quot;first_name&quot;:1,&quot;age&quot;:-1&#125;)</span><br><span class="line">db.customers.createIndexes([&#123;&quot;first_name&quot;:1&#125;,&#123;&quot;age&quot;:-1&#125;])</span><br><span class="line">-- 查看索引</span><br><span class="line">db.customers.getIndexes();</span><br><span class="line">--删除索引</span><br><span class="line">db.customers.dropIndex(&quot;first_name_1&quot;) </span><br><span class="line">db.customers.dropIndex(&#123;&quot;first_name&quot;:1&#125;)</span><br><span class="line">db.customers.dropIndexes();</span><br></pre></td></tr></table></figure>
+<h3 id="Mongodb复制"><a href="#Mongodb复制" class="headerlink" title="Mongodb复制"></a>Mongodb复制</h3><p>mongod –help</p>
+<h4 id="主从读写分离（旧版本的，将用replica-副本集代替）"><a href="#主从读写分离（旧版本的，将用replica-副本集代替）" class="headerlink" title="主从读写分离（旧版本的，将用replica 副本集代替）"></a>主从读写分离（旧版本的，将用replica 副本集代替）</h4><p>通过主数据库的<code>OpLog</code>日志来复制,如果配置成功可看见<code>sync_pullOpLog</code><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 一主两从，主服务器不写默认端口 27017</span></span><br><span class="line">mongod <span class="comment">--dbpath=E:\MongoDB\datamaster --master</span></span><br><span class="line">mongod <span class="comment">--dbpath=E:\MongoDB\dataslave --port=27018 --slave --source=127.0.0.1:27017</span></span><br><span class="line">mongod <span class="comment">--dbpath=E:\MongoDB\dataslave1 --port=27019 --slave --source=127.0.0.1:27017</span></span><br><span class="line"><span class="comment">-- 测试同步</span></span><br><span class="line">mongo 127.0.0.1:27017</span><br><span class="line">db.users.insert(&#123;<span class="keyword">name</span>:<span class="string">"tom"</span>,age:<span class="number">10</span>&#125;)</span><br><span class="line">db.users.insert(&#123;<span class="keyword">name</span>:<span class="string">"lucy"</span>,age:<span class="number">13</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 在从服务器上查看</span></span><br><span class="line">db.usrs.find();</span><br></pre></td></tr></table></figure></p>
+<p>主从配置好之后，从服务器默认是不可读取的，如果出现了 <code>error: { &quot;$err&quot; : &quot;not master and slaveok=false&quot;, &quot;code&quot; : 13435 }</code> 这个错误，需要在从服务器上执行<code>rs.slaveok()</code>,之后再从服务器上查询即可。</p>
+<h4 id="副本集-代替旧的主从-（-–replSet）"><a href="#副本集-代替旧的主从-（-–replSet）" class="headerlink" title="副本集(代替旧的主从)（ –replSet）"></a>副本集(代替旧的主从)（ –replSet）</h4><ol>
+<li>该集群没有特定的主数据库</li>
+<li>如果哪个主数据库宕机了，集群中就会推选出一个从属数据库作为主数据库顶上，这就具备了自动故障恢复功能<blockquote>
+<p>N 个节点的集群(至少3个)<br>任何节点可作为主节点<br>所有写入操作都在主节点上<br>自动故障转移<br>自动恢复</p>
+</blockquote>
+</li>
+</ol>
+<p><img src="/images/replica.jpg" alt="replica"></p>
+<p>我们使用同一个MongoDB来做MongoDB主从的实验， 操作步骤如下：<br>关闭正在运行的MongoDB服务器。<br><code>mongod --port 27017 --dbpath=E:\MongoDB\datamaster --replSet rs0</code><br>以上实例会启动一个名为rs0的MongoDB实例，其端口号为27017。<br>启动后打开命令提示框并连接上mongoDB服务。<br>在Mongo客户端使用命令<code>rs.initiate()</code>来启动一个新的副本集。<br>我们可以使用<code>rs.conf()</code>来查看副本集的配置<br>查看副本集状态使用 <code>rs.status()</code> 命令</p>
+<p>在不同机机子上，需要建立集群名称,具体可以参考如下：（示例在一个机子上，用端口区分）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath=E:\MongoDB\replsetmaster --port=27017  --replSet replset</span><br><span class="line">mongod --dbpath=E:\MongoDB\replsetslave --port=27018 --replSet replset</span><br><span class="line">mongod --dbpath=E:\MongoDB\replsetslave1 --port=27019  --replSet replset</span><br><span class="line">-- 在任意一个`mongo` 初始化副本集，replset 为上面的副本集名称</span><br><span class="line"></span><br><span class="line">rs.initiate(&#123;</span><br><span class="line">    _id:&quot;replset&quot;,</span><br><span class="line">    members:[</span><br><span class="line">    &#123;</span><br><span class="line">        _id:0,</span><br><span class="line">        host:&quot;127.0.0.1:27017&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        _id:1,</span><br><span class="line">        host:&quot;127.0.0.1:27018&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        _id:2,</span><br><span class="line">        host:&quot;127.0.0.1:27019&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- 测试同步</span><br><span class="line">mongo 127.0.0.1:27017</span><br><span class="line">db.users.insert(&#123;name:&quot;tom&quot;,age:10&#125;)</span><br><span class="line">db.users.insert(&#123;name:&quot;lucy&quot;,age:13&#125;)</span><br><span class="line"></span><br><span class="line">-- 在第二个服务器上查看</span><br><span class="line">db.usrs.find();</span><br><span class="line">-- 如果出现错误`not master and slaveok=false` ,默认是从主节点读写数据的，副本节点上不允许读，需要设置副本节点可以读,然后执行 `db.getMongo().setSlaveOk()` 或者`rs.slaveOk()`即可</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-- rs.addArb() 使用这个追加一个仲裁服务器</span><br><span class="line">mongod --dbpath=xxxx --port=27020 --replSet replset</span><br><span class="line">rs.addArb(&quot;192.168.1.2:27020&quot;)</span><br><span class="line"></span><br><span class="line">-- rs.add 陆续增加更多的副本</span><br><span class="line">rs.add(&quot;192.168.1.2:27021&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>最后查看副本集状态使用 <code>rs.status()</code> 命令。判断当前运行的Mongo服务是否为主节点可以使用命令<code>db.isMaster()</code>,MongoDB的副本集与我们常见的主从有所不同，主从在主机宕机后所有服务将停止，而副本集在主机宕机后，副本会接管主节点成为主节点，不会出现宕机，无缝切换</p>
+<h3 id="分片技术（Shard）"><a href="#分片技术（Shard）" class="headerlink" title="分片技术（Shard）"></a>分片技术（Shard）</h3><p>在Mongodb里面存在另一种集群(cluster)，就是分片技术,可以满足MongoDB数据量大量增长的需求。</p>
+<blockquote>
+<p>复制所有的写入操作到主节点<br>延迟的敏感数据会在主节点查询<br>单个副本集限制在12个节点<br>当请求量巨大时会出现内存不足。<br>本地磁盘不足<br>垂直扩展价格昂贵</p>
+</blockquote>
+<p><img src="/images/mongo-cluster.jpg" alt="MongoDB Cluster"></p>
+<blockquote>
+<ul>
+<li>Shard:用于存储实际的数据块，实际生产环境中一个shard server角色可由几台机器组个一个replica set承担，防止主机单点故障</li>
+<li>Config Server:mongod实例，存储了整个 ClusterMetadata，其中包括 chunk信息。</li>
+<li>Query Routers: 前端路由，客户端由此接入，且让整个集群看上去像单一数据库，前端应用可以透明使用。</li>
+</ul>
+</blockquote>
+<p>模拟在单机上启用不同的端口，分片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">-- 服务器分布</span><br><span class="line">Shard Server 1：27020</span><br><span class="line">Shard Server 2：27021</span><br><span class="line">Shard Server 3：27022</span><br><span class="line">Shard Server 4：27023</span><br><span class="line">Config Server ：27100</span><br><span class="line">Route Process：40000</span><br><span class="line"></span><br><span class="line">-- 1. 启动Shard Server</span><br><span class="line">mkdir -p /www/mongoDB/shard/s0</span><br><span class="line">mkdir -p /www/mongoDB/shard/s1</span><br><span class="line">mkdir -p /www/mongoDB/shard/s2</span><br><span class="line">mkdir -p /www/mongoDB/shard/s3</span><br><span class="line">mkdir -p /www/mongoDB/shard/log</span><br><span class="line"></span><br><span class="line">/usr/local/mongoDB/bin/mongod --port 27020 --dbpath=E:/MongoDB/shard/s0 --logpath=E:/MongoDB/shard/log/s0.log --logappend</span><br><span class="line">/usr/local/mongoDB/bin/mongod --port 27021 --dbpath=E:/MongoDB/shard/s1 --logpath=E:/MongoDB/shard/log/s1.log --logappend</span><br><span class="line">/usr/local/mongoDB/bin/mongod --port 27022 --dbpath=E:/MongoDB/shard/s2 --logpath=E:/MongoDB/shard/log/s2.log --logappend</span><br><span class="line">/usr/local/mongoDB/bin/mongod --port 27023 --dbpath=E:/MongoDB/shard/s3 --logpath=E:/MongoDB/shard/log/s3.log --logappend</span><br><span class="line"></span><br><span class="line">-- 2. 启动Config Server,这里只有一台config server 如果不是一台，添加 `--configsvr` 参数</span><br><span class="line">mkdir -p /www/mongoDB/shard/config</span><br><span class="line">/usr/local/mongoDB/bin/mongod --port 27100 --configsvr --dbpath=E:/MongoDB/shard/config --logpath=E:/MongoDB/shard/log/config.log --logappend</span><br><span class="line"></span><br><span class="line">-- 3. 启动Route Process，mongos启动参数中，chunkSize这一项是用来指定chunk的大小的，单位是MB，默认大小为200MB.</span><br><span class="line"></span><br><span class="line">/usr/local/mongoDB/bin/mongos --port 40000 --configdb localhost:27100 --logpath=E:/MongoDB/shard/log/route.log --chunkSize 200</span><br><span class="line"></span><br><span class="line">-- 4. 配置Sharding,使用MongoDB Shell登录到mongos，添加Shard节点,然后按照普通的mongo数据库那样，将数据库连接接入接口40000</span><br><span class="line">/usr/local/mongoDB/bin/mongo admin --port 40000</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">db.runCommand(&#123; addshard:&quot;localhost:27020&quot; &#125;)</span><br><span class="line">db.runCommand(&#123; addshard:&quot;localhost:27021&quot; &#125;)</span><br><span class="line">db.runCommand(&#123; addshard:&quot;localhost:27022&quot; &#125;)</span><br><span class="line">db.runCommand(&#123; addshard:&quot;localhost:27023&quot; &#125;)</span><br><span class="line">db.runCommand(&#123; enablesharding:&quot;test&quot; &#125;)</span><br><span class="line">db.runCommand(&#123; shardcollection: &quot;users&quot;, key: &#123; id:1,time:1&#125;&#125;)</span><br><span class="line">-- 或者下面写写法是一样的</span><br><span class="line">sh.addShard(&quot;localhost:27020&quot;);</span><br><span class="line">sh.addShard(&quot;localhost:27021&quot;);</span><br><span class="line">sh.addShard(&quot;localhost:27022&quot;);</span><br><span class="line">sh.addShard(&quot;localhost:27023&quot;);</span><br><span class="line">sh.enableSharding(&quot;test&quot;);</span><br><span class="line">-- sh.shardCollection(&quot;&lt;database&gt;.&lt;collection&gt;&quot;, shard-key-pattern) 按照collection的key来分片</span><br><span class="line">sh.shardCollection(&quot;test.users&quot;,&#123;&quot;name&quot;:1,&quot;_id&quot;:1&#125;);</span><br><span class="line"></span><br><span class="line">-- 5. 插入数据,测试分片</span><br><span class="line">    use test</span><br><span class="line"></span><br><span class="line">    for(var i=0;i&lt;=100000;i++) &#123;</span><br><span class="line">        db.users.insert(&#123;name:&quot;lucy&quot;+i,age:i&#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">-- 6. 查看分片信息</span><br><span class="line">sh.status()</span><br></pre></td></tr></table></figure></p>
+<h3 id="安全管理"><a href="#安全管理" class="headerlink" title="安全管理"></a>安全管理</h3><ol>
+<li>以安全认证模式启动<br>mongod –auth –dbpath /usr/mongo/data -f /var/mongo.log<br>使用–auth选项启动mongod进程即可启用认证模式。<br>或者，也可以修改<code>/etc/mongodb.conf</code>，设置<code>auth=true</code>，重启mongod进程。</li>
+<li>添加用户</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-- 创建用户</span><br><span class="line">db.createUser(&#123;  </span><br><span class="line">    &quot;user&quot;: &quot;chrisaiv&quot;,</span><br><span class="line">    &quot;pwd&quot;: &quot;password&quot;,</span><br><span class="line">    &quot;roles&quot;: [</span><br><span class="line">        &#123; role: &quot;clusterAdmin&quot;, db: &quot;admin&quot; &#125;,</span><br><span class="line">        &#123; role: &quot;readAnyDatabase&quot;, db: &quot;admin&quot; &#125;,</span><br><span class="line">        &quot;readWrite&quot;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123; w: &quot;majority&quot;, wtimeout: 5000 &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">测试数据库安全认证: `db.auth(&quot;admin&quot;, &quot;123456&quot;)`</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>为数据库写数据（同步到磁盘）加锁<br><code>db.runCommand({fsync:1,lock:1})</code><br>说明：该操作已经对数据库上锁，不允许执行写数据操作，一般在执行数据库备份时有用。</p>
+</li>
+<li><p>查看当前锁状态<br><code>db.currentOp()</code></p>
+</li>
+<li><p>解锁<br><code>use local
+db.$cmd.sys.unlock.findOne()</code><br>说明：<br>执行解锁，结果如下所示：<br><code>db.currentOp()</code></p>
+</li>
+</ol>
+<h3 id="数据备份、恢复与迁移管理"><a href="#数据备份、恢复与迁移管理" class="headerlink" title="数据备份、恢复与迁移管理"></a>数据备份、恢复与迁移管理</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">mongodump -h dbhost -d dbname -c collection -o dbdirectory</span><br><span class="line">mongorestore -h dbhost -d dbname -c collection <span class="comment">--directoryperdb dbdirectory</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 备份全部数据库</span></span><br><span class="line">mkdir testbak</span><br><span class="line">mongodump </span><br><span class="line"><span class="comment">-- 备份指定数据库</span></span><br><span class="line">mongodump -d pagedb</span><br><span class="line"><span class="comment">-- 备份一个数据库中的某个集合</span></span><br><span class="line">mongodump -d pagedb -c page</span><br><span class="line"><span class="comment">-- 恢复全部数据库</span></span><br><span class="line">cd testbak</span><br><span class="line">mongorestore <span class="comment">--drop</span></span><br><span class="line"><span class="comment">-- 恢复某个数据库的数据</span></span><br><span class="line">cd testbak</span><br><span class="line">mongorestore -d pagedb <span class="comment">--drop</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 恢复某个数据库的某个集合的数据</span></span><br><span class="line">mongorestore -d pagedb -c page <span class="comment">--drop</span></span><br><span class="line"><span class="comment">-- 向MongoDB导入数据</span></span><br><span class="line">mongoimport -d pagedb -c page <span class="comment">--type csv --headerline --drop &lt; csvORtsvFile.csv</span></span><br><span class="line"><span class="comment">-- 将文件csvORtsvFile.csv的数据导入到pagedb数据库的page集合中，使用cvs或tsv文件的列名作为集合的列名。</span></span><br><span class="line"><span class="comment">-- 需要注意的是，使用`--headerline`选项时，只支持csv和tsv文件。</span></span><br><span class="line"><span class="comment">-- type支持的类型有三个：csv、tsv、json</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### MongoDB 监控</span></span><br><span class="line">```sql</span><br><span class="line">mongostat </span><br><span class="line">mongotop</span><br><span class="line">mongotop 10   <span class="comment">-- 等待时间</span></span><br><span class="line">mongotop <span class="comment">--locks  -- 报告每个数据库的锁的使用</span></span><br></pre></td></tr></table></figure>
+<h3 id="MongoDB-自动增长"><a href="#MongoDB-自动增长" class="headerlink" title="MongoDB 自动增长"></a>MongoDB 自动增长</h3><p>MongoDB 没有像 SQL 一样有自动增长的功能， MongoDB 的 _id 是系统自动生成的12字节唯一标识。<code>db.createCollection(&quot;counters&quot;)</code>,通过<code>db.counters.insert({_id:&quot;productid&quot;,sequence_value:0})</code> 来实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNextSequenceValue</span>(<span class="params">sequenceName</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> sequenceDocument = db.counters.findAndModify(</span><br><span class="line">      &#123;</span><br><span class="line">         query:&#123;<span class="attr">_id</span>: sequenceName &#125;,</span><br><span class="line">         update: &#123;<span class="attr">$inc</span>:&#123;<span class="attr">sequence_value</span>:<span class="number">1</span>&#125;&#125;,</span><br><span class="line">         <span class="keyword">new</span>:<span class="literal">true</span></span><br><span class="line">      &#125;);</span><br><span class="line">   <span class="keyword">return</span> sequenceDocument.sequence_value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> db.products.insert(&#123;</span><br><span class="line">    <span class="string">"_id"</span>:getNextSequenceValue(<span class="string">"productid"</span>),</span><br><span class="line">    <span class="string">"product_name"</span>:<span class="string">"Apple iPhone"</span>,</span><br><span class="line">    <span class="string">"category"</span>:<span class="string">"mobiles"</span></span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"> db.products.insert(&#123;</span><br><span class="line"><span class="string">"_id"</span>:getNextSequenceValue(<span class="string">"productid"</span>),</span><br><span class="line"><span class="string">"product_name"</span>:<span class="string">"Samsung S3"</span>,</span><br><span class="line"><span class="string">"category"</span>:<span class="string">"mobiles"</span>&#125;)</span><br><span class="line"></span><br><span class="line">db.products.find()</span><br></pre></td></tr></table></figure>
+<h3 id="关于ObjectId"><a href="#关于ObjectId" class="headerlink" title="关于ObjectId"></a>关于ObjectId</h3><blockquote>
+<p>前4个字节表示时间戳<br>接下来的3个字节是机器标识码<br>紧接的两个字节由进程id组成（PID）<br>最后三个字节是随机数。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">newObjectId = ObjectId()</span><br><span class="line">myObjectId = ObjectId("5349b4ddd2781d08c09890f4")</span><br><span class="line">ObjectId("5349b4ddd2781d08c09890f4").getTimestamp()</span><br><span class="line"></span><br><span class="line">new ObjectId().str</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="GridFS"><a href="#GridFS" class="headerlink" title="GridFS"></a>GridFS</h3><p>GridFS 用于存储和恢复那些超过16M（BSON文件限制）的文件(如：图片、音频、视频等)。<br>GridFS 也是文件存储的一种方式，但是它是存储在MonoDB的集合中。<br>GridFS 可以更好的存储大于16M的文件。<br>GridFS 会将大文件对象分割成多个小的chunk(文件片段),一般为256k/个,每个chunk将作为MongoDB的一个文档(document)被存储在chunks集合中。<br>GridFS 用两个集合来存储一个文件：<code>fs.files</code>与<code>fs.chunks</code>。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">--fs.files</span></span><br><span class="line">&#123;</span><br><span class="line">   "filename": "test.txt",</span><br><span class="line">   "chunkSize": NumberInt(261120),</span><br><span class="line">   "uploadDate": ISODate("2014-04-13T11:32:33.557Z"),</span><br><span class="line">   "md5": "7b762939321e146569b07f72c62cca4f",</span><br><span class="line">   "length": NumberInt(646)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- fs.chunks</span></span><br><span class="line">&#123;</span><br><span class="line">   "files_id": ObjectId("534a75d19f54bfec8a2fe44b"),</span><br><span class="line">   "n": NumberInt(0),</span><br><span class="line">   "data": "Mongo Binary Data"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 添加文件</span></span><br><span class="line">mongofiles.exe -d gridfs put song.mp3</span><br><span class="line">db.fs.files.find()</span><br><span class="line"></span><br><span class="line"><span class="comment">--_id 获取区块(chunk)</span></span><br><span class="line">db.fs.chunks.find(&#123;files_id:ObjectId('534a811bf8b4aa4d33fdf94d')&#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><a href="https://docs.mongodb.com/v3.2/tutorial/access-mongo-shell-help/" target="_blank" rel="noopener">参考</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>分享即是成长</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="changyuan WeChat Pay">
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/db/" rel="tag"># db</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/02/mysql-cheatsheet/" rel="next" title="mysql-cheatsheet">
+                <i class="fa fa-chevron-left"></i> mysql-cheatsheet
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/09/shell/" rel="prev" title="shell 相关">
+                shell 相关 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="changyuan">
+          <p class="site-author-name" itemprop="name">changyuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">不断升级自己的操作系统</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/changyuan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/changocean1" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/changyuan2011" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/changyuanyuan" target="_blank" title="Zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装篇"><span class="nav-number">1.</span> <span class="nav-text">安装篇</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载安装"><span class="nav-number">1.1.</span> <span class="nav-text">下载安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置mongodb-conf"><span class="nav-number">1.2.</span> <span class="nav-text">配置mongodb.conf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试"><span class="nav-number">1.3.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#查看当前mongodb进程信息"><span class="nav-number">1.3.1.</span> <span class="nav-text">查看当前mongodb进程信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php的扩展与测试"><span class="nav-number">2.</span> <span class="nav-text">php的扩展与测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP代码"><span class="nav-number">2.1.</span> <span class="nav-text">PHP代码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建集合"><span class="nav-number">2.1.1.</span> <span class="nav-text">创建集合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插入文档"><span class="nav-number">2.1.2.</span> <span class="nav-text">插入文档</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查找文档"><span class="nav-number">2.1.3.</span> <span class="nav-text">查找文档</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更新文档"><span class="nav-number">2.1.4.</span> <span class="nav-text">更新文档</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除文档"><span class="nav-number">2.1.5.</span> <span class="nav-text">删除文档</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用篇"><span class="nav-number">3.</span> <span class="nav-text">使用篇</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Start-Mongod-amp-amp-Command"><span class="nav-number">3.1.</span> <span class="nav-text">Start Mongod &amp;&amp; Command</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-Types-类型比较"><span class="nav-number">3.2.</span> <span class="nav-text">Data Types 类型比较</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Date"><span class="nav-number">3.2.1.</span> <span class="nav-text">Date</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ObjectId"><span class="nav-number">3.2.2.</span> <span class="nav-text">ObjectId</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NumberLong-amp-amp-NumberInt"><span class="nav-number">3.2.3.</span> <span class="nav-text">NumberLong &amp;&amp;  NumberInt</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Check-Types"><span class="nav-number">3.3.</span> <span class="nav-text">Check Types</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-amp-amp-MongoDB-Mapping-Chart"><span class="nav-number">3.4.</span> <span class="nav-text">SQL &amp;&amp;  MongoDB Mapping Chart</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Executables"><span class="nav-number">3.4.1.</span> <span class="nav-text">Executables</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Terminology-and-Concepts"><span class="nav-number">3.4.2.</span> <span class="nav-text">Terminology and Concepts</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-and-Alter-and-CURD"><span class="nav-number">3.5.</span> <span class="nav-text">Create and Alter and CURD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#详细使用"><span class="nav-number">3.6.</span> <span class="nav-text">详细使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#INSERTING-DATA"><span class="nav-number">3.6.1.</span> <span class="nav-text">INSERTING DATA</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FINDING-DATA"><span class="nav-number">3.6.2.</span> <span class="nav-text">FINDING DATA</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UPDATING-DATA"><span class="nav-number">3.6.3.</span> <span class="nav-text">UPDATING DATA</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#REMOVING-DATA"><span class="nav-number">3.6.4.</span> <span class="nav-text">REMOVING DATA</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DELETING-DATA"><span class="nav-number">3.6.5.</span> <span class="nav-text">DELETING DATA</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SEARCHING-DATA"><span class="nav-number">3.6.6.</span> <span class="nav-text">SEARCHING DATA</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于统计，排序，分页，分组等"><span class="nav-number">3.7.</span> <span class="nav-text">关于统计，排序，分页，分组等</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#aggregate-聚合"><span class="nav-number">3.7.1.</span> <span class="nav-text">aggregate 聚合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#管道的概念"><span class="nav-number">3.7.2.</span> <span class="nav-text">管道的概念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mapReduce"><span class="nav-number">4.</span> <span class="nav-text">mapReduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#游标"><span class="nav-number">5.</span> <span class="nav-text">游标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-number">6.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mongodb复制"><span class="nav-number">7.</span> <span class="nav-text">Mongodb复制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主从读写分离（旧版本的，将用replica-副本集代替）"><span class="nav-number">7.1.</span> <span class="nav-text">主从读写分离（旧版本的，将用replica 副本集代替）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#副本集-代替旧的主从-（-–replSet）"><span class="nav-number">7.2.</span> <span class="nav-text">副本集(代替旧的主从)（ –replSet）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分片技术（Shard）"><span class="nav-number">8.</span> <span class="nav-text">分片技术（Shard）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全管理"><span class="nav-number">9.</span> <span class="nav-text">安全管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据备份、恢复与迁移管理"><span class="nav-number">10.</span> <span class="nav-text">数据备份、恢复与迁移管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB-自动增长"><span class="nav-number">11.</span> <span class="nav-text">MongoDB 自动增长</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于ObjectId"><span class="nav-number">12.</span> <span class="nav-text">关于ObjectId</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GridFS"><span class="nav-number">13.</span> <span class="nav-text">GridFS</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changyuan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

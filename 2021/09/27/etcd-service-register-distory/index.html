@@ -1,0 +1,742 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="微服务,">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="ETCD 服务发现 在微服务中各个服务都是无状态的，不会在配置中写死上下游的访问地址，所以需要有一个地方去维护各个节点的信息。 服务起来的时候会去注册中心拉取其他服务的节点信息，并且把自己的信息推送到注册中心。 当有运行的服务下线或者出现问题的时候，把自己从配置中心摘除，或者配置中心来检测服务状态（心跳、健康检查的协议）来摘除服务。 12345678910111213141516171819202">
+<meta name="keywords" content="微服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ETCD 服务注册和发现">
+<meta property="og:url" content="http://changyuan.github.io/2021/09/27/etcd-service-register-distory/index.html">
+<meta property="og:site_name" content="Chang Crazy&#39;s Blog">
+<meta property="og:description" content="ETCD 服务发现 在微服务中各个服务都是无状态的，不会在配置中写死上下游的访问地址，所以需要有一个地方去维护各个节点的信息。 服务起来的时候会去注册中心拉取其他服务的节点信息，并且把自己的信息推送到注册中心。 当有运行的服务下线或者出现问题的时候，把自己从配置中心摘除，或者配置中心来检测服务状态（心跳、健康检查的协议）来摘除服务。 12345678910111213141516171819202">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-09-27T03:01:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ETCD 服务注册和发现">
+<meta name="twitter:description" content="ETCD 服务发现 在微服务中各个服务都是无状态的，不会在配置中写死上下游的访问地址，所以需要有一个地方去维护各个节点的信息。 服务起来的时候会去注册中心拉取其他服务的节点信息，并且把自己的信息推送到注册中心。 当有运行的服务下线或者出现问题的时候，把自己从配置中心摘除，或者配置中心来检测服务状态（心跳、健康检查的协议）来摘除服务。 12345678910111213141516171819202">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://changyuan.github.io/2021/09/27/etcd-service-register-distory/">
+
+
+
+
+
+  <title>ETCD 服务注册和发现 | Chang Crazy's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chang Crazy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">升级自己的操作系统</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2021/09/27/etcd-service-register-distory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ETCD 服务注册和发现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-27T11:01:23+08:00">
+                2021-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ETCD 服务发现</p>
+<p>在微服务中各个服务都是无状态的，不会在配置中写死上下游的访问地址，所以需要有一个地方去维护各个节点的信息。</p>
+<p>服务起来的时候会去注册中心拉取其他服务的节点信息，并且把自己的信息推送到注册中心。</p>
+<p>当有运行的服务下线或者出现问题的时候，把自己从配置中心摘除，或者配置中心来检测服务状态（心跳、健康检查的协议）来摘除服务。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"encoding/json"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"github.com/coreos/etcd/clientv3"</span></span><br><span class="line">    <span class="string">"context"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Discovery <span class="keyword">struct</span> &#123;</span><br><span class="line">    cli       *clientv3.Client</span><br><span class="line">    info      *NodeInfo</span><br><span class="line">    nodes     *NodesManager</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewDiscovery</span><span class="params">(info *NodeInfo, conf clientv3.Config, mgr *NodesManager)</span> <span class="params">(dis *Discovery, err error)</span></span> &#123;</span><br><span class="line">    d := &amp;Discovery&#123;&#125;</span><br><span class="line">    d.info = info</span><br><span class="line">    <span class="keyword">if</span> mgr == <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>, fmt.Errorf(<span class="string">"[Discovery] mgr == nil"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    d.nodes = mgr</span><br><span class="line">    d.cli, err = clientv3.New(conf)</span><br><span class="line">    <span class="keyword">return</span> d, err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Discovery)</span> <span class="title">pull</span><span class="params">()</span></span> &#123;</span><br><span class="line">    kv := clientv3.NewKV(d.cli)</span><br><span class="line">    resp, err := kv.Get(context.TODO(), <span class="string">"discovery/"</span>, clientv3.WithPrefix())</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        log.Fatalf(<span class="string">"[Discovery] kv.Get err:%+v"</span>, err)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> _, v := <span class="keyword">range</span> resp.Kvs&#123;</span><br><span class="line">        node := &amp;NodeInfo&#123;&#125;</span><br><span class="line">        err = json.Unmarshal(v.Value, node)</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            log.Fatalf(<span class="string">"[Discovery] json.Unmarshal err:%+v"</span>, err)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        &#125;</span><br><span class="line">        d.nodes.AddNode(node)</span><br><span class="line">        log.Printf(<span class="string">"[Discovery] pull node:%+v"</span>, node)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Discovery)</span> <span class="title">watch</span><span class="params">()</span></span> &#123;</span><br><span class="line">    watcher := clientv3.NewWatcher(d.cli)</span><br><span class="line">    watchChan := watcher.Watch(context.TODO(), <span class="string">"discovery"</span>, clientv3.WithPrefix())</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> resp := &lt;-watchChan:</span><br><span class="line">            d.watchEvent(resp.Events)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(d *Discovery)</span> <span class="title">watchEvent</span><span class="params">(evs []*clientv3.Event)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> _, ev := <span class="keyword">range</span> evs&#123;</span><br><span class="line">        <span class="keyword">switch</span> ev.Type&#123;</span><br><span class="line">        <span class="keyword">case</span> clientv3.EventTypePut:</span><br><span class="line">            node := &amp;NodeInfo&#123;&#125;</span><br><span class="line">            err := json.Unmarshal(ev.Kv.Value, node)</span><br><span class="line">            <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">                log.Fatalf(<span class="string">"[Discovery] json.Unmarshal err:%+v"</span>, err)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            &#125;</span><br><span class="line">            d.nodes.AddNode(node)</span><br><span class="line">            log.Printf(fmt.Sprintf(<span class="string">"[Discovery] new node:%s"</span>,<span class="keyword">string</span>(ev.Kv.Value)))</span><br><span class="line">        <span class="keyword">case</span> clientv3.EventTypeDelete:</span><br><span class="line">            d.nodes.DelNode(<span class="keyword">string</span>(ev.Kv.Key))</span><br><span class="line">            log.Printf(fmt.Sprintf(<span class="string">"[Discovery] del node:%s data:%s"</span>,<span class="keyword">string</span>(ev.Kv.Key),<span class="keyword">string</span>(ev.Kv.Value)))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>服务注册</p>
+<p>在etcd中服务的注册使用租约（lease）来实现，设置租约的时候按需求设置租约的时间（ttl），类似redis中的EXPIRE key，再把服务自身的节点等信息写到对应的key中。然后定时去调用KeepAliveOnce来保持租约，如果在期间KeepAliveOnce的消息丢失或者延迟大于这个租约的ttl则etcd中将会把这个节点的信息删除，恢复正常时重新发起租约流程。</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"encoding/json"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"github.com/coreos/etcd/clientv3"</span></span><br><span class="line">    <span class="string">"github.com/coreos/etcd/etcdserver/api/v3rpc/rpctypes"</span></span><br><span class="line">    <span class="string">"github.com/pkg/errors"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">    <span class="string">"context"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">    _ttl = <span class="number">10</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Register <span class="keyword">struct</span> &#123;</span><br><span class="line">    cli       *clientv3.Client</span><br><span class="line">    leaseId   clientv3.LeaseID</span><br><span class="line">    lease     clientv3.Lease</span><br><span class="line">    info      *NodeInfo</span><br><span class="line">    closeChan <span class="keyword">chan</span> error</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewRegister</span><span class="params">(info *NodeInfo, conf clientv3.Config)</span> <span class="params">(reg *Register, err error)</span></span> &#123;</span><br><span class="line">    r := &amp;Register&#123;&#125;</span><br><span class="line">    r.closeChan = <span class="built_in">make</span>(<span class="keyword">chan</span> error)</span><br><span class="line">    r.info = info</span><br><span class="line">    r.cli, err = clientv3.New(conf)</span><br><span class="line">    <span class="keyword">return</span> r, err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Register)</span> <span class="title">Run</span><span class="params">()</span></span> &#123;</span><br><span class="line">    dur := time.Duration(time.Second)</span><br><span class="line">    timer := time.NewTicker(dur)</span><br><span class="line">    r.register()</span><br><span class="line">    <span class="keyword">for</span> &#123;</span><br><span class="line">        <span class="keyword">select</span> &#123;</span><br><span class="line">        <span class="keyword">case</span> &lt;-timer.C:</span><br><span class="line">            r.keepAlive()</span><br><span class="line">        <span class="keyword">case</span> &lt;-r.closeChan:</span><br><span class="line">            <span class="keyword">goto</span> EXIT</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">EXIT:</span><br><span class="line">    log.Printf(<span class="string">"[Register] Run exit..."</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Register)</span> <span class="title">Stop</span><span class="params">()</span></span> &#123;</span><br><span class="line">    r.revoke()</span><br><span class="line">    <span class="built_in">close</span>(r.closeChan)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Register)</span> <span class="title">register</span><span class="params">()</span> <span class="params">(err error)</span></span> &#123;</span><br><span class="line">    r.leaseId = <span class="number">0</span></span><br><span class="line">    kv := clientv3.NewKV(r.cli)</span><br><span class="line">    r.lease = clientv3.NewLease(r.cli)</span><br><span class="line">    leaseResp, err := r.lease.Grant(context.TODO(), _ttl)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        err = errors.Wrapf(err, <span class="string">"[Register] register Grant err"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    data, err := json.Marshal(r.info)</span><br><span class="line">    _, err = kv.Put(context.TODO(), r.info.UniqueId, <span class="keyword">string</span>(data), clientv3.WithLease(leaseResp.ID))</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        err = errors.Wrapf(err, <span class="string">"[Register] register kv.Put err %s-%+v"</span>, r.info.Name, <span class="keyword">string</span>(data))</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    r.leaseId = leaseResp.ID</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Register)</span> <span class="title">keepAlive</span><span class="params">()</span> <span class="params">(err error)</span></span> &#123;</span><br><span class="line">    _, err = r.lease.KeepAliveOnce(context.TODO(), r.leaseId)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="comment">// 租约丢失，重新注册</span></span><br><span class="line">        <span class="keyword">if</span> err == rpctypes.ErrLeaseNotFound &#123;</span><br><span class="line">            r.register()</span><br><span class="line">            err = <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line">        err = errors.Wrapf(err, <span class="string">"[Register] keepAlive err"</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    log.Printf(fmt.Sprintf(<span class="string">"[Register] keepalive... leaseId:%+v"</span>, r.leaseId))</span><br><span class="line">    <span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span><span class="params">(r *Register)</span> <span class="title">revoke</span><span class="params">()</span> <span class="params">(err error)</span></span> &#123;</span><br><span class="line">    _, err = r.cli.Revoke(context.TODO(), r.leaseId)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        err = errors.Wrapf(err, <span class="string">"[Register] revoke err"</span>)</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    log.Printf(fmt.Sprintf(<span class="string">"[Register] revoke node:%+v"</span>, r.leaseId))</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>节点管理</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"math/rand"</span></span><br><span class="line">    <span class="string">"strings"</span></span><br><span class="line">    <span class="string">"sync"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> NodeInfo <span class="keyword">struct</span> &#123;</span><br><span class="line">    Addr     <span class="keyword">string</span></span><br><span class="line">    Name     <span class="keyword">string</span></span><br><span class="line">    UniqueId <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> NodesManager <span class="keyword">struct</span> &#123;</span><br><span class="line">    sync.RWMutex</span><br><span class="line">    <span class="comment">// &lt;name,&lt;id,node&gt;&gt;</span></span><br><span class="line">    nodes <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">map</span>[<span class="keyword">string</span>]*NodeInfo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">NewNodeManager</span><span class="params">()</span> <span class="params">(m *NodesManager)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &amp;NodesManager&#123;</span><br><span class="line">        nodes: <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">map</span>[<span class="keyword">string</span>]*NodeInfo&#123;&#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *NodesManager)</span> <span class="title">AddNode</span><span class="params">(node *NodeInfo)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> node == <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    n.Lock()</span><br><span class="line">    <span class="keyword">defer</span> n.Unlock()</span><br><span class="line">    <span class="keyword">if</span> _, exist := n.nodes[node.Name]; !exist &#123;</span><br><span class="line">        n.nodes[node.Name] = <span class="keyword">map</span>[<span class="keyword">string</span>]*NodeInfo&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    n.nodes[node.Name][node.UniqueId] = node</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *NodesManager)</span> <span class="title">DelNode</span><span class="params">(id <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">    sli := strings.Split(id,<span class="string">"/"</span>)</span><br><span class="line">    name := sli[<span class="built_in">len</span>(sli)<span class="number">-2</span>]</span><br><span class="line">    n.Lock()</span><br><span class="line">    <span class="keyword">defer</span> n.Unlock()</span><br><span class="line">    <span class="keyword">if</span> _, exist := n.nodes[name]; exist &#123;</span><br><span class="line">        <span class="built_in">delete</span>(n.nodes[name], id)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *NodesManager)</span> <span class="title">Pick</span><span class="params">(name <span class="keyword">string</span>)</span> *<span class="title">NodeInfo</span></span> &#123;</span><br><span class="line">    n.RLock()</span><br><span class="line">    <span class="keyword">defer</span> n.RUnlock()</span><br><span class="line">    <span class="keyword">if</span> nodes, exist := n.nodes[name]; !exist &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 纯随机取节点</span></span><br><span class="line">        idx := rand.Intn(<span class="built_in">len</span>(nodes))</span><br><span class="line">        <span class="keyword">for</span> _, v := <span class="keyword">range</span> nodes &#123;</span><br><span class="line">            <span class="keyword">if</span> idx == <span class="number">0</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> v</span><br><span class="line">            &#125;</span><br><span class="line">            idx--</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(n *NodesManager)</span> <span class="title">Dump</span> <span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> k, v := <span class="keyword">range</span> n.nodes &#123;</span><br><span class="line">        <span class="keyword">for</span> kk, vv := <span class="keyword">range</span> v &#123;</span><br><span class="line">            log.Printf(<span class="string">"[NodesManager] Name:%s Id:%s Node:%+v"</span>, k, kk, vv)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试效果</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"github.com/coreos/etcd/clientv3"</span></span><br><span class="line">    <span class="string">"log"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    nodes := NewNodeManager()</span><br><span class="line">    dis, _ := NewDiscovery(&amp;NodeInfo&#123;</span><br><span class="line">        Name: <span class="string">"server name/aaaa"</span>,</span><br><span class="line">        Addr: <span class="string">"127.0.0.1:8888"</span>,</span><br><span class="line">    &#125;, clientv3.Config&#123;</span><br><span class="line">        Endpoints:   []<span class="keyword">string</span>&#123;<span class="string">"tx.cxc233.com:8888"</span>&#125;,</span><br><span class="line">        DialTimeout: <span class="number">5</span> * time.Second,</span><br><span class="line">    &#125;, nodes)</span><br><span class="line"></span><br><span class="line">    reg, _ := NewRegister(&amp;NodeInfo&#123;</span><br><span class="line">        Name: <span class="string">"testsvr"</span>,</span><br><span class="line">        Addr: <span class="string">"127.0.0.1:8888"</span>,</span><br><span class="line">        UniqueId: <span class="string">"discovery/testsvr/instance_id/aaabbbccc"</span>,</span><br><span class="line">    &#125;, clientv3.Config&#123;</span><br><span class="line">        Endpoints:   []<span class="keyword">string</span>&#123;<span class="string">"tx.cxc233.com:8888"</span>&#125;,</span><br><span class="line">        DialTimeout: <span class="number">5</span> * time.Second,</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    reg2, _ := NewRegister(&amp;NodeInfo&#123;</span><br><span class="line">        Name: <span class="string">"testsvr"</span>,</span><br><span class="line">        Addr: <span class="string">"127.0.0.1:8888"</span>,</span><br><span class="line">        UniqueId: <span class="string">"discovery/testsvr/instance_id/testqqqqq"</span>,</span><br><span class="line">    &#125;, clientv3.Config&#123;</span><br><span class="line">        Endpoints:   []<span class="keyword">string</span>&#123;<span class="string">"tx.cxc233.com:8888"</span>&#125;,</span><br><span class="line">        DialTimeout: <span class="number">5</span> * time.Second,</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">go</span> reg.Run()</span><br><span class="line">    time.Sleep(time.Second * <span class="number">2</span>)</span><br><span class="line">    dis.pull()</span><br><span class="line">    <span class="keyword">go</span> dis.watch()</span><br><span class="line">    time.Sleep(time.Second * <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">go</span> reg2.Run()</span><br><span class="line">    time.Sleep(time.Second * <span class="number">1</span>)</span><br><span class="line">    nodes.Dump()</span><br><span class="line">    log.Printf(<span class="string">"[Main] nodes pick:%+v"</span>,nodes.Pick(<span class="string">"testsvr"</span>))</span><br><span class="line">    time.Sleep(time.Second * <span class="number">5</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">2020-10-18 22:36:39.102233 I | [Register] keepalive... leaseId:7587849142468224212</span><br><span class="line">2020-10-18 22:36:40.100365 I | [Register] keepalive... leaseId:7587849142468224212</span><br><span class="line">2020-10-18 22:36:40.100365 I | [Discovery] pull node:&amp;&#123;Addr:127.0.0.1:8888 Name:testsvr UniqueId:discovery/testsvr/instance_id/aaabbbccc&#125;</span><br><span class="line">2020-10-18 22:36:41.100389 I | [Register] keepalive... leaseId:7587849142468224212</span><br><span class="line">2020-10-18 22:36:41.143304 I | [Discovery] new node:&#123;<span class="string">"Addr"</span>:<span class="string">"127.0.0.1:8888"</span>,<span class="string">"Name"</span>:<span class="string">"testsvr"</span>,<span class="string">"UniqueId"</span>:<span class="string">"discovery/testsvr/instance_id/testqqqqq"</span>&#125;</span><br><span class="line">2020-10-18 22:36:42.097662 I | [Register] keepalive... leaseId:7587849142468224212</span><br><span class="line">2020-10-18 22:36:42.100819 I | [NodesManager] Name:testsvr Id:discovery/testsvr/instance_id/aaabbbccc Node:&amp;&#123;Addr:127.0.0.1:8888 Name:testsvr UniqueId:discovery/testsvr/instance_id/aaabbbccc&#125;</span><br><span class="line">2020-10-18 22:36:42.100819 I | [NodesManager] Name:testsvr Id:discovery/testsvr/instance_id/testqqqqq Node:&amp;&#123;Addr:127.0.0.1:8888 Name:testsvr UniqueId:discovery/testsvr/instance_id/testqqqqq&#125;</span><br><span class="line">2020-10-18 22:36:42.100819 I | [Main] nodes pick:&amp;&#123;Addr:127.0.0.1:8888 Name:testsvr UniqueId:discovery/testsvr/instance_id/testqqqqq&#125;</span><br><span class="line">2020-10-18 22:36:42.107588 I | [Register] keepalive... leaseId:7587849142468224216</span><br><span class="line">2020-10-18 22:36:43.091650 I | [Register] keepalive... leaseId:7587849142468224212</span><br><span class="line">2020-10-18 22:36:43.109634 I | [Register] keepalive... leaseId:7587849142468224216</span><br><span class="line">2020-10-18 22:36:44.093966 I | [Register] keepalive... leaseId:7587849142468224212</span><br><span class="line">2020-10-18 22:36:44.108130 I | [Register] keepalive... leaseId:7587849142468224216</span><br><span class="line">2020-10-18 22:36:45.093075 I | [Register] keepalive... leaseId:7587849142468224212</span><br><span class="line">2020-10-18 22:36:45.114071 I | [Register] keepalive... leaseId:7587849142468224216</span><br><span class="line">2020-10-18 22:36:46.107634 I | [Register] keepalive... leaseId:7587849142468224212</span><br><span class="line">2020-10-18 22:36:46.114016 I | [Register] keepalive... leaseId:7587849142468224216</span><br><span class="line">2020-10-18 22:36:47.091863 I | [Register] keepalive... leaseId:7587849142468224212</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>分享即是成长</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="changyuan WeChat Pay">
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/微服务/" rel="tag"># 微服务</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/09/27/go-dockerfile/" rel="next" title="golang项目部署(Dockerfile)">
+                <i class="fa fa-chevron-left"></i> golang项目部署(Dockerfile)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/12/15/site/" rel="prev" title="site">
+                site <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="changyuan">
+          <p class="site-author-name" itemprop="name">changyuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">不断升级自己的操作系统</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/changyuan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/changocean1" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/changyuan2011" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/changyuanyuan" target="_blank" title="Zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changyuan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

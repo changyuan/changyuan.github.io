@@ -1,0 +1,796 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0">
+
+
+
+
+
+
+<meta name="description" content="使用Docker能为我们解决什么问题？可以快速思考开发和部署没有Docker的应用程序的典型工作流程。 共享设置脚本吗，你真的会使用泊坞窗运行设置脚本，并分享图像生成。此映像包含应用程序运行应用程序所需的所有依赖项，包括Ubuntu等平台。因此，当您基于这个映像运行一个容器时，它不需要下载任何东西。这也确保了在构建映像时使用的软件版本将是随处使用的软件版本。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker入门">
+<meta property="og:url" content="http://changyuan.github.io/2017/07/31/docker-tutorial/index.html">
+<meta property="og:site_name" content="Chang Crazy&#39;s Blog">
+<meta property="og:description" content="使用Docker能为我们解决什么问题？可以快速思考开发和部署没有Docker的应用程序的典型工作流程。 共享设置脚本吗，你真的会使用泊坞窗运行设置脚本，并分享图像生成。此映像包含应用程序运行应用程序所需的所有依赖项，包括Ubuntu等平台。因此，当您基于这个映像运行一个容器时，它不需要下载任何东西。这也确保了在构建映像时使用的软件版本将是随处使用的软件版本。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-07-31T07:48:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker入门">
+<meta name="twitter:description" content="使用Docker能为我们解决什么问题？可以快速思考开发和部署没有Docker的应用程序的典型工作流程。 共享设置脚本吗，你真的会使用泊坞窗运行设置脚本，并分享图像生成。此映像包含应用程序运行应用程序所需的所有依赖项，包括Ubuntu等平台。因此，当您基于这个映像运行一个容器时，它不需要下载任何东西。这也确保了在构建映像时使用的软件版本将是随处使用的软件版本。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://changyuan.github.io/2017/07/31/docker-tutorial/">
+
+
+
+
+
+  <title>Docker入门 | Chang Crazy's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chang Crazy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">升级自己的操作系统</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2017/07/31/docker-tutorial/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="changyuan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang Crazy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-31T15:48:22+08:00">
+                2017-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="使用Docker能为我们解决什么问题？"><a href="#使用Docker能为我们解决什么问题？" class="headerlink" title="使用Docker能为我们解决什么问题？"></a>使用Docker能为我们解决什么问题？</h2><p>可以快速思考开发和部署没有Docker的应用程序的典型工作流程。</p>
+<p>共享设置脚本吗，你真的会使用泊坞窗运行设置脚本，并分享图像生成。此映像包含应用程序运行应用程序所需的所有依赖项，包括Ubuntu等平台。因此，当您基于这个映像运行一个容器时，它不需要下载任何东西。这也确保了在构建映像时使用的软件版本将是随处使用的软件版本。</p>
+<a id="more"></a>
+<p>由于每个容器都基于相同的映像，所以为了更新，您只需更新构建脚本，构建映像，测试映像仍然按预期运行，然后使用新映像部署新容器，并切换旧容器实例。这样可以确保容器彼此一致。</p>
+<p>一个容器会有一个单独的守护进程（Docker deamon） ，然后共享内核（the kernel）。</p>
+<p><strong> 使用Docker可确保部署的应用程序实例之间的一致性，最大限度地减少错误，并通过像Kubernetes这样的工具，使管理可扩展基础架构更加轻松。 </strong></p>
+<table>
+<thead>
+<tr>
+<th>header 1</th>
+<th>应用架构</th>
+<th>部署架构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>模块化</td>
+<td>包和组件</td>
+<td>容器</td>
+</tr>
+<tr>
+<td>关注点分离</td>
+<td>单一责任原则</td>
+<td>面向服务的体系结构 (SOA)</td>
+</tr>
+</tbody>
+</table>
+<p>举个例子，一个典型的社交媒体被分割成几个部分：</p>
+<ul>
+<li>一个核心的应用<code>python</code> or <code>nodejs</code> or <code>php</code> 或者其他语言</li>
+<li>一个mongodb数据库已提供应用信息</li>
+<li>一个搜索引擎，例如elasticsearch 来返回查询结果</li>
+<li>一个nginx的web服务器去处理请求和响应</li>
+</ul>
+<p>您将有四个容器，一个用于应用程序的每个分支。</p>
+<h2 id="术语（terminology）"><a href="#术语（terminology）" class="headerlink" title="术语（terminology）"></a>术语（terminology）</h2><ul>
+<li>镜像(images)用于创建容器的应用程序的文件系统和配置。想了解更多关于码头工人的形象，运行Docker视察高山。在演示中，你使用泊坞窗拉命令下载高山图像。当你执行命令Docker运行Hello World，它也没有一个码头工人拉幕后下载你好世界图像。</li>
+<li>容器 (containers) 运行Docker容器图像实例的运行实际的应用。容器包含应用程序及其所有依赖项。它与其他容器共享内核，并作为主机操作系统上的用户空间中的一个隔离进程运行。你创造了一个你下载的<code>alpine image</code>。你可以用<code>docker ps</code>这个命令列出所有的容器。</li>
+<li>Docker守护进程(Docker daemon) 管理大楼的主机上运行的后台服务，运行和分配的docker containers.</li>
+<li>docker client 命令行工具，允许用户与后台交互和Docker Deamon.</li>
+<li>Docker Store  docker 商店 你可以去下载使用别人做好的容器，插件等。</li>
+</ul>
+<h2 id="installion"><a href="#installion" class="headerlink" title="installion"></a>installion</h2><p><code>uname -r</code> 查看版本且必须大于3.1才能使用docker</p>
+<h3 id="ubuntu"><a href="#ubuntu" class="headerlink" title="ubuntu"></a>ubuntu</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://get.docker.com/ | sh</span><br><span class="line">sudo usermod -aG docker runoob  // 非root用户执行</span><br><span class="line">sudo service docker start</span><br><span class="line">//执行这个想去找hello-world 镜像，然后运行</span><br><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+<h3 id="centos"><a href="#centos" class="headerlink" title="centos"></a>centos</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker</span><br><span class="line">service docker start</span><br><span class="line">docker run hello-world</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 使用或者脚本安装</span></span><br><span class="line">sudo yum update</span><br><span class="line">curl -fsSL https://get.docker.com/ | sh</span><br><span class="line">sudo service docker start</span><br><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">sudo docker version</span><br><span class="line">&gt; - Client:  </span><br><span class="line">&gt; -  Version:      1.13.1</span><br><span class="line">&gt; -  API version:  1.26</span><br><span class="line">&gt; -  Go version:   go1.7.5</span><br><span class="line">&gt; -  Git commit:   092cba3</span><br><span class="line">&gt; -  Built:        Wed Feb  8 06:50:14 2017</span><br><span class="line">&gt; -  OS/Arch:      linux/amd64</span><br><span class="line">&gt; - </span><br><span class="line">&gt; - Server:  </span><br><span class="line">&gt; -  Version:      1.13.1</span><br><span class="line">&gt; -  API version:  1.26 (minimum version 1.12)</span><br><span class="line">&gt; -  Go version:   go1.7.5</span><br><span class="line">&gt; -  Git commit:   092cba3</span><br><span class="line">&gt; -  Built:        Wed Feb  8 06:50:14 2017</span><br><span class="line">&gt; -  OS/Arch:      linux/amd64</span><br><span class="line">&gt; -  Experimental: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo docker pull ubuntu</span><br><span class="line">sudo docker images</span><br><span class="line"></span><br><span class="line">sudo docker ps -a  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//Docker容器连接</span><br><span class="line">docker run -d -P training/webapp python app.py</span><br><span class="line">docker run -d -p 5000:5000 training/webapp python app.py</span><br><span class="line">docker run -d -p 127.0.0.1:5001:5002 training/webapp python app.py</span><br><span class="line">docker run -d -p 127.0.0.1:5000:5000/udp training/webapp python app.py</span><br><span class="line">//自定义</span><br><span class="line">docker run -d -P --name my_container_name training/webapp python app.py</span><br><span class="line"></span><br><span class="line">docker run --name static-site -e AUTHOR=<span class="string">"Your Name"</span> -d -P dockersamples/static-site</span><br><span class="line"></span><br><span class="line">docker ps</span><br><span class="line">docker ps -l</span><br><span class="line">docker ps -a</span><br><span class="line"></span><br><span class="line">&gt; -d: 后台运行</span><br><span class="line">&gt; -P: 创建</span><br><span class="line">&gt; -p: 端口或者地址</span><br><span class="line">&gt;- e: 是如何将环境变量传递给容器</span><br><span class="line">&gt;- name:  自定义容器名称</span><br></pre></td></tr></table></figure>
+<h2 id="webapps-whit-docker"><a href="#webapps-whit-docker" class="headerlink" title="webapps whit docker"></a>webapps whit docker</h2><h3 id="Run-a-static-website-in-a-container"><a href="#Run-a-static-website-in-a-container" class="headerlink" title="Run a static website in a container"></a>Run a static website in a container</h3><p>在<a href="https://github.com/docker/labs/tree/master/beginner/static-site" target="_blank" rel="noopener">这里</a> 有一个写好的容器下载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">docker run -d dockersamples/static-site</span><br><span class="line">docker ps // 查看</span><br><span class="line"></span><br><span class="line">docker port static-site</span><br><span class="line">//run</span><br><span class="line">docker run --name static-site-2 -e AUTHOR=&quot;Your Name&quot; -d -p 8888:80 dockersamples/static-site</span><br><span class="line">open localhost:8888/</span><br><span class="line"></span><br><span class="line">//stop</span><br><span class="line">docker stop a7a0e504ca3e // 停止</span><br><span class="line">docker rm a7a0e504ca3e   // 删除</span><br><span class="line"></span><br><span class="line">//或者直接</span><br><span class="line">docker rm -f static-site-2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker ps</span><br><span class="line">docker images</span><br></pre></td></tr></table></figure></p>
+<h2 id="docker-images"><a href="#docker-images" class="headerlink" title="docker images"></a>docker images</h2><p>可以在<a href="https://store.docker.com/" target="_blank" rel="noopener">docker Store</a> 使用官方或者自己的镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//加载ubuntu 16.04</span><br><span class="line">docker pull ubuntu:16.04  </span><br><span class="line">// 拉取latest</span><br><span class="line">docker pull ubuntu</span><br></pre></td></tr></table></figure></p>
+<h2 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h2><p>其他可以发布自己的store，或者<a href="https://github.com/docker/labs/blob/master/beginner/chapters/votingapp.md" target="_blank" rel="noopener">部署多个app的方法</a>。</p>
+<p><a href="https://github.com/docker/labs/blob/master/beginner/readme.md" target="_blank" rel="noopener">教程参考</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>分享即是成长</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat-reward-image.png" alt="changyuan WeChat Pay">
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/11/one2more-db-separation/" rel="next" title="1对多类业务架构分割">
+                <i class="fa fa-chevron-left"></i> 1对多类业务架构分割
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/02/daohuo/" rel="prev" title="盗火：硅谷、海豹突击队和疯狂科学家正在给我们的工作和生活带来一个革命">
+                盗火：硅谷、海豹突击队和疯狂科学家正在给我们的工作和生活带来一个革命 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="changyuan">
+          <p class="site-author-name" itemprop="name">changyuan</p>
+           
+              <p class="site-description motion-element" itemprop="description">不断升级自己的操作系统</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">69</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/changyuan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/changocean1" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/changyuan2011" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/changyuanyuan" target="_blank" title="Zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Docker能为我们解决什么问题？"><span class="nav-number">1.</span> <span class="nav-text">使用Docker能为我们解决什么问题？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#术语（terminology）"><span class="nav-number">2.</span> <span class="nav-text">术语（terminology）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#installion"><span class="nav-number">3.</span> <span class="nav-text">installion</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ubuntu"><span class="nav-number">3.1.</span> <span class="nav-text">ubuntu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#centos"><span class="nav-number">3.2.</span> <span class="nav-text">centos</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">4.</span> <span class="nav-text">Usage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webapps-whit-docker"><span class="nav-number">5.</span> <span class="nav-text">webapps whit docker</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-a-static-website-in-a-container"><span class="nav-number">5.1.</span> <span class="nav-text">Run a static website in a container</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-images"><span class="nav-number">6.</span> <span class="nav-text">docker images</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other"><span class="nav-number">7.</span> <span class="nav-text">Other</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">changyuan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/fancybox/3.5.1/jquery.fancybox.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
