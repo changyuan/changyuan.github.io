@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Comic+Sans+MS:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Brush+Script+MT:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=cursive:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=LXGW+WenKai:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=LXGW+WenKai+GB:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=LXGW+WenKai+TC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=LXGW+WenKai+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.31/dist/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous" defer></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changyuan.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":5,"unescape":true,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="Homebrew12345678&#x2F;&#x2F;installruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install)&quot;&#x2F;&#x2F;usebrew search &#x2F;apache*&#x2F;brew install wgetbrew uninstall wget  官网">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mac 常见环境安装配置">
+<meta property="og:url" content="http://changyuan.github.io/2015/07/29/mac-web/index.html">
+<meta property="og:site_name" content="Chang&#39;s Mind Garden">
+<meta property="og:description" content="Homebrew12345678&#x2F;&#x2F;installruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install)&quot;&#x2F;&#x2F;usebrew search &#x2F;apache*&#x2F;brew install wgetbrew uninstall wget  官网">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-07-29T05:42:55.000Z">
+<meta property="article:modified_time" content="2015-07-29T05:42:55.000Z">
+<meta property="article:author" content="Change">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://changyuan.github.io/2015/07/29/mac-web/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://changyuan.github.io/2015/07/29/mac-web/","path":"2015/07/29/mac-web/","title":"mac 常见环境安装配置"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 优化文章配图加载
+  const articleImages = document.querySelectorAll('.article-header-image img');
+  
+  articleImages.forEach(img => {
+    // 添加加载状态
+    img.addEventListener('load', function() {
+      this.style.opacity = '1';
+      this.parentElement.style.background = 'none';
+    });
+    
+    img.addEventListener('error', function() {
+      // 如果默认图片也加载失败，隐藏整个图片容器
+      if (this.src.includes('default-')) {
+        this.parentElement.style.display = 'none';
+      }
+    });
+    
+    // 设置初始状态
+    img.style.transition = 'opacity 0.3s ease';
+    img.style.opacity = '0.8';
+  });
+  
+  // 预加载下一张图片（如果有）
+  const nextLink = document.querySelector('a[rel="next"]');
+  if (nextLink) {
+    const nextImg = new Image();
+    nextImg.src = nextLink.href;
+  }
+});
+</script>
+<title>mac 常见环境安装配置 | Chang's Mind Garden</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.31/dist/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@7.2.0/dist/browser/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.5.0/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@11.10.1/dist/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdn.jsdelivr.net/npm/wavedrom@3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdn.jsdelivr.net/npm/wavedrom@3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js" defer></script>
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+  <script src="/js/third-party/pace.js" defer></script>
+
+  <script src="/js/third-party/addtoany.js" defer></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@3.0.1/dist/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"http://changyuan.github.io/2015/07/29/mac-web/"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+<!-- 霞鹜文楷字体引入 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css">
+<style>
+  /* 确保文章正文使用霞鹜文楷 */
+  .post-body {
+    font-family: "LXGW WenKai Screen", "LXGW WenKai", "LXGW WenKai GB", "LXGW WenKai TC", "LXGW WenKai Mono", "ZCOOL KuaiLe", "Comic Sans MS", "Brush Script MT", cursive, "PingFang SC", "Microsoft YaHei", sans-serif !important;
+  }
+</style>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Chang's Mind Garden</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">不断升级自己的操作系统</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew"><span class="nav-number">1.</span> <span class="nav-text">Homebrew</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zsh-bash"><span class="nav-number">2.</span> <span class="nav-text">zsh bash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#apache"><span class="nav-number">3.</span> <span class="nav-text">apache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx"><span class="nav-number">4.</span> <span class="nav-text">nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">5.</span> <span class="nav-text">mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php"><span class="nav-number">6.</span> <span class="nav-text">php</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mac-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B7%A5%E5%85%B7"><span class="nav-number">7.</span> <span class="nav-text">mac 的一些工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xcode"><span class="nav-number">8.</span> <span class="nav-text">xcode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rvm"><span class="nav-number">9.</span> <span class="nav-text">rvm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nvm"><span class="nav-number">10.</span> <span class="nav-text">nvm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#atom"><span class="nav-number">11.</span> <span class="nav-text">atom</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mac%E8%87%AA%E5%90%AF%E5%8A%A8%E7%9B%AE%E5%BD%95"><span class="nav-number">12.</span> <span class="nav-text">mac自启动目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#brew-%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">13.</span> <span class="nav-text">brew 使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B1%E4%BA%8Ehomebrew%E4%B8%8A%E9%9D%A2%E7%9A%84%E4%B8%9C%E8%A5%BF-%E5%BE%88%E5%A4%9A%E8%A6%81%E4%B9%88%E8%A2%AB%E5%A2%99-%E8%A6%81%E4%B9%88%E6%AD%BB%E6%85%A2-%E9%9C%80%E8%A6%81%E6%8D%A2brew%E6%BA%90-%E5%88%86%E4%B8%BA%E4%B8%A4%E9%83%A8%E5%88%86"><span class="nav-number">13.1.</span> <span class="nav-text">由于homebrew上面的东西 很多要么被墙,要么死慢,需要换brew源(分为两部分)</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Change"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Change</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/changyuan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changyuan" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:changocean@163.com" title="E-Mail → mailto:changocean@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/changyuan2011" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;changyuan2011" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/changocean1" title="X → https:&#x2F;&#x2F;x.com&#x2F;changocean1" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>X</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/change-12-17" title="ZhiHu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;change-12-17" rel="noopener me" target="_blank"><i class="fab fa-quora fa-fw"></i>ZhiHu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.reddit.com/" title="Reddit → https:&#x2F;&#x2F;www.reddit.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-reddit fa-fw"></i>Reddit</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2015/07/29/mac-web/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Change">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="mac 常见环境安装配置 | Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          mac 常见环境安装配置<a href="https://github.com/changyuan/blog/tree/dev/_posts/2015/mac-web.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-07-29 13:42:55" itemprop="dateCreated datePublished" datetime="2015-07-29T13:42:55+08:00">2015-07-29</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//install</span><br><span class="line">ruby -e <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>&quot;</span></span><br><span class="line"></span><br><span class="line">//use</span><br><span class="line">brew search /apache*/</span><br><span class="line">brew install wget</span><br><span class="line">brew uninstall wget</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://brew.sh/">官网</a></p>
+</blockquote>
+<span id="more"></span>
+<h2 id="zsh-bash"><a href="#zsh-bash" class="headerlink" title="zsh bash"></a>zsh bash</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<p>｀cat &#x2F;etc&#x2F;shells｀ 查看所有的sh<br><code>chsh -s /bin/bash</code>  或者 <code>chsh -s /bin/zsh</code></p>
+<p><a target="_blank" rel="noopener" href="http://ohmyz.sh/">zsh</a></p>
+<h2 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h2><p>mac自带一个版本，如果安装新的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install apache</span><br></pre></td></tr></table></figure>
+
+<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><p>自动安装依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">brew install nginx</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> nginx</span><br><span class="line">nginx -s reload|reopen|stop|quit</span><br><span class="line">nginx -t</span><br></pre></td></tr></table></figure>
+<p>默认启用的8080端口，可以更改配置文件来设置端口。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/local/etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure>
+<p>默认访问目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/Cellar/nginx/<span class="variable">$version</span>/html</span><br></pre></td></tr></table></figure>
+<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mysql</span><br></pre></td></tr></table></figure>
+<p>安装完成之后：<br>We’ve installed your MySQL database without a root password. To secure it run:<br>    <code>mysql_secure_installation</code><br>To connect run:<br>    <code>mysql -uroot</code><br>To have launchd start mysql now and restart at login:<br>  <code>brew services start mysql</code><br>Or, if you don’t want&#x2F;need a background service you can just run:<br>  <code>mysql.server start</code></p>
+<p>在5.7版本之后，其自动初始化数据库，用｀mysql.erver start｀ 启动 ，<code>mysql -uroot</code> 链接使用.<br>在之前的需要初始化数据库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_install_db --verbose --user=<span class="string">&#x27;whoami&#x27;</span> --basedir=<span class="string">&quot;<span class="subst">$(brew --prefix mysql)</span>&quot;</span> --datadir=/usr/local/var/mysql --tmpdir=/tmp</span><br></pre></td></tr></table></figure>
+<p><code>mysqladmin -u root password &#39;password&#39;</code></p>
+<h2 id="php"><a href="#php" class="headerlink" title="php"></a>php</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Homebrew/homebrew-php">参考</a><br>安装完成之后：</p>
+</blockquote>
+<p>To enable PHP in Apache add the following to httpd.conf and restart Apache:<br>    <code>LoadModule php5_module    /usr/local/opt/php56/libexec/apache2/libphp5.so</code></p>
+<p>The php.ini file can be found in:<br>    <code>/usr/local/etc/php/5.6/php.ini</code></p>
+<p>✩✩✩✩ Extensions ✩✩✩✩</p>
+<p>If you are having issues with custom extension compiling, ensure that<br>you are using the brew version, by placing &#x2F;usr&#x2F;local&#x2F;bin before &#x2F;usr&#x2F;sbin in your PATH:</p>
+<pre><code>  PATH=&quot;/usr/local/bin:$PATH&quot;
+</code></pre>
+<p>PHP56 Extensions will always be compiled against this PHP. Please install them<br>using –without-homebrew-php to enable compiling against system PHP.</p>
+<p>✩✩✩✩ PHP CLI ✩✩✩✩</p>
+<p>If you wish to swap the PHP you use on the command line, you should add the following to ~&#x2F;.bashrc,<br>~&#x2F;.zshrc, ~&#x2F;.profile or your shell’s equivalent configuration file:</p>
+<pre><code>  export PATH=&quot;$(brew --prefix homebrew/php/php56)/bin:$PATH&quot;
+</code></pre>
+<p>✩✩✩✩ FPM ✩✩✩✩</p>
+<p>加入launchctl启动控制<br>To launch php-fpm on startup:<br>    mkdir -p ~&#x2F;Library&#x2F;LaunchAgents<br>    cp &#x2F;usr&#x2F;local&#x2F;opt&#x2F;php56&#x2F;homebrew.mxcl.php56.plist ~&#x2F;Library&#x2F;LaunchAgents&#x2F;<br>    launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php56.plist</p>
+<p>The control script is located at &#x2F;usr&#x2F;local&#x2F;opt&#x2F;php56&#x2F;sbin&#x2F;php56-fpm</p>
+<p>OS X 10.8 and newer come with php-fpm pre-installed, to ensure you are using the brew version you need to make sure &#x2F;usr&#x2F;local&#x2F;sbin is before &#x2F;usr&#x2F;sbin in your PATH:</p>
+<p>  PATH&#x3D;”&#x2F;usr&#x2F;local&#x2F;sbin:$PATH”</p>
+<p>You may also need to edit the plist to use the correct “UserName”.</p>
+<p>Please note that the plist was called ‘homebrew-php.josegonzalez.php56.plist’ in old versions<br>of this formula.</p>
+<p>To have launchd start homebrew&#x2F;php&#x2F;php56 now and restart at login:<br>  brew services start homebrew&#x2F;php&#x2F;php56<br>  brew services restart homebrew&#x2F;php&#x2F;php56</p>
+<p>DocumentRoot is &#x2F;usr&#x2F;local&#x2F;var&#x2F;www.</p>
+<p>The default ports have been set in &#x2F;usr&#x2F;local&#x2F;etc&#x2F;httpd&#x2F;httpd.conf to 8080 and in<br>&#x2F;usr&#x2F;local&#x2F;etc&#x2F;httpd&#x2F;extra&#x2F;httpd-ssl.conf to 8443 so that httpd can run without sudo.</p>
+<p>To have launchd start httpd now and restart at login:<br>  brew services start httpd<br>Or, if you don’t want&#x2F;need a background service you can just run:<br>  apachectl start</p>
+<p>To enable PHP in Apache add the following to httpd.conf and restart Apache:<br>    LoadModule php7_module &#x2F;usr&#x2F;local&#x2F;opt&#x2F;<a href="mailto:&#x70;&#x68;&#x70;&#64;&#55;&#x2e;&#x31;">php@7.1</a>&#x2F;lib&#x2F;httpd&#x2F;modules&#x2F;libphp7.so</p>
+<pre><code>&lt;FilesMatch \.php$&gt;
+    SetHandler application/x-httpd-php
+&lt;/FilesMatch&gt;
+</code></pre>
+<p>Finally, check DirectoryIndex includes index.php<br>    DirectoryIndex index.php index.html</p>
+<p>The php.ini and php-fpm.ini file can be found in:<br>    &#x2F;usr&#x2F;local&#x2F;etc&#x2F;php&#x2F;7.1&#x2F;</p>
+<p><a href="mailto:&#x70;&#x68;&#x70;&#64;&#x37;&#x2e;&#49;">php@7.1</a> is keg-only, which means it was not symlinked into &#x2F;usr&#x2F;local,<br>because this is an alternate version of another formula.</p>
+<p>If you need to have <a href="mailto:&#112;&#104;&#x70;&#x40;&#x37;&#x2e;&#x31;">php@7.1</a> first in your PATH run:<br>  echo ‘export PATH&#x3D;”&#x2F;usr&#x2F;local&#x2F;opt&#x2F;<a href="mailto:&#112;&#104;&#112;&#x40;&#55;&#x2e;&#49;">php@7.1</a>&#x2F;bin:$PATH”‘ &gt;&gt; ~&#x2F;.bash_profile<br>  echo ‘export PATH&#x3D;”&#x2F;usr&#x2F;local&#x2F;opt&#x2F;<a href="mailto:&#112;&#x68;&#112;&#64;&#x37;&#x2e;&#49;">php@7.1</a>&#x2F;sbin:$PATH”‘ &gt;&gt; ~&#x2F;.bash_profile</p>
+<p>For compilers to find <a href="mailto:&#112;&#x68;&#x70;&#x40;&#55;&#x2e;&#49;">php@7.1</a> you may need to set:<br>  export LDFLAGS&#x3D;”-L&#x2F;usr&#x2F;local&#x2F;opt&#x2F;<a href="mailto:&#112;&#104;&#x70;&#x40;&#55;&#46;&#49;">php@7.1</a>&#x2F;lib”<br>  export CPPFLAGS&#x3D;”-I&#x2F;usr&#x2F;local&#x2F;opt&#x2F;<a href="mailto:&#x70;&#x68;&#x70;&#x40;&#x37;&#46;&#49;">php@7.1</a>&#x2F;include”</p>
+<p>To have launchd start <a href="mailto:&#112;&#x68;&#112;&#x40;&#55;&#x2e;&#x31;">php@7.1</a> now and restart at login:<br>  brew services start <a href="mailto:&#112;&#104;&#112;&#64;&#x37;&#46;&#49;">php@7.1</a><br>Or, if you don’t want&#x2F;need a background service you can just run:<br>  php-fpm<br>&#x3D;&#x3D;&gt; Summary</p>
+<h2 id="mac-的一些工具"><a href="#mac-的一些工具" class="headerlink" title="mac 的一些工具"></a>mac 的一些工具</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">//自己的环境变量</span><br><span class="line">curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.bash_profile</span><br><span class="line">// 一些颜色设置，并不好用（可选）</span><br><span class="line"><span class="comment"># curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.bash_prompt</span></span><br><span class="line">//unix的自定义别名</span><br><span class="line">curl -O https://raw.githubusercontent.com/donnemartin/dev-setup/master/.aliases</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>一些工具替换产品</p>
+<blockquote>
+<ul>
+<li>Terminal → <a target="_blank" rel="noopener" href="https://www.iterm2.com/">iTerm</a></li>
+<li>Finder → <a target="_blank" rel="noopener" href="http://totalfinder.binaryage.com/">TotalFinder</a> &#x2F; <a target="_blank" rel="noopener" href="http://www.cocoatech.com/pathfinder/">Path Finder</a></li>
+<li>Spotlight → <a target="_blank" rel="noopener" href="https://qsapp.com/">QuickSilver</a> &#x2F; <a target="_blank" rel="noopener" href="https://www.alfredapp.com/">Alfred</a></li>
+</ul>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/0nn0/terminal-mac-cheatsheet">Terminal cheatsheet</a></p>
+<h2 id="xcode"><a href="#xcode" class="headerlink" title="xcode"></a>xcode</h2><p>xcode-select –install</p>
+<h2 id="rvm"><a href="#rvm" class="headerlink" title="rvm"></a>rvm</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL https://get.rvm.io | bash -s stable</span><br><span class="line">rvm install 2.3.1</span><br><span class="line">rvm use 2.3.1</span><br></pre></td></tr></table></figure>
+<h2 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install nvm</span><br><span class="line">nvm install 4</span><br><span class="line">nvm use 4</span><br></pre></td></tr></table></figure>
+
+<h2 id="atom"><a href="#atom" class="headerlink" title="atom"></a>atom</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">brew cask install atom</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="mac自启动目录"><a href="#mac自启动目录" class="headerlink" title="mac自启动目录"></a>mac自启动目录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/Library/LaunchAgents</span><br></pre></td></tr></table></figure>
+
+<h2 id="brew-使用方法"><a href="#brew-使用方法" class="headerlink" title="brew 使用方法"></a>brew 使用方法</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">brew update                        　　#更新brew可安装包，建议每次执行一下</span><br><span class="line">brew search php55                    #搜索php5.5</span><br><span class="line">brew tap josegonzalez/php        #安装扩展&lt;gihhub_user/repo&gt;   ,可以获得更多的资源</span><br><span class="line">brew tap                                  #查看安装的扩展列表</span><br><span class="line">brew install php55                    #安装php5.5</span><br><span class="line">brew remove  php55                 #卸载php5.5</span><br><span class="line">brew upgrade php55                 #升级php5.5</span><br><span class="line">brew options php55                  #查看php5.5安装选项</span><br><span class="line">brew info    php55                    #查看php5.5相关信息</span><br><span class="line">brew home    php55                  #访问php5.5官方网站</span><br><span class="line">brew services list                      #查看系统通过 brew 安装的服务</span><br><span class="line">brew services cleanup               #清除已卸载无用的启动配置文件</span><br><span class="line">brew services restart php55       #重启php-fpm</span><br></pre></td></tr></table></figure>
+
+<h3 id="由于homebrew上面的东西-很多要么被墙-要么死慢-需要换brew源-分为两部分"><a href="#由于homebrew上面的东西-很多要么被墙-要么死慢-需要换brew源-分为两部分" class="headerlink" title="由于homebrew上面的东西 很多要么被墙,要么死慢,需要换brew源(分为两部分)"></a>由于homebrew上面的东西 很多要么被墙,要么死慢,需要换brew源(分为两部分)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">替换homebrew默认源</span><br><span class="line">　　cd &quot;$(brew --repo)&quot; 　　//这个命令会进入到相应目录,可以pwd查看下</span><br><span class="line">　　cd &quot;$(brew --repo)&quot; git remote set-url origin git://mirrors.ustc.edu.cn/brew.git</span><br><span class="line">Homebrew Bottles源(二进制代码包)</span><br><span class="line">　　echo &#x27;export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles&#x27; &gt;&gt; ~/.bash_profile </span><br><span class="line">　　source ~/.bash_profile</span><br><span class="line">更新</span><br><span class="line">　　brew update</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat-reward-image.png" alt="Change 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay-reward-image.jpg" alt="Change 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+      <a class="a2a_button_weibo"></a>
+      <a class="a2a_button_email"></a>
+      <a class="a2a_button_copy_link"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2015/06/22/grown-up/" rel="prev" title="成长记">
+                  <i class="fa fa-angle-left"></i> 成长记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2015/09/22/observer-pattern/" rel="next" title="观察者模式(observer pattern)">
+                  观察者模式(observer pattern) <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Change</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/changyuan" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

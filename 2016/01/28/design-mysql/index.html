@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Comic+Sans+MS:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Brush+Script+MT:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=cursive:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=LXGW+WenKai:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=LXGW+WenKai+GB:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=LXGW+WenKai+TC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=LXGW+WenKai+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.31/dist/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous" defer></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changyuan.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":5,"unescape":true,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="数据库的基本概念基本概念就一页PPT，让大家就一些数据库方面的概念达成一致。  “单库”。  “分片”，也就是水平切分，它是用来解决数据量大的问题。有一些数据库支持auto sharding，自动分片，例如mongoDB，后来发现auto sharding不太可控，不知道什么时候会进行数据迁移，数据迁移过程中会有大粒度的锁，读写被阻塞，业务会有抖动和毛刺，这些是业务不能接受的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库设计">
+<meta property="og:url" content="http://changyuan.github.io/2016/01/28/design-mysql/index.html">
+<meta property="og:site_name" content="Chang&#39;s Mind Garden">
+<meta property="og:description" content="数据库的基本概念基本概念就一页PPT，让大家就一些数据库方面的概念达成一致。  “单库”。  “分片”，也就是水平切分，它是用来解决数据量大的问题。有一些数据库支持auto sharding，自动分片，例如mongoDB，后来发现auto sharding不太可控，不知道什么时候会进行数据迁移，数据迁移过程中会有大粒度的锁，读写被阻塞，业务会有抖动和毛刺，这些是业务不能接受的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://changyuan.github.io/images/technology/snowflake-64bit.jpg">
+<meta property="article:published_time" content="2016-01-28T09:21:06.000Z">
+<meta property="article:modified_time" content="2016-01-28T09:21:06.000Z">
+<meta property="article:author" content="Change">
+<meta property="article:tag" content="mysql">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://changyuan.github.io/images/technology/snowflake-64bit.jpg">
+
+
+<link rel="canonical" href="http://changyuan.github.io/2016/01/28/design-mysql/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://changyuan.github.io/2016/01/28/design-mysql/","path":"2016/01/28/design-mysql/","title":"数据库设计"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 优化文章配图加载
+  const articleImages = document.querySelectorAll('.article-header-image img');
+  
+  articleImages.forEach(img => {
+    // 添加加载状态
+    img.addEventListener('load', function() {
+      this.style.opacity = '1';
+      this.parentElement.style.background = 'none';
+    });
+    
+    img.addEventListener('error', function() {
+      // 如果默认图片也加载失败，隐藏整个图片容器
+      if (this.src.includes('default-')) {
+        this.parentElement.style.display = 'none';
+      }
+    });
+    
+    // 设置初始状态
+    img.style.transition = 'opacity 0.3s ease';
+    img.style.opacity = '0.8';
+  });
+  
+  // 预加载下一张图片（如果有）
+  const nextLink = document.querySelector('a[rel="next"]');
+  if (nextLink) {
+    const nextImg = new Image();
+    nextImg.src = nextLink.href;
+  }
+});
+</script>
+<title>数据库设计 | Chang's Mind Garden</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.31/dist/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@7.2.0/dist/browser/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.5.0/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@11.10.1/dist/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdn.jsdelivr.net/npm/wavedrom@3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdn.jsdelivr.net/npm/wavedrom@3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js" defer></script>
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+  <script src="/js/third-party/pace.js" defer></script>
+
+  <script src="/js/third-party/addtoany.js" defer></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@3.0.1/dist/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"http://changyuan.github.io/2016/01/28/design-mysql/"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+<!-- 霞鹜文楷字体引入 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css">
+<style>
+  /* 确保文章正文使用霞鹜文楷 */
+  .post-body {
+    font-family: "LXGW WenKai Screen", "LXGW WenKai", "LXGW WenKai GB", "LXGW WenKai TC", "LXGW WenKai Mono", "ZCOOL KuaiLe", "Comic Sans MS", "Brush Script MT", cursive, "PingFang SC", "Microsoft YaHei", sans-serif !important;
+  }
+</style>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Chang's Mind Garden</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">不断升级自己的操作系统</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">数据库的基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%AF%E7%94%A8%E6%80%A7%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5"><span class="nav-number">2.</span> <span class="nav-text">可用性架构实践</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%BB%E6%80%A7%E8%83%BD%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.</span> <span class="nav-text">读性能架构实践</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5"><span class="nav-number">4.</span> <span class="nav-text">一致性架构实践</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%80%A7%E6%9E%B6%E6%9E%84%E5%AE%9E%E8%B7%B5"><span class="nav-number">5.</span> <span class="nav-text">扩展性架构实践</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Change"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Change</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/changyuan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changyuan" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:changocean@163.com" title="E-Mail → mailto:changocean@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/changyuan2011" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;changyuan2011" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/changocean1" title="X → https:&#x2F;&#x2F;x.com&#x2F;changocean1" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>X</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/change-12-17" title="ZhiHu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;change-12-17" rel="noopener me" target="_blank"><i class="fab fa-quora fa-fw"></i>ZhiHu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.reddit.com/" title="Reddit → https:&#x2F;&#x2F;www.reddit.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-reddit fa-fw"></i>Reddit</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2016/01/28/design-mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Change">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数据库设计 | Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据库设计<a href="https://github.com/changyuan/blog/tree/dev/_posts/2016/design-mysql.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-01-28 17:21:06" itemprop="dateCreated datePublished" datetime="2016-01-28T17:21:06+08:00">2016-01-28</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.8k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>17 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="数据库的基本概念"><a href="#数据库的基本概念" class="headerlink" title="数据库的基本概念"></a>数据库的基本概念</h1><p>基本概念就一页PPT，让大家就一些数据库方面的概念达成一致。</p>
+<ol>
+<li><p>“单库”。</p>
+</li>
+<li><p>“分片”，也就是水平切分，它是用来解决数据量大的问题。有一些数据库支持auto sharding，自动分片，例如mongoDB，后来发现auto sharding不太可控，不知道什么时候会进行数据迁移，数据迁移过程中会有大粒度的锁，读写被阻塞，业务会有抖动和毛刺，这些是业务不能接受的。</p>
+</li>
+</ol>
+<span id="more"></span>
+<p>一旦进行分片，就会面临“数据路由”的问题，来了一个请求，要将请求路由到对应的数据库分片上。互联网常用的数据路由方法有三种：</p>
+<ol>
+<li><p>一个是按照数据范围路由，比如有两个分片，一个范围是0-1亿，一个范围是1亿-2亿，这样来路由。<br>这个方式的优点是非常的简单，并且扩展性好，假如两个分片不够了，增加一个2亿-3亿的分片即可。<br>这个方式的缺点是：虽然数据的分布是均衡的，每一个库的数据量差不多，但请求的负载会不均衡。例如有一些业务场景，新注册的用户活跃度更高，大范围的分片请求负载会更高。</p>
+</li>
+<li><p>二个是按照hash路由，比如有两个分片，数据模2寻库即可。<br>这个方式的优点是路由方式很简单，数据分布也是均衡的，请求负载也是均衡的。<br>这个方式的缺点是如果两个分片数据量过大，要变成三个分片，数据迁移会比较麻烦，即扩展性会受限。</p>
+</li>
+<li><p>三个是路由服务。前面两个数据路由方法均有一个缺点，业务线需要耦合路由规则，如果路由规则发生变化，业务线是需要配合升级的。路由服务可以实现业务线与路由规则的解耦，业务线每次访问数据库之前先调用路由服务，来知道数据究竟存放在哪个分库上。</p>
+</li>
+<li><p>“分组”与“复制”，这解决的是扩展读性能，保证读高可用的问题。<br>大部分互联网的业务都是读多写少。<br>淘宝、京东查询商品，搜索商品的请求可能占了99%，只有下单和支付的时候有写请求。<br>58同城搜索帖子，察看列表页，查看详情页都是读请求，发布帖子是写请求，写请求的量也是比较少的。<br>大部分互联网的场景都读多写少，一般来说读性能会最先成为瓶颈，怎么快速解决这个问题呢？</p>
+</li>
+</ol>
+<p>我们通常使用<strong>读写分离</strong>，扩充读库的方式来提升系统的读性能，同时多个读库也保证了读的可用性，一台读库挂了，另外一台读库可以持续的提供服务。</p>
+<h1 id="可用性架构实践"><a href="#可用性架构实践" class="headerlink" title="可用性架构实践"></a>可用性架构实践</h1><p>数据库大家都用，平时除了根据业务设计表结构，根据访问来设计索引之外，还应该在设计时考虑数据的可用性，可用性又分为读的高可用与写的高可用。</p>
+<p>上图是“读”高可用的常见玩法，我们是怎么样保证读库的高可用的呢？解决高可用这个问题的思路是冗余。<br>解决站点的可用性问题冗余多个站点，解决服务的可用性问题冗余多个服务，解决数据的可用性问题冗余多份数据。<br>如果用一个读库，保证不了读高可用，就复制读库，一个读库挂了另一个仍然可以提供服务，这么用复制的方式来保证读的可用性。</p>
+<p>数据的冗余会引发一个副作用，就是一致性的问题。<br>如果是单库，读和写都落在同一个库上，每次读到的都是最新的数据库，不存在一致性的问题。<br>但是为了保证可用性将数据复制到多个地方，而这多个地方的数据绝对不是实时同步的，会有同步时延，所以有可能会读到旧的数据。如何解决主从数据库一致性问题我们在后面再来讲。</p>
+<p>很多互联网公司的数据库软件架构都是一主两从或者一主三从，不能够保证“写”的高可用，因为写其实还是只有一个库，仍是单点，如果这个库挂了的话，写会受影响。那小伙伴们为什么还使用这个架构呢？<br>我刚才提到大部分互联网公司99%的业务都是“读”业务，写库不是主要矛盾，写库挂了，可能只有1%的用户会受影响。<br>如果要做到“写”的高可用，对数据库软件架构的冲击比较大，不一定值得，为了解决1%的问题引入了80%的复杂度，所以很多互联网公司都没有解决写数据库的高可用的问题。</p>
+<p>怎么来解决写的高可用问题呢？思路还是<strong>冗余</strong>，读的高可用是冗余读库，写的高可用是冗余写库。把一个写变成两个写，做一个<strong>双主同步</strong>，一个挂了的话，可以将写的流量自动切到另外一个，写库的高可用性。</p>
+<p>用双主同步的方式保证写高可用性会存在什么样的问题？</p>
+<p>刚才提到，用冗余的方式保证可用性会存在一致性问题。因为两个主相互同步，这个同步是有时延的，很多公司用到auto-increment-id这样的一些数据库的特性，<strong>如果用双主同步的架构，一个主id由10变成11，在数据没有同步过去之前，另一个主又来了一个写请求，也由10变成11，双向同步会主键冲突，同步失败，造成数据丢失</strong>。</p>
+<p>解决这个双主同步id冲突的方案有两种：</p>
+<ol>
+<li>一个是双主使用不同的初始值，相同的步长来生成id，一个库从0开始（生成02468），一个库从1开始（生成13579），步长都为2，这样两边同步数据就不会冲突。</li>
+<li>另一个方式是不要使用数据库的auto-increment-id，而由业务层来保证生成的id不冲突。<a href="http://changyuan.github.io/2015/12/04/gen-id-way/">参考</a></li>
+<li>使用的是“双主”当“主从”的方式来保证数据库的读写可用性,虽然看上去是双主同步，但是读写都在一个主上，另一个主库没有读写流量，完全是备份。当一个主库挂掉的时候，流量会自动的切换到另外一个主库上，这一切对业务线都是透明的，自动完成。但缺点有两个：<ul>
+<li>数据库资源利用率只有50%；</li>
+<li>没有办法通过增加读库的方式来扩展系统的读性能；</li>
+</ul>
+</li>
+</ol>
+<h1 id="读性能架构实践"><a href="#读性能架构实践" class="headerlink" title="读性能架构实践"></a>读性能架构实践</h1><p>如何增加数据库的读性能，先看下传统的玩法：</p>
+<ol>
+<li>增加从库，通过增加从库来提升读性能，缺点是什么呢？从库越多，写的性能越慢，同步的时间越长，不一致的可能性越高。</li>
+<li>增加缓存，缓存是大家用的非常多的一种提高系统读性能方法，特别是对于读多写少的互联网场景非常的有效。上游是业务线，下游是读写分离主从同步和一个cache。<br>对于写操作：<strong>会先淘汰cache，再写数据库</strong>。<br>对于读操作：先读cache，如果cache hit则返回数据，如果cache miss则读从库，然后把读出来的数据再入缓存。</li>
+</ol>
+<p>cache玩法在一种异常时序下，会引发严重的一致性问题，考虑这样一个特殊的时序：</p>
+<ol>
+<li>先来了一个写请求，淘汰了cache，写了数据库；</li>
+<li>又来了一个读请求，读cache，cache miss了，然后读从库，此时写请求还没有同步到从库上，于是读了一个脏数据，接着脏数据入缓存；</li>
+<li>最后主从同步完成，这个时序会导致脏数据一直在缓存中没有办法被淘汰掉，数据库和缓存中的数据严重不一致。</li>
+</ol>
+<h1 id="一致性架构实践"><a href="#一致性架构实践" class="headerlink" title="一致性架构实践"></a>一致性架构实践</h1><p>58同城采用“服务+缓存+数据库”一套的方式来保证数据的一致性，由于58同城使用“双主当主从用”的数据库读写高可用架构，读写都在一个主库上，不会读到所谓“读库的脏数据”，所以数据库与缓存的不一致情况也不会存在。</p>
+<p>主从为什么会不一致？刚才提到读写会有时延，有可能读到从库上的旧数据。常见的方法是引入中间件，业务层不直接访问数据库，而是通过中间件访问数据库，这个中间件会记录哪一些key上发生了写请求，在数据主从同步时间窗口之内，如果key上又出了读请求，就将这个请求也路由到主库上去（因为此时从库可能还没有同步完成，是旧数据），使用这个方法来保证数据的一致性。</p>
+<p>中间件的方案很理想，那为什么大部分的互联网的公司都没有使用这种方案来保证主从数据的一致性呢？那是因为数据库中间件的技术门槛比较高，有一些大公司，例如百度，腾讯，阿里他们可能有自己的中间件，并不是所有的创业公司互联网公司有自己的中间件产品，况且很多互联网公司的业务对数据一致性的要求并没有那么高。比如说同城搜一个帖子，可能5秒钟之后才搜出来，对用户的体验并没有多大的影响。</p>
+<p>除了中间件，读写都路由到主库，58同城就是这么干的，也是一种解决主从不一致的常用方案。</p>
+<p>解决完主从不一致，第二个要解决的是数据库和缓存的不一致，刚才提到cache传统的玩法，脏数据有可能入cache，我们怎么解决呢？<br>两个实践：第一个是缓存双淘汰机制，第二个是建议为所有item设定过期时间（前提是允许cache miss）。<br>（1）缓存双淘汰，传统的玩法在进行写操作的时候，先淘汰cache再写主库。上文提到，在主从同步时间窗口之内可能有脏数据入cache，此时如果再发起一个异步的淘汰，即使不一致时间窗内脏数据入了cache，也会再次淘汰掉。<br>（2）为所有item设定超时时间，例如10分钟。极限时序下，即使有脏数据入cache，这个脏数据也最多存在十分钟。带来的副作用是，可能每十分钟，这个key上有一个读请求会穿透到数据库上，但我们认为这对数据库的从库压力增加是非常小的。</p>
+<h1 id="扩展性架构实践"><a href="#扩展性架构实践" class="headerlink" title="扩展性架构实践"></a>扩展性架构实践</h1><p>扩展性也是架构师在做数据库架构设计的时候需要考虑的一点。我分享一个58同城非常帅气的秒级数据扩容的方案。这个方案解决什么问题呢？原来数据库水平切分成N个库，现在要扩容成2N个库，要解决这个问题。</p>
+<p>假设原来分成两个库，假设按照hash的方式分片，如上图分为奇数库和偶数库。</p>
+<p>第一个步骤提升从库，底下一个从库放到上面来（其实什么动作都没有做）；<br>第二个步骤修改配置，此时扩容完成，原来是2个分片，修改配置后变成4个分片，这个过程没有数据的迁移。原来偶数的那一部分现在变成了两个部分，一部分是0，一部分是2，奇数的部分现在变成1和3。0库和2库没有数据冲突，只是扩容之后在短时间内双主的可用性这个特性丢失掉了。</p>
+<p>第三个步骤还要做一些收尾操作：把旧的双主给解除掉，为了保证可用性增加新的双主同步，原来拥有全部的数据，现在只为一半的数据提供服务了，我们把多余的数据删除掉，结尾这三个步骤可以事后慢慢操作。整个扩容在过程在第二步提升从库，修改配置其实就秒级完成了，非常的帅气。<br>这个方案的缺点是只能实现N库到2N 库的扩容，2变4、4变8，不能实现2库变3库，2库变5库的扩容，如何能够实现这种扩容呢？</p>
+<p>数据库扩展性方面有很多的需求，例如刚才说的2库扩3库，2库扩5库。产品经理经常变化需求，扩充表的属性也是经常的事情，今年的数据库大会同行也介绍了一些使用触发器来做online schema change的方案，但是触发器的局限性在于：<br>第一、触发器对数据库性能的影响比较大；<br>第二、触发器只能在同一个库上才有效，而互联网的场景特点是数据量非常大，并发量非常大，库都分布在不同的物理机器上，触发器没法弄。<br>最后还有一类扩展性需求，底层存储介质发生变化，原来是mongodb存储，现在要变为mysql存储，这也是扩展性需求（虽然很少），这三类需求怎么扩展？</p>
+<p>方法是导库，迁移数据，迁移数据有几种做法，第一种停服务，如果大家的业务能够接受这种方法，强烈建议使用这种方法，例如有一些游戏公司，晚上一点到两点服务器维护，可能就是在干分区或者合区这类导库的事情。</p>
+<p>如果业务上不允许停服务，想做到平滑迁移，双写法可以解决这类问题。<br>（1）双写法迁移数据的第一步是升级服务，原来的服务是写一个库，现在建立新的数据库，双写。比如底层存储介质的变化，我们原来是mongo数据库，现在建立好新的mysql数据库，然后对服务的所有写接口进行双库写升级。</p>
+<p>（2）第二步写一个小程序去进行数据的迁移。比如写一个离线的程序，把两个库的数据重新分片，分到三个库里。也可能是把一个只有三个属性的用户表导到五个属性的数据表里面。这个数据迁移要限速，导完之后两个库的数据一致吗？只要提前双写，如果没有什么意外，两边的数据应该是一致的。<br>什么时候会有意外呢？在导某一条数据的过程当中正好发生了一个删除操作，这个数据刚被服务双写删除，又被迁移数据的程序插入到了新库中，这种非常极限的情况下会造成两边的数据不一致。</p>
+<p>（3）建议第三步再开发一个小脚本，对两边的数据进行比对，如果发现了不一致，就将数据修复。当修复完成之后，我们认为数据是一致的，再将双写又变成单写，数据完成迁移。<br>这个方式的优点：<br>第一、改动是非常小的，对服务的影响比较小，单写变双写，开发两个小工具，一个是迁移程序，从一个库读数据，另外一个库插进去；还有一个数据校验程序，两个数据进行比对，改动是比较小的。<br>第二、随时可回滚的，方案风险比较小，在任何一个步骤如果发现问题，可以随时停止操作。比如迁移数据的过程当中发现不对，就把新的数据库干掉，重新再迁。因为在切换之前，所有线上的读服务和写服务都是旧库提供，只有切了以后，才是新库提供的服务。这是我们非常帅气的一个平滑导库的方式。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>分片解决的是数据量大的问题，</li>
+<li>复制和分组解决的是提高读性能，保证读的可用性的问题。</li>
+<li>分片会引入路由，常用的三种路由的方法，按照范围、按照hash，或者新增服务来路由。</li>
+<li>怎么保证数据的<strong>可用性</strong>，保证数据可用性的思路是<strong>冗余</strong>，但会引发数据的不一致，可用性的实践是<strong>双主当主从用</strong>，读写流量都在一个库上，另一个库standby，一个主库挂掉流量自动迁移到另外一个主库，只是资源利用率是50%，并且不能通过增加从库的方式提高读性。</li>
+<li>读性能的实践：传统的玩法是<strong>增加从库</strong>或者<strong>增加缓存</strong>。存在的问题是：主从可能不一致，同城的玩法是<strong>服务+数据库+缓存</strong>一套的方式来解决这些问题。</li>
+<li>一致性的实践，解决主从不一致性有两种方法:<br>增加中间件: 中间件记录哪些key上发生了写操作，在主从同步时间窗口之内的读操作也路由到主库。<br>强制读主: 数据库与缓存的一致性，我们的实践是双淘汰，在发生写请求的时候，淘汰缓存，写入数据库，再做一个延时的缓存淘汰操作。第二个实践是建议为所有的item设置一个超时时间。</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=400465735&idx=1&sn=8d7067de4cc8f73ea5558f07e0a9340e&scene=21#wechat_redirect">如何秒级扩容的结构？</a></p>
+<blockquote>
+<ol>
+<li>提升从库 （把原来的shadow-master改成master）</li>
+<li>修改配置（靠服务，hash取模）</li>
+<li>接触旧的双主；新增新的双主；删除旧的数据（余0的主，可以将余2的数据删除掉）<br><img data-src="/images/technology/snowflake-64bit.jpg" alt="db-mater"></li>
+</ol>
+</blockquote>
+<p>P.S.:</p>
+<blockquote>
+<ul>
+<li>分布式领域CAP理论：</li>
+<li>Consistency(一致性), 数据一致更新，所有数据变动都是同步的</li>
+<li>Availability(可用性), 好的响应性能</li>
+<li>Partition tolerance(分区容错性) 可靠性</li>
+<li>任何分布式系统只可同时满足二点，没法三者兼顾。 </li>
+<li>忠告：不要将精力浪费在如何设计能满足三者的完美分布式系统，而是进行取舍。</li>
+</ul>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechat-reward-image.png" alt="Change 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay-reward-image.jpg" alt="Change 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
+          </div>
+
+        
+  <div class="social-like a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" target="_blank" rel="noopener" href="https://www.addtoany.com/share"></a>
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_wechat"></a>
+      <a class="a2a_button_weibo"></a>
+      <a class="a2a_button_email"></a>
+      <a class="a2a_button_copy_link"></a>
+  </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/01/28/ganji-design-msyql-rule/" rel="prev" title="【转】赶集Mysql军规">
+                  <i class="fa fa-angle-left"></i> 【转】赶集Mysql军规
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/06/15/principles/" rel="next" title="principles(原则)">
+                  principles(原则) <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Change</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/changyuan" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

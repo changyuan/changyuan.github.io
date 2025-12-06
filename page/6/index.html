@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Comic+Sans+MS:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Brush+Script+MT:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=cursive:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=LXGW+WenKai:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=LXGW+WenKai+GB:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=LXGW+WenKai+TC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=LXGW+WenKai+Mono:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.31/dist/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous" defer></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"changyuan.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"mac"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":5,"unescape":true,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Chang&#39;s Mind Garden">
+<meta property="og:url" content="http://changyuan.github.io/page/6/index.html">
+<meta property="og:site_name" content="Chang&#39;s Mind Garden">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Change">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://changyuan.github.io/page/6/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"page/6/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 优化文章配图加载
+  const articleImages = document.querySelectorAll('.article-header-image img');
+  
+  articleImages.forEach(img => {
+    // 添加加载状态
+    img.addEventListener('load', function() {
+      this.style.opacity = '1';
+      this.parentElement.style.background = 'none';
+    });
+    
+    img.addEventListener('error', function() {
+      // 如果默认图片也加载失败，隐藏整个图片容器
+      if (this.src.includes('default-')) {
+        this.parentElement.style.display = 'none';
+      }
+    });
+    
+    // 设置初始状态
+    img.style.transition = 'opacity 0.3s ease';
+    img.style.opacity = '0.8';
+  });
+  
+  // 预加载下一张图片（如果有）
+  const nextLink = document.querySelector('a[rel="next"]');
+  if (nextLink) {
+    const nextImg = new Image();
+    nextImg.src = nextLink.href;
+  }
+});
+</script>
+<title>Chang's Mind Garden</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.31/dist/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lozad@1.16.0/dist/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/pangu@7.2.0/dist/browser/pangu.umd.js" integrity="sha256-JnmRRnJK7DC6RQJbAJb6AXOM9OmWzS6z8eYultk/48Y=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script><script src="/js/pjax.js" defer></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.5.0/dist/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdn.jsdelivr.net/npm/pdfobject@2.3.1/pdfobject.min.js","integrity":"sha256-jI72I8ZLVflVOisZIOaLvRew3tyvzeu6aZXFm7P7dEo="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js" defer></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdn.jsdelivr.net/npm/mermaid@11.10.1/dist/mermaid.min.js","integrity":"sha256-BmQmdWDS8X2OTbrwELWK366LV6escyWhHHe0XCTU/Hk="}}</script>
+  <script src="/js/third-party/tags/mermaid.js" defer></script>
+
+  <script class="next-config" data-name="wavedrom" type="application/json">{"enable":true,"js":{"url":"https://cdn.jsdelivr.net/npm/wavedrom@3.5.0/wavedrom.min.js","integrity":"sha256-INLAoJc6quTNfiMWkGZniYO2cxE8mHpddnLow1m6RFs="}}</script>
+  <script class="next-config" data-name="wavedrom_skin" type="application/json">{"enable":true,"js":{"url":"https://cdn.jsdelivr.net/npm/wavedrom@3.5.0/skins/default.js","integrity":"sha256-fduc/Zszk5ezWws2uInY/ALWVmIrmV6VTgXbsYSReFI="}}</script>
+  <script src="/js/third-party/tags/wavedrom.js" defer></script>
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+  <script src="/js/third-party/pace.js" defer></script>
+
+  <script src="/js/third-party/addtoany.js" defer></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/quicklink@3.0.1/dist/quicklink.umd.js" integrity="sha256-44BednzIpUeQJcY8qtLyarFu0UCCTbgmWOvaoehiFQQ=" crossorigin="anonymous" defer></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":false,"home":false,"archive":false,"delay":true,"timeout":3000,"priority":true,"url":"http://changyuan.github.io/page/6/"}</script>
+  <script src="/js/third-party/quicklink.js" defer></script>
+<!-- 霞鹜文楷字体引入 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css">
+<style>
+  /* 确保文章正文使用霞鹜文楷 */
+  .post-body {
+    font-family: "LXGW WenKai Screen", "LXGW WenKai", "LXGW WenKai GB", "LXGW WenKai TC", "LXGW WenKai Mono", "ZCOOL KuaiLe", "Comic Sans MS", "Brush Script MT", cursive, "PingFang SC", "Microsoft YaHei", sans-serif !important;
+  }
+</style>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Chang's Mind Garden</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">不断升级自己的操作系统</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Change"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Change</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">69</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/changyuan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;changyuan" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:changocean@163.com" title="E-Mail → mailto:changocean@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/changyuan2011" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;changyuan2011" rel="noopener me" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/changocean1" title="X → https:&#x2F;&#x2F;x.com&#x2F;changocean1" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>X</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/change-12-17" title="ZhiHu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;change-12-17" rel="noopener me" target="_blank"><i class="fab fa-quora fa-fw"></i>ZhiHu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.reddit.com/" title="Reddit → https:&#x2F;&#x2F;www.reddit.com&#x2F;" rel="noopener me" target="_blank"><i class="fab fa-reddit fa-fw"></i>Reddit</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+        <div class="pjax">
+        </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2015/09/23/singleton-pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Change">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/09/23/singleton-pattern/" class="post-title-link" itemprop="url">门面模式(singleton pattern)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-09-23 00:00:00" itemprop="dateCreated datePublished" datetime="2015-09-23T00:00:00+08:00">2015-09-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-05 20:15:56" itemprop="dateModified" datetime="2025-12-05T20:15:56+08:00">2025-12-05</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>165</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <ul>
+<li>必须拥有一个访问级别为 <code>private</code> 的构造函数，有效防止类被随意实例化； </li>
+<li>必须拥有一个保存类的实例的静态变量； </li>
+<li>必须拥有一个访问这个实例的公共的静态方法，该方法通常被命名为 getInstance()； </li>
+<li>必须拥有一个私有的空的__clone方法，防止实例被克隆复制</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$name</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">static</span> <span class="variable">$instance</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">function</span> <span class="title">__clone</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// <span class="doctag">TODO:</span> Implement __clone() method.</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">static</span> <span class="function"><span class="keyword">function</span> <span class="title">getInstance</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!<span class="built_in">self</span>::<span class="variable">$instance</span> <span class="keyword">instanceof</span> <span class="built_in">self</span>) &#123;</span><br><span class="line">            <span class="built_in">self</span>::<span class="variable">$instance</span> = <span class="keyword">new</span> <span class="built_in">self</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">self</span>::<span class="variable">$instance</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setName</span>(<span class="params"><span class="variable">$name</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;name = <span class="variable">$name</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;hi&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用demo</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$single</span> = <span class="title class_">Singleton</span>::<span class="title function_ invoke__">getInstance</span>();</span><br><span class="line"><span class="comment">//$c_single= clone  $single;</span></span><br><span class="line"><span class="variable">$single</span>-&gt;<span class="title function_ invoke__">setName</span>(<span class="string">&quot;TOM&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$single</span>-&gt;<span class="title function_ invoke__">getName</span>();</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2015/09/22/facade-pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Change">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/09/22/facade-pattern/" class="post-title-link" itemprop="url">门面模式(facade pattern)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-09-22 00:00:00" itemprop="dateCreated datePublished" datetime="2015-09-22T00:00:00+08:00">2015-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-05 20:15:56" itemprop="dateModified" datetime="2025-12-05T20:15:56+08:00">2025-12-05</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>392</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>门面模式（Facade）或 外观模式,定义了一个高层接口，这个接口使得子系统更加容易使用：引入门面角色之后，用户只需要直接与门面角色交互，<em>用户与子系统之间的复杂关系由门面角色来实现</em>，从而降低了系统的耦合度。Laravel 中门面模式的使用也很广泛，<strong>基本上每个服务容器中注册的服务提供者类</strong>都对应一个门面类。(接口封装场景)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// OsInterface.php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">DesignPatterns</span>\<span class="title class_">Structural</span>\<span class="title class_">Facade</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * OsInterface接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">OsInterface</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * halt the OS</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">halt</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// BiosInterface.php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">DesignPatterns</span>\<span class="title class_">Structural</span>\<span class="title class_">Facade</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * BiosInterface接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">BiosInterface</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * execute the BIOS</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">execute</span>(<span class="params"></span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * wait for halt</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">waitForKeyPress</span>(<span class="params"></span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * launches the OS</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> OsInterface $os</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">launch</span>(<span class="params">OsInterface <span class="variable">$os</span></span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * power down BIOS</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">powerDown</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//实现</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">DesignPatterns</span>\<span class="title class_">Structural</span>\<span class="title class_">Facade</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 门面类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Facade</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> OsInterface</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$os</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> BiosInterface</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$bios</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * This is the perfect time to use a dependency injection container</span></span><br><span class="line"><span class="comment">     * to create an instance of this class</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> BiosInterface $bios</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> OsInterface   $os</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params">BiosInterface <span class="variable">$bios</span>, OsInterface <span class="variable">$os</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;bios = <span class="variable">$bios</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;os = <span class="variable">$os</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * turn on the system</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">turnOn</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;bios-&gt;<span class="title function_ invoke__">execute</span>();</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;bios-&gt;<span class="title function_ invoke__">waitForKeyPress</span>();</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;bios-&gt;<span class="title function_ invoke__">launch</span>(<span class="variable">$this</span>-&gt;os);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * turn off the system</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">turnOff</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;os-&gt;<span class="title function_ invoke__">halt</span>();</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;bios-&gt;<span class="title function_ invoke__">powerDown</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">DesignPatterns</span>\<span class="title class_">Structural</span>\<span class="title class_">Facade</span>\<span class="title class_">Tests</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Structural</span>\<span class="title">Facade</span>\<span class="title">Facade</span> <span class="keyword">as</span> <span class="title">Computer</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Structural</span>\<span class="title">Facade</span>\<span class="title">OsInterface</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * FacadeTest用于测试门面模式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FacadeTest</span> <span class="keyword">extends</span> \<span class="title">PHPUnit_Framework_TestCase</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getComputer</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$bios</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">getMockBuilder</span>(<span class="string">&#x27;DesignPatterns\Structural\Facade\BiosInterface&#x27;</span>)</span><br><span class="line">                -&gt;<span class="title function_ invoke__">setMethods</span>(<span class="keyword">array</span>(<span class="string">&#x27;launch&#x27;</span>, <span class="string">&#x27;execute&#x27;</span>, <span class="string">&#x27;waitForKeyPress&#x27;</span>))</span><br><span class="line">                -&gt;<span class="title function_ invoke__">disableAutoload</span>()</span><br><span class="line">                -&gt;<span class="title function_ invoke__">getMock</span>();</span><br><span class="line">        <span class="variable">$os</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">getMockBuilder</span>(<span class="string">&#x27;DesignPatterns\Structural\Facade\OsInterface&#x27;</span>)</span><br><span class="line">                -&gt;<span class="title function_ invoke__">setMethods</span>(<span class="keyword">array</span>(<span class="string">&#x27;getName&#x27;</span>))</span><br><span class="line">                -&gt;<span class="title function_ invoke__">disableAutoload</span>()</span><br><span class="line">                -&gt;<span class="title function_ invoke__">getMock</span>();</span><br><span class="line">        <span class="variable">$bios</span>-&gt;<span class="title function_ invoke__">expects</span>(<span class="variable">$this</span>-&gt;<span class="title function_ invoke__">once</span>())</span><br><span class="line">                -&gt;<span class="title function_ invoke__">method</span>(<span class="string">&#x27;launch&#x27;</span>)</span><br><span class="line">                -&gt;<span class="title function_ invoke__">with</span>(<span class="variable">$os</span>);</span><br><span class="line">        <span class="variable">$os</span>-&gt;<span class="title function_ invoke__">expects</span>(<span class="variable">$this</span>-&gt;<span class="title function_ invoke__">once</span>())</span><br><span class="line">                -&gt;<span class="title function_ invoke__">method</span>(<span class="string">&#x27;getName&#x27;</span>)</span><br><span class="line">                -&gt;<span class="title function_ invoke__">will</span>(<span class="variable">$this</span>-&gt;<span class="title function_ invoke__">returnValue</span>(<span class="string">&#x27;Linux&#x27;</span>));</span><br><span class="line"></span><br><span class="line">        <span class="variable">$facade</span> = <span class="keyword">new</span> <span class="title class_">Computer</span>(<span class="variable">$bios</span>, <span class="variable">$os</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">array</span>(<span class="keyword">array</span>(<span class="variable">$facade</span>, <span class="variable">$os</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@dataProvider</span> getComputer</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testComputerOn</span>(<span class="params">Computer <span class="variable">$facade</span>, OsInterface <span class="variable">$os</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// interface is simpler :</span></span><br><span class="line">        <span class="variable">$facade</span>-&gt;<span class="title function_ invoke__">turnOn</span>();</span><br><span class="line">        <span class="comment">// but I can access to lower component</span></span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">assertEquals</span>(<span class="string">&#x27;Linux&#x27;</span>, <span class="variable">$os</span>-&gt;<span class="title function_ invoke__">getName</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2015/09/22/observer-pattern/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Change">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/09/22/observer-pattern/" class="post-title-link" itemprop="url">观察者模式(observer pattern)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-09-22 00:00:00" itemprop="dateCreated datePublished" datetime="2015-09-22T00:00:00+08:00">2015-09-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-05 20:15:56" itemprop="dateModified" datetime="2025-12-05T20:15:56+08:00">2025-12-05</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>观察者模式有时也被称<strong>作发布&#x2F;订阅模式</strong>，该模式用于为对象实现发布&#x2F;订阅功能：一旦<strong>主体对象</strong>状态发生改变，与之关联的<strong>观察者对象</strong>会收到通知，并进行相应操作。</p>
+<p>将一个系统分割成一个一些类相互协作的类有一个不好的副作用，那就是需要维护相关对象间的一致性。我们不希望为了维持一致性而使各类紧密耦合，这样会给维护、扩展和重用都带来不便。观察者就是解决这类的耦合关系的。</p>
+<p><strong>消息队列系统、事件</strong>都使用了观察者模式。</p>
+<p>PHP 为观察者模式定义了两个接口：<code>SplSubject</code> 和 <code>SplObserver</code>。<code>SplSubject</code> 可以看做<strong>主体对象</strong>的抽象，<code>SplObserver</code> 可以看做<strong>观察者对象</strong>的抽象，要实现观察者模式，只需<strong>让主体对象实现 SplSubject</strong> ，<strong>观察者对象实现 SplObserver</strong>，并实现相应方法即可。</p>
+<h2 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//下面两个接口，在php已经有了，直接implements即可，</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IObserver</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">onChanged</span>(<span class="params"> <span class="variable">$sender</span>, <span class="variable">$args</span> </span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IObservable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">addObserver</span>(<span class="params"> <span class="variable">$observer</span> </span>)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserList</span> <span class="keyword">implements</span> <span class="title">IObservable</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$_observers</span> = <span class="keyword">array</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addCustomer</span>(<span class="params"> <span class="variable">$name</span> </span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">foreach</span>( <span class="variable language_">$this</span>-&gt;_observers <span class="keyword">as</span> <span class="variable">$obs</span> )</span><br><span class="line">            <span class="variable">$obs</span>-&gt;<span class="title function_ invoke__">onChanged</span>( <span class="variable">$this</span>, <span class="variable">$name</span> );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addObserver</span>(<span class="params"> <span class="variable">$observer</span> </span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;_observers []= <span class="variable">$observer</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserListLogger</span> <span class="keyword">implements</span> <span class="title">IObserver</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">onChanged</span>(<span class="params"> <span class="variable">$sender</span>, <span class="variable">$args</span> </span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span>( <span class="string">&quot;&#x27;<span class="subst">$args</span>&#x27; added to user list\n&quot;</span> );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$ul</span> = <span class="keyword">new</span> <span class="title class_">UserList</span>();</span><br><span class="line"><span class="variable">$ul</span>-&gt;<span class="title function_ invoke__">addObserver</span>( <span class="keyword">new</span> <span class="title class_">UserListLogger</span>());</span><br><span class="line"><span class="variable">$ul</span>-&gt;<span class="title function_ invoke__">addCustomer</span>( <span class="string">&quot;Jack&quot;</span> );</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h2><p>使用了php中的 SplSubject,SplObserver 主体对象和观察者对象类</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// User.php 被观察主体对象</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">DesignPatterns</span>\<span class="title class_">Behavioral</span>\<span class="title class_">Observer</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 观察者模式 : 被观察对象 (主体对象)</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 主体对象维护观察者列表并发送通知</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> \<span class="title">SplSubject</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * user data</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$data</span> = <span class="keyword">array</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * observers</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> \SplObjectStorage</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$observers</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;observers = <span class="keyword">new</span> <span class="title class_">\SplObjectStorage</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 附加观察者</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> \SplObserver $observer</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">attach</span>(<span class="params">\<span class="built_in">SplObserver</span> <span class="variable">$observer</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;observers-&gt;<span class="title function_ invoke__">attach</span>(<span class="variable">$observer</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 取消观察者</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> \SplObserver $observer</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">detach</span>(<span class="params">\<span class="built_in">SplObserver</span> <span class="variable">$observer</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;observers-&gt;<span class="title function_ invoke__">detach</span>(<span class="variable">$observer</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 通知观察者方法</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">notify</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">/** <span class="doctag">@var</span> \SplObserver $observer */</span></span><br><span class="line">        <span class="keyword">foreach</span> (<span class="variable language_">$this</span>-&gt;observers <span class="keyword">as</span> <span class="variable">$observer</span>) &#123;</span><br><span class="line">            <span class="variable">$observer</span>-&gt;<span class="title function_ invoke__">update</span>(<span class="variable">$this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> string $name</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> mixed  $value</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> void</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__set</span>(<span class="params"><span class="variable">$name</span>, <span class="variable">$value</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;data[<span class="variable">$name</span>] = <span class="variable">$value</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 通知观察者用户被改变</span></span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">notify</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// UserObserver.php  // 观察者</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">DesignPatterns</span>\<span class="title class_">Behavioral</span>\<span class="title class_">Observer</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * UserObserver 类（观察者对象）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserObserver</span> <span class="keyword">implements</span> \<span class="title">SplObserver</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 观察者要实现的唯一方法</span></span><br><span class="line"><span class="comment">     * 也是被 Subject 调用的方法</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> \SplSubject $subject</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params">\<span class="built_in">SplSubject</span> <span class="variable">$subject</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="title function_ invoke__">get_class</span>(<span class="variable">$subject</span>) . <span class="string">&#x27; has been updated&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">DesignPatterns</span>\<span class="title class_">Behavioral</span>\<span class="title class_">Observer</span>\<span class="title class_">Tests</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Behavioral</span>\<span class="title">Observer</span>\<span class="title">UserObserver</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">DesignPatterns</span>\<span class="title">Behavioral</span>\<span class="title">Observer</span>\<span class="title">User</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * ObserverTest 测试观察者模式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ObserverTest</span> <span class="keyword">extends</span> \<span class="title">PHPUnit_Framework_TestCase</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$observer</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">setUp</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;observer = <span class="keyword">new</span> <span class="title class_">UserObserver</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试通知</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testNotify</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">expectOutputString</span>(<span class="string">&#x27;DesignPatterns\Behavioral\Observer\User has been updated&#x27;</span>);</span><br><span class="line">        <span class="variable">$subject</span> = <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line"></span><br><span class="line">        <span class="variable">$subject</span>-&gt;<span class="title function_ invoke__">attach</span>(<span class="variable">$this</span>-&gt;observer);</span><br><span class="line">        <span class="variable">$subject</span>-&gt;property = <span class="number">123</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试订阅</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testAttachDetach</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$subject</span> = <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">        <span class="variable">$reflection</span> = <span class="keyword">new</span> <span class="title class_">\ReflectionProperty</span>(<span class="variable">$subject</span>, <span class="string">&#x27;observers&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable">$reflection</span>-&gt;<span class="title function_ invoke__">setAccessible</span>(<span class="literal">true</span>);</span><br><span class="line">        <span class="comment">/** <span class="doctag">@var</span> \SplObjectStorage $observers */</span></span><br><span class="line">        <span class="variable">$observers</span> = <span class="variable">$reflection</span>-&gt;<span class="title function_ invoke__">getValue</span>(<span class="variable">$subject</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">assertInstanceOf</span>(<span class="string">&#x27;SplObjectStorage&#x27;</span>, <span class="variable">$observers</span>);</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">assertFalse</span>(<span class="variable">$observers</span>-&gt;<span class="title function_ invoke__">contains</span>(<span class="variable">$this</span>-&gt;observer));</span><br><span class="line"></span><br><span class="line">        <span class="variable">$subject</span>-&gt;<span class="title function_ invoke__">attach</span>(<span class="variable">$this</span>-&gt;observer);</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">assertTrue</span>(<span class="variable">$observers</span>-&gt;<span class="title function_ invoke__">contains</span>(<span class="variable">$this</span>-&gt;observer));</span><br><span class="line"></span><br><span class="line">        <span class="variable">$subject</span>-&gt;<span class="title function_ invoke__">detach</span>(<span class="variable">$this</span>-&gt;observer);</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">assertFalse</span>(<span class="variable">$observers</span>-&gt;<span class="title function_ invoke__">contains</span>(<span class="variable">$this</span>-&gt;observer));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试 update() 调用</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testUpdateCalling</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$subject</span> = <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">        <span class="variable">$observer</span> = <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">getMock</span>(<span class="string">&#x27;SplObserver&#x27;</span>);</span><br><span class="line">        <span class="variable">$subject</span>-&gt;<span class="title function_ invoke__">attach</span>(<span class="variable">$observer</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable">$observer</span>-&gt;<span class="title function_ invoke__">expects</span>(<span class="variable">$this</span>-&gt;<span class="title function_ invoke__">once</span>())</span><br><span class="line">            -&gt;<span class="title function_ invoke__">method</span>(<span class="string">&#x27;update&#x27;</span>)</span><br><span class="line">            -&gt;<span class="title function_ invoke__">with</span>(<span class="variable">$subject</span>);</span><br><span class="line"></span><br><span class="line">        <span class="variable">$subject</span>-&gt;<span class="title function_ invoke__">notify</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="官方demo"><a href="#官方demo" class="headerlink" title="官方demo"></a>官方demo</h2><p>使用了<code>SplObjectStorage</code> 这个对象，这个对象本身有attach ,detach 的方法，如果不用，可以参考第二个</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObserver1</span> <span class="keyword">implements</span> <span class="title">SplObserver</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params"><span class="built_in">SplSubject</span> <span class="variable">$subject</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">__CLASS__</span> . <span class="string">&#x27; - &#x27;</span> . <span class="variable">$subject</span>-&gt;<span class="title function_ invoke__">getName</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyObserver2</span> <span class="keyword">implements</span> <span class="title">SplObserver</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params"><span class="built_in">SplSubject</span> <span class="variable">$subject</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">__CLASS__</span> . <span class="string">&#x27; - &#x27;</span> . <span class="variable">$subject</span>-&gt;<span class="title function_ invoke__">getName</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MySubject</span> <span class="keyword">implements</span> <span class="title">SplSubject</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$_observers</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$_name</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$name</span></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;_observers = <span class="keyword">new</span> <span class="built_in">SplObjectStorage</span>();</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;_name = <span class="variable">$name</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">attach</span>(<span class="params"><span class="built_in">SplObserver</span> <span class="variable">$observer</span></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;_observers-&gt;<span class="title function_ invoke__">attach</span>(<span class="variable">$observer</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">detach</span>(<span class="params"><span class="built_in">SplObserver</span> <span class="variable">$observer</span></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;_observers-&gt;<span class="title function_ invoke__">detach</span>(<span class="variable">$observer</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">notify</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="variable language_">$this</span>-&gt;_observers <span class="keyword">as</span> <span class="variable">$observer</span>) &#123;</span><br><span class="line">            <span class="variable">$observer</span>-&gt;<span class="title function_ invoke__">update</span>(<span class="variable">$this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;_name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$observer1</span> = <span class="keyword">new</span> <span class="title class_">MyObserver1</span>();</span><br><span class="line"><span class="variable">$observer2</span> = <span class="keyword">new</span> <span class="title class_">MyObserver2</span>();</span><br><span class="line"></span><br><span class="line"><span class="variable">$subject</span> = <span class="keyword">new</span> <span class="title class_">MySubject</span>(<span class="string">&quot;test&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$subject</span>-&gt;<span class="title function_ invoke__">attach</span>(<span class="variable">$observer1</span>);</span><br><span class="line"><span class="variable">$subject</span>-&gt;<span class="title function_ invoke__">attach</span>(<span class="variable">$observer2</span>);</span><br><span class="line"><span class="variable">$subject</span>-&gt;<span class="title function_ invoke__">notify</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="一个报纸和订阅者的例子，很像发布和订阅"><a href="#一个报纸和订阅者的例子，很像发布和订阅" class="headerlink" title="一个报纸和订阅者的例子，很像发布和订阅"></a>一个报纸和订阅者的例子，很像发布和订阅</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* Subject,that who makes news</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Newspaper</span> <span class="keyword">implements</span> \<span class="title">SplSubject</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$name</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$observers</span> = <span class="keyword">array</span>();</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$content</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$name</span></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;name = <span class="variable">$name</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//add observer</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">attach</span>(<span class="params">\<span class="built_in">SplObserver</span> <span class="variable">$observer</span></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;observers[] = <span class="variable">$observer</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//remove observer</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">detach</span>(<span class="params">\<span class="built_in">SplObserver</span> <span class="variable">$observer</span></span>) </span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="variable">$key</span> = <span class="title function_ invoke__">array_search</span>(<span class="variable">$observer</span>,<span class="variable">$this</span>-&gt;observers, <span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable">$key</span>)&#123;</span><br><span class="line">            <span class="keyword">unset</span>(<span class="variable language_">$this</span>-&gt;observers[<span class="variable">$key</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//set breakouts news</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">breakOutNews</span>(<span class="params"><span class="variable">$content</span></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;content = <span class="variable">$content</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">notify</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getContent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;content.<span class="string">&quot; (<span class="subst">&#123;$this-&gt;name&#125;</span>)&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//notify observers(or some of them)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">notify</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">foreach</span> (<span class="variable language_">$this</span>-&gt;observers <span class="keyword">as</span> <span class="variable">$value</span>) &#123;</span><br><span class="line">            <span class="variable">$value</span>-&gt;<span class="title function_ invoke__">update</span>(<span class="variable">$this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* Observer,that who recieves news</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Reader</span> <span class="keyword">implements</span> <span class="title">SplObserver</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$name</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$name</span></span>) </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;name = <span class="variable">$name</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params">\<span class="built_in">SplSubject</span> <span class="variable">$subject</span></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;name.<span class="string">&#x27; is reading breakout news &lt;b&gt;&#x27;</span>.<span class="variable">$subject</span>-&gt;<span class="title function_ invoke__">getContent</span>().<span class="string">&#x27;&lt;/b&gt;&lt;br&gt;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$newspaper</span> = <span class="keyword">new</span> <span class="title class_">Newspaper</span>(<span class="string">&#x27;Newyork Times&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable">$allen</span> = <span class="keyword">new</span> <span class="title class_">Reader</span>(<span class="string">&#x27;Allen&#x27;</span>);</span><br><span class="line"><span class="variable">$jim</span> = <span class="keyword">new</span> <span class="title class_">Reader</span>(<span class="string">&#x27;Jim&#x27;</span>);</span><br><span class="line"><span class="variable">$linda</span> = <span class="keyword">new</span> <span class="title class_">Reader</span>(<span class="string">&#x27;Linda&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//add reader</span></span><br><span class="line"><span class="variable">$newspaper</span>-&gt;<span class="title function_ invoke__">attach</span>(<span class="variable">$allen</span>);</span><br><span class="line"><span class="variable">$newspaper</span>-&gt;<span class="title function_ invoke__">attach</span>(<span class="variable">$jim</span>);</span><br><span class="line"><span class="variable">$newspaper</span>-&gt;<span class="title function_ invoke__">attach</span>(<span class="variable">$linda</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//remove reader</span></span><br><span class="line"><span class="variable">$newspaper</span>-&gt;<span class="title function_ invoke__">detach</span>(<span class="variable">$linda</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//set break outs</span></span><br><span class="line"><span class="variable">$newspaper</span>-&gt;<span class="title function_ invoke__">breakOutNews</span>(<span class="string">&#x27;USA break down!&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2015/07/29/mac-web/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Change">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/07/29/mac-web/" class="post-title-link" itemprop="url">mac 常见环境安装配置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-07-29 13:42:55" itemprop="dateCreated datePublished" datetime="2015-07-29T13:42:55+08:00">2015-07-29</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//install</span><br><span class="line">ruby -e <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>&quot;</span></span><br><span class="line"></span><br><span class="line">//use</span><br><span class="line">brew search /apache*/</span><br><span class="line">brew install wget</span><br><span class="line">brew uninstall wget</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://brew.sh/">官网</a></p>
+</blockquote>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/07/29/mac-web/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2015/06/22/grown-up/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Change">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/06/22/grown-up/" class="post-title-link" itemprop="url">成长记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-06-22 14:50:38" itemprop="dateCreated datePublished" datetime="2015-06-22T14:50:38+08:00">2015-06-22</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>4 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="给你90天，成为不一样的自己"><a href="#给你90天，成为不一样的自己" class="headerlink" title="给你90天，成为不一样的自己"></a>给你90天，成为不一样的自己</h1><p>为了改变我的三分钟热度性格，我曾给自己提出一个要求，就是以”22天习惯养成”为基础。只不过，我要求自己，如果真正开始一件事就至少要坚持90天以上，而一旦坚持了90天，接下来的继续也就十分容易了。它对我的确受益匪浅，我想把它也分享给已在职场的你。如果你的确认真坚持了，I AM SURE U WILL FIND A DIFFERENT U.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/06/22/grown-up/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2015/06/22/critical-thinking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Change">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/06/22/critical-thinking/" class="post-title-link" itemprop="url">批判性思维(critical thinking)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-06-22 14:07:53" itemprop="dateCreated datePublished" datetime="2015-06-22T14:07:53+08:00">2015-06-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-05 20:15:56" itemprop="dateModified" datetime="2025-12-05T20:15:56+08:00">2025-12-05</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="http://www.criticalthinking.org/">批判性思维</a><br><a target="_blank" rel="noopener" href="https://book.douban.com/subject/2591434/">critical thinking</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2015/06/21/hui-lai-shi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Change">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/06/21/hui-lai-shi/" class="post-title-link" itemprop="url">怎样会来事？</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-06-21 17:25:46" itemprop="dateCreated datePublished" datetime="2015-06-21T17:25:46+08:00">2015-06-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-05 20:15:56" itemprop="dateModified" datetime="2025-12-05T20:15:56+08:00">2025-12-05</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>521</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="何为会来事？"><a href="#何为会来事？" class="headerlink" title="何为会来事？"></a>何为会来事？</h2><p>创造双赢局面甚至创造多赢局面。那种总是能够看透那些不明显的利益取向，进而创造出来多赢的局面来。<br>1.即便你完全不会来事，只能独来独往，现在的这个世界也会给你一条还算不错的的路。<br>2.只要认真面对，在任何环境里，都能知道办法创造多赢的局面。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/06/21/hui-lai-shi/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2015/06/20/yc-create-note/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Change">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/06/20/yc-create-note/" class="post-title-link" itemprop="url">YC创业课笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-06-20 16:43:09" itemprop="dateCreated datePublished" datetime="2015-06-20T16:43:09+08:00">2015-06-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-05 20:15:56" itemprop="dateModified" datetime="2025-12-05T20:15:56+08:00">2025-12-05</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>13 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="成为有完整作品的人"><a href="#成为有完整作品的人" class="headerlink" title="成为有完整作品的人"></a>成为有完整作品的人</h1><p><code>成长的最靠谱起点是什么？Sam的这篇文章里有个很好的建议</code>：</p>
+<blockquote>
+<p>No matter what you choose, build stuff and be around smart people. “Stuff” can be a lot of different things。 Building stuffs—-做出东西来。</p>
+</blockquote>
+<p>我个人最看中人的这个特质。人群中只有少数人最终能拿出完整的作品—-人与人之间的差异是如此之大，乃至于少数人有作品，更少数人有好的作品，只极少数极少数人才可能作出传世的作品；而与此同时，绝大多数人（万分之九千九百九十九的人）一辈子都没有像样的作品，他们连一篇作文都写不明白。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/06/20/yc-create-note/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2015/03/15/markdown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Change">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2015/03/15/markdown/" class="post-title-link" itemprop="url">Markdown</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2015-03-15 00:43:20" itemprop="dateCreated datePublished" datetime="2015-03-15T00:43:20+08:00">2015-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-05 20:15:56" itemprop="dateModified" datetime="2025-12-05T20:15:56+08:00">2025-12-05</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>546</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="markdown-在-sublime-text-3-中使用"><a href="#markdown-在-sublime-text-3-中使用" class="headerlink" title="markdown 在 sublime text 3 中使用"></a>markdown 在 sublime text 3 中使用</h2><p>作为Windows&#x2F;Mac&#x2F;Linux下强大的文本编辑器，st提供了对Markdown语言的支持。通过设置可实现markdown预览和转换功能。而本文介绍的Markdown Preview支持Mathjax语法和目录自动生成。(Windows下）,<br>打开st，按下组合键Control + &#96;，出现控制台，输入</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/03/15/markdown/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://changyuan.github.io/2014/12/22/linux-aliases/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Change">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Chang's Mind Garden">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2014/12/22/linux-aliases/" class="post-title-link" itemprop="url">linux-aliases</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2014-12-22 13:22:37" itemprop="dateCreated datePublished" datetime="2014-12-22T13:22:37+08:00">2014-12-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-05 20:15:56" itemprop="dateModified" datetime="2025-12-05T20:15:56+08:00">2025-12-05</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>227</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>1 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="linux别名设置"><a href="#linux别名设置" class="headerlink" title="linux别名设置"></a>linux别名设置</h4><p>Terminal 输入 <code>alias</code> 之后可以查看已经有的别名设置</p>
+<p>如果要设置自己的别名如下：
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2014/12/22/linux-aliases/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Change</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/changyuan" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
